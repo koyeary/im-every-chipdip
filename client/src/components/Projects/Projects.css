@@ -1,0 +1,88 @@
+.projects-header {
+  font-optical-sizing: auto;
+  font-size: 4rem;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  text-align: center;
+  width: fit-content;
+  margin: 20px auto;
+  color: #21387a;
+}
+
+.subheader {
+  font-optical-sizing: auto;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto 20px auto;
+  color: #4061d7;
+}
+
+.accordion-wrapper {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .projects-header {
+    margin: 10px auto;
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .projects-header {
+    margin: 10px auto;
+    font-size: 3rem;
+  }
+  .subheader {
+    margin: 0 auto 10px auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .projects-header {
+    margin: 10px auto;
+    font-size: 2.75rem;
+  }
+  .subheader {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .projects-header {
+    margin: 10px auto 50px auto;
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 439px) {
+  .projects-header {
+    margin: 10px auto 40px auto;
+    font-size: 2.25rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .projects-header {
+    margin: 10px auto 20px auto;
+    font-size: 2rem;
+  }
+}
+
+.link {
+  text-decoration: none;
+  margin: 5;
+  color: #4061d7;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: #6cc644;
+}

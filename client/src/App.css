@@ -1,0 +1,34 @@
+html,
+body {
+  font-family: "Outfit", sans-serif;
+  overflow: hidden;
+}
+
+.serif {
+  font-family: "Roboto Serif", serif;
+}
+
+:root {
+  --darkest-blue: #21387a;
+  --dark-blue: #4061d6;
+  --blue: #598cfa;
+  --light-blue: #59abfa;
+  --lightest-blue: #d6e5f5;
+  --neutral: #f2f4fc;
+
+  --dark-violet: #1700eb;
+  --violet: #7366f0;
+  --light-violet: #abb6eb;
+
+  --dark-yellow: #c48404;
+  --yellow: #fcb529;
+  --light-yellow: #fece77;
+
+  --dark-green: #3f9c99;
+  --green: #66c8b6;
+  --light-green: #77e4c6;
+
+  --dark-berry: #9e1b4a;
+  --berry: #d54d68;
+  --light-berry: #e57c7e;
+}

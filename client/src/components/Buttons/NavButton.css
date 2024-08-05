@@ -1,0 +1,11 @@
+.button-row {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  z-index: 150;
+}
