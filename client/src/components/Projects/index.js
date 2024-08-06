@@ -38,6 +38,18 @@ const Projects = ({ darkMode }) => {
             aria-controls="panel1-content"
             id="panel1-header"
           >
+            <Typography>Admin Status and Error Reporting</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>Coming soon!</Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ArrowDownwardIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
             <Typography>Payment System Using Authorize AcceptJS</Typography>
           </AccordionSummary>
           <AccordionDetails>
