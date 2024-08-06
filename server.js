@@ -1,32 +1,32 @@
 const express = require("express");
-const session = require("express-session");
-const axios = require("axios");
-const morgan = require("morgan");
-const cors = require("cors");
 
+const mongoose = require("mongoose");
+//const routes = require("./routes");
 const app = express();
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(
-  session({ secret: "your-secret-key", resave: false, saveUninitialized: true })
-);
-app.use(express.json());
+// Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan("dev"));
-app.use(cors());
+app.use(express.json());
+// Serve up static assets
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
+// Add routes, both API and view
+//app.use(routes);
 
-//app.use(express.static(path.join(__dirname, "public")));
+// Connect to the Mongo DB
+/* mongoose.connect(
+  process.env.MONGODB_URI ||
+    "mongodb://user1:password1@ds125871.mlab.com:25871/heroku_0xn0jnk7",
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+  }
+); */
 
-app.get("/favicon.ico", (req, res, next) => {
-  res.sendStatus(204);
-});
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Start the API server
+app.listen(PORT, () =>
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
+);
