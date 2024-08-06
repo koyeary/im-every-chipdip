@@ -20,7 +20,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+//app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/favicon.ico", (req, res, next) => {
   res.sendStatus(204);
