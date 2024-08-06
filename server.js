@@ -16,9 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/favicon.ico", (req, res, next) => {
+/* app.get("/favicon.ico", (req, res, next) => {
   res.sendStatus(204);
-});
+}); */
 
 /* // Routes
 if (process.env.NODE_ENV === "production") {
