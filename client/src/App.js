@@ -24,11 +24,7 @@ const App = () => {
         <Routes>
           <Route
             path="*"
-            element={
-              <Suspense fallback={<div>...loading</div>}>
-                <Splash darkMode={darkMode} advocateMode={false} />
-              </Suspense>
-            }
+            element={<Splash darkMode={darkMode} advocateMode={false} />}
           />
           <Route
             path="/advocate"
