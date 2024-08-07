@@ -13,24 +13,13 @@ const About = ({ advocateMode }) => {
       }}
     >
       <div className="about-wrapper" style={{ overflow: "auto" }}>
-        {/*   <div className="card"> */}
         <div className="img-wrapper ">
-          {/*           {advocateMode ? (
-            <iframe
-              width="315"
-              height="568"
-              src="https://www.youtube.com/embed/y9KcPOPWyAs?si=wFuecS1PcqNFkj63"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          ) : ( */}
           <LazyLoadImage
+            effect="blur"
             alt="Portrait of Kat Yeary"
             className="lg-img"
-            src="/assets/13-Kat_Yeary-6BW.png" // use normal <img> attributes as props
+            height="100%"
+            src="/assets/13-Kat_Yeary-6BW.png"
           />
         </div>
         <div className="text-container">
