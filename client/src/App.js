@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, useMemo, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Splash from "./components/Splash";
+//import Splash from "./components/Splash";
 import FAB from "./components/Buttons/FAB";
 import NavButton from "./components/Buttons/NavButton";
 import { animated, config, useSpring } from "react-spring";
 import "./App.css";
 import Payment from "./components/Payment";
+
+const Splash = lazy(() => import("./components/Splash"));
 
 const App = () => {
   const darkMode = useRef(false);
@@ -22,7 +24,11 @@ const App = () => {
         <Routes>
           <Route
             path="*"
-            element={<Splash darkMode={darkMode} advocateMode={false} />}
+            element={
+              <Suspense fallback={<div>...loading</div>}>
+                <Splash darkMode={darkMode} advocateMode={false} />
+              </Suspense>
+            }
           />
           <Route
             path="/advocate"

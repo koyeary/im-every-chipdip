@@ -172,6 +172,8 @@ h1 {
 
 @media (max-width: 360px) {
   .header-sub-div {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    margin: 0;
+    min-width: none;
   }
 }

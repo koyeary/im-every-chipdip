@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./About.css";
 
 const About = ({ advocateMode }) => {
@@ -15,7 +15,7 @@ const About = ({ advocateMode }) => {
       <div className="about-wrapper" style={{ overflow: "auto" }}>
         {/*   <div className="card"> */}
         <div className="img-wrapper ">
-          {advocateMode ? (
+          {/*           {advocateMode ? (
             <iframe
               width="315"
               height="568"
@@ -26,9 +26,12 @@ const About = ({ advocateMode }) => {
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             ></iframe>
-          ) : (
-            <img src="/assets/13-Kat_Yeary-6BW.png" className="lg-img" />
-          )}
+          ) : ( */}
+          <LazyLoadImage
+            alt="Portrait of Kat Yeary"
+            className="lg-img"
+            src="/assets/13-Kat_Yeary-6BW.png" // use normal <img> attributes as props
+          />
         </div>
         <div className="text-container">
           <div className="about-text">

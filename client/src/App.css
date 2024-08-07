@@ -2,6 +2,7 @@ html,
 body {
   font-family: "Outfit", sans-serif;
   overflow: hidden;
+  scrollbar-width: none;
 }
 
 .serif {
