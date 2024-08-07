@@ -1,4 +1,5 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Skeleton } from "@mui/material";
 import "./About.css";
 
 const About = ({ advocateMode }) => {
@@ -15,6 +16,9 @@ const About = ({ advocateMode }) => {
       <div className="about-wrapper" style={{ overflow: "auto" }}>
         <div className="img-wrapper ">
           <LazyLoadImage
+            placeholder={
+              <Skeleton variant="rectangular" width={275} height={275} />
+            }
             effect="blur"
             alt="Portrait of Kat Yeary"
             className="lg-img"
