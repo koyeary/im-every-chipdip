@@ -17,6 +17,7 @@ const Projects = ({ darkMode }) => {
         width: "90%",
         margin: "auto",
         height: "100%",
+        paddingTop: "100px",
         overflow: "auto",
         display: "flex",
         flexDirection: "column",
@@ -41,7 +42,9 @@ const Projects = ({ darkMode }) => {
             <Typography>Admin Status and Error Reporting</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Coming soon!</Typography>
+            <Typography>
+              <Link to="/status">Here</Link>
+            </Typography>
           </AccordionDetails>
         </Accordion>
         <Accordion>

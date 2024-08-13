@@ -3,8 +3,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import emailjs from "@emailjs/browser";
-import { sendEmail } from "../../actions/Contact";
+import { sendEmail } from "../../utils/API";
 import "./Contact.css";
 
 const Contact = ({ darkMode }) => {
@@ -28,6 +27,7 @@ const Contact = ({ darkMode }) => {
   const sendToast = (msg, severity) => {
     setSeverity(severity);
     setMsg(msg);
+    severity === "success" && handleClear();
   };
 
   const handleClear = () => {
@@ -41,26 +41,8 @@ const Contact = ({ darkMode }) => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    sendEmail(emailData, sendToast, handleClear);
-    /*  emailjs
-      .send(
-        "default_service",
-        "template_Rq3s9o8b",
-        emailData,
-        "user_G4m0Vhk6hpxUONewRQh00",
-       
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          sendToast(result.text, "success");
-          handleClear();
-        },
-        (error) => {
-          console.log(error.text);
-          sendToast(error.text, "error");
-        }
-      ); */
+
+    sendEmail(emailData, sendToast);
   };
 
   return (
@@ -83,7 +65,7 @@ const Contact = ({ darkMode }) => {
         <div className="header-wrap">
           <h1 className="contact-header">Send me a message.</h1>
           <h2 className="subheader">
-            Or contact me directly at katyeary @ gmail dot com
+            You can also contact me at katyeary @ gmail dot com
           </h2>
         </div>
       ) : (
@@ -106,6 +88,7 @@ const Contact = ({ darkMode }) => {
           id="outlined-basic"
           label="Your Name"
           value={name}
+          required
         />
         <TextField
           onChange={handleChange}
@@ -113,6 +96,7 @@ const Contact = ({ darkMode }) => {
           id="outlined-basic"
           label="Your Email"
           value={email}
+          required
         />
         <TextField
           onChange={handleChange}
@@ -120,6 +104,7 @@ const Contact = ({ darkMode }) => {
           id="outlined-basic"
           label="Subject"
           value={subject}
+          required
         />
         <TextField
           onChange={handleChange}
@@ -129,8 +114,10 @@ const Contact = ({ darkMode }) => {
           multiline
           rows={10}
           value={message}
+          required
         />
         <Button
+          aria-label="Send"
           style={{ width: 200, margin: "0 auto" }}
           variant="contained"
           type="submit"

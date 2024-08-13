@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState, useMemo, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-//import Splash from "./components/Splash";
 import FAB from "./components/Buttons/FAB";
-import NavButton from "./components/Buttons/NavButton";
+import Splash from "./components/Splash";
 import { animated, config, useSpring } from "react-spring";
 import "./App.css";
-import Payment from "./components/Payment";
-
-const Splash = lazy(() => import("./components/Splash"));
+import Status from "./components/Projects/Status";
 
 const App = () => {
-  const darkMode = useRef(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   const spring = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -30,14 +28,15 @@ const App = () => {
             path="/advocate"
             element={<Splash darkMode={darkMode} advocateMode={true} />}
           />
+          <Route path="/status" element={<Status />} />
         </Routes>
       </div>
-
+      {/* 
       <animated.div style={spring}>
         <FAB darkMode={darkMode} icon="linkedIn" />
         <FAB darkMode={darkMode} icon="gitHub" />
-        {/*        <NavButton darkMode={darkMode} /> */}
-      </animated.div>
+
+      </animated.div> */}
     </Router>
   );
 };

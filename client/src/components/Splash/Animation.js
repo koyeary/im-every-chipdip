@@ -136,7 +136,7 @@ const Animation = (props) => {
       style={{
         width: "50%",
         margin: "30vh auto auto auto",
-        width: "fit-content",
+        minWidth: "fit-content",
       }}
     >
       <div className="header">
@@ -163,17 +163,17 @@ const Animation = (props) => {
       </div>
       <div
         className="header"
-        style={{
+        /*         style={{
           display: "flex",
           flexDirection: "column",
-        }}
+        }} */
       >
         <div
           className="header-div"
-          style={{
+          /*           style={{
             display: "flex",
             flexDirection: "row",
-          }}
+          }} */
         >
           <animated.div
             style={{

@@ -1,4 +1,5 @@
 import FAB from "../Buttons/FAB";
+
 import "./CV.css";
 
 const CV = ({ darkMode }) => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAcceptJs } from "react-acceptjs";
-import { createTransaction } from "../../actions/AuthNet";
+//import { createTransaction } from "../../actions/AuthNet";
 import CreditForm from "./CreditForm";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -42,7 +42,7 @@ const Payment = (/* { clientId } */) => {
 
   const handlePay = (formData) => {
     console.log("Payment submitted");
-    createTransaction(formData, authData, invoiceId, clientId);
+    //Transaction(formData, authData, invoiceId, clientId);
   };
 
   return (
