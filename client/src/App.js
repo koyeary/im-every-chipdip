@@ -5,6 +5,7 @@ import Splash from "./components/Splash";
 import { animated, config, useSpring } from "react-spring";
 import "./App.css";
 import Status from "./components/Projects/Status";
+import FinanceDashboard from "./components/Projects/FinanceDashboard";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -28,15 +29,18 @@ const App = () => {
             path="/advocate"
             element={<Splash darkMode={darkMode} advocateMode={true} />}
           />
+          <Route
+            path="/finance"
+            element={<FinanceDashboard darkMode={darkMode} />}
+          />
           <Route path="/status" element={<Status />} />
         </Routes>
       </div>
-      {/* 
-      <animated.div style={spring}>
+
+      <animated.div style={spring} className="fab">
         <FAB darkMode={darkMode} icon="linkedIn" />
         <FAB darkMode={darkMode} icon="gitHub" />
-
-      </animated.div> */}
+      </animated.div>
     </Router>
   );
 };

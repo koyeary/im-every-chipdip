@@ -51,12 +51,14 @@ const Contact = ({ darkMode }) => {
       style={{
         width: "90%",
         maxWidth: 800,
-        margin: "40px auto",
+        margin: "auto",
+        padding: 20,
         display: "flex",
         flexDirection: "column",
         gap: 20,
         height: "calc(100% - 50px)",
         overflow: "auto",
+        scrollbarWidth: "none",
         display: "flex",
         justifyContent: "center",
       }}

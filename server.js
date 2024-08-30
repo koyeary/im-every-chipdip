@@ -1,11 +1,14 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const cors = require("cors");
 const routes = require("./routes");
+require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Connect Database
+
 connectDB();
 
 // Define middleware here
@@ -17,6 +20,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+app.use(cors());
 app.use(routes);
 
 // Start the API server

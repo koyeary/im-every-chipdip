@@ -19,10 +19,9 @@ const Projects = ({ darkMode }) => {
         height: "100%",
         paddingTop: "100px",
         overflow: "auto",
+        scrollbarWidth: "none",
         display: "flex",
         flexDirection: "column",
-
-        /*         justifyContent: "center", */
       }}
     >
       <h1 className="projects-header">Projects</h1>
@@ -92,7 +91,11 @@ const Projects = ({ darkMode }) => {
             <Typography>Investment Portfolio Dashboard</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Coming soon!</Typography>
+            <Typography>
+              <Link to="/finance" target="_blank">
+                Here
+              </Link>
+            </Typography>
           </AccordionDetails>
         </Accordion>
         <Accordion>

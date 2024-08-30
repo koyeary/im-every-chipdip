@@ -134,9 +134,12 @@ const Animation = (props) => {
   return (
     <div
       style={{
-        width: "50%",
+        width: "fit-content",
         margin: "30vh auto auto auto",
-        minWidth: "fit-content",
+        height: "100%",
+        maxWidth: "95vw",
+        overflow: "hidden",
+        justifyContent: "center",
       }}
     >
       <div className="header">
@@ -161,13 +164,7 @@ const Animation = (props) => {
           Yeary
         </animated.div>
       </div>
-      <div
-        className="header"
-        /*         style={{
-          display: "flex",
-          flexDirection: "column",
-        }} */
-      >
+      <div className="header">
         <div
           className="header-div"
           /*           style={{
@@ -190,7 +187,7 @@ const Animation = (props) => {
               Developer
             </span>
           </animated.div>
-          {/*   )} */}
+
           {advocateMode && (
             <animated.div
               style={{ ...graphicStyles3, color: "var(--darkest-blue)" }}

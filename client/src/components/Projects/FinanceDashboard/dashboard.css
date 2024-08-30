@@ -1,0 +1,27 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 98vh;
+  padding: 1rem;
+  justify-content: space-between;
+  background-color: #1d1240;
+}
+
+.dash-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.portfolio-table {
+  background-color: #5b507c;
+  width: 98%;
+  height: 25vh;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  overflow: auto;
+  scrollbar-width: none;
+}
