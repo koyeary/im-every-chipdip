@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import Portfolio from "./Portfolio";
-import { getForexData, getStockData } from "../../../utils/API";
+import {
+  getForexData,
+  getStockData,
+  getAllTickers,
+  getUserForex,
+} from "../../../utils/API";
 import Dropdown from "./Dropdown";
 import "./dashboard.css";
 import ForEx from "./ForEx";
@@ -35,15 +40,22 @@ const FinanceDashboard = () => {
     },
   ]);
 
+  const finishForex = useCallback((data) => {
+    const forexArray = Object.keys(data).map((key) => ({
+      currency: key,
+      rate: data[key],
+      ...data[key],
+    }));
+    setForexData(forexArray);
+  });
+
   useEffect(() => {
     getStockData(tickers, setPerformance);
-    getForexData(userCurrencies, setForexData);
+    getForexData(userCurrencies, finishForex);
+    getAllTickers();
+    //getUserForex(userCurrencies);
     //console.log(performance);
   }, []);
-
-  const finish = () => {
-    console.log("finished");
-  };
 
   let yourDate = new Date(Date.now() - 86400000);
   let d = yourDate.toISOString().split("T")[0];
@@ -51,19 +63,12 @@ const FinanceDashboard = () => {
 
   return (
     <div className="dashboard">
-      <Dropdown />
-      {/*       <button
-        onClick={(e) => {
-          e.preventDefault();
-          getStockData(portfolio, setPerformanceData, finish);
-        }}
-      >
-        Get Data
-      </button> */}
+      {/*    <Dropdown /> */}
+
       <div className="dash-row"></div>
       <div className="dash-row">
         {" "}
-        {forexData.length && <ForEx forexData={forexData} />}
+        <ForEx forexData={forexData} currencies={userCurrencies} />
       </div>
       <div className="dash-row">
         {/* A "my portfolios list which allows you to cycle through sheets if you have more than one" */}

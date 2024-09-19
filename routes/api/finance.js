@@ -10,6 +10,50 @@ const axios = require("axios");
 
 // Matches with "/api/finance"
 
+router.get("/forex", async (req, res) => {
+  const forex = await axios.get(
+    `https://api.currencybeacon.com/v1/latest${process.env.CB_API_KEY}`
+  );
+  try {
+    const data = forex.data;
+    const rates = forex.data.response;
+
+    console.log(rates);
+    //rates.map((d) => updateCurrency(d));
+    res.status(200).send(data);
+  } catch (error) {
+    return console.error(error);
+  }
+});
+
+router.post("/forex", async (req, res) => {
+  const { currencies } = req.body;
+  const forex = await axios.get(
+    `https://api.currencybeacon.com/v1/latest?symbols=${currencies}&${process.env.CB_API_KEY}`
+  );
+  try {
+    const rates = forex.data.response.rates;
+    const filterArray = currencies;
+
+    const filteredRates = Object.keys(rates)
+      .filter((key) => filterArray.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = rates[key];
+        return obj;
+      }, {});
+
+    Object.keys(filteredRates).map((item) =>
+      updateCurrency(item, filteredRates[item])
+    );
+
+    const updatedList = await getUserForex(currencies);
+    console.log(updatedList);
+    return res.status(200).send(updatedList);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   const tickers = Array(req.body.data).toString();
 
@@ -31,52 +75,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/forex", async (req, res) => {
-  try {
-    const results = await getForex();
-    return res.status(200).json(results);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-});
-
-router.post("/forex", async (req, res) => {
+router.post("/forex/user", async (req, res) => {
   const { currencies } = req.body;
-  console.log("req", currencies);
+  const forexData = await Currency.find({ currencyCode: { $in: currencies } });
   try {
-    const results = await axios.get(
-      `https://api.currencybeacon.com/v1/latest${process.env.CB_API_KEY}`
-    );
-    const localData = await getUserForex(currencies);
-    const currentEx = results.data;
-    const update = localData.map(
-      async (data) =>
-        await updateCurrency(
-          data.currencyCode,
-          currentEx.rates[data.currencyCode],
-          currentEx.date
-        )
-    );
-
-    res.status(200).json(update);
-
-    /*     const update = await updateCurrencies(
-      localData,
-      current.data.date,
-      current.data.rates
-    ); */
-    //console.log("finished");
-    /*     const newData = localData.map((l, index) =>
-      updateCurrencies(
-        l,
-        current.data.date,
-        current.data.rates[`${l.currencyCode}`]
-      )
-    ); */
-
-    //return res.status(200).json(update);
-  } catch (error) {
-    console.error(error);
+    res.status(200).send(forexData);
+  } catch (err) {
+    console.error(err);
   }
 });
 

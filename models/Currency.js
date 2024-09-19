@@ -19,9 +19,11 @@ const CurrencySchema = new mongoose.Schema({
   },
   rate: {
     type: Number,
+    required: true,
   },
   date: {
     type: Date,
+    required: true,
   },
 });
 

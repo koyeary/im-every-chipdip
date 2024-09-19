@@ -7,17 +7,11 @@ import TableRow from "@mui/material/TableRow";
 import { Tooltip } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
-const ForEx = ({ forexData }) => {
+const ForEx = ({ forexData, currencies }) => {
   // Your component logic goes here
+  console.log(forexData);
 
-  const columns = [
-    "Currency",
-    "Exchange Rate",
-    "Bid Price",
-    "Ask Price",
-    "Last Refreshed",
-    "Time Zone",
-  ];
+  const columns = ["Currency", "Exchange Rate"];
 
   return (
     // Your JSX code goes here
@@ -33,25 +27,25 @@ const ForEx = ({ forexData }) => {
         <TableBody>
           {forexData.map((c, index) => (
             <TableRow key={index}>
-              <Tooltip title={c.currencyName}>
-                <TableCell
-                  style={{ color: "#FFF" }}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <img
-                    style={{ marginRight: 10 }}
-                    src={`https://flagsapi.com/${c.countryCode}/flat/24.png`}
-                  />
-                  {c.currencyCode}
-                </TableCell>
-              </Tooltip>
-              {/*               <TableCell>{c.change}</TableCell>
-              <TableCell>{c.percent_change}</TableCell>
-              <TableCell>{c.open}</TableCell>
-              <TableCell>{c.high}</TableCell>
-              <TableCell>{c.close}</TableCell>
-              <TableCell>{c.low}</TableCell>
-              <TableCell>{c.volume}</TableCell> */}
+              <TableCell style={{ color: "#FFF" }}>
+                {" "}
+                <img
+                  style={{ marginRight: 10 }}
+                  src={`https://flagsapi.com/${c.countryCode}/flat/24.png`}
+                />
+              </TableCell>
+              <TableCell
+                style={{ color: "#FFF" }}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                {c.currency}
+              </TableCell>
+              <TableCell
+                style={{ color: "#FFF" }}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                {c.rate}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

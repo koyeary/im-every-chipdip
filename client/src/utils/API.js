@@ -31,6 +31,17 @@ export const getUserPortfolio = async (userId) => {
     .catch((err) => console.log(err.message));
 };
 
+export const getAllTickers = () => {
+  axios
+    .get("http://localhost:3001/api/finance/all", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
+};
+
 export const getStockData = (tickers, setPerformance) => {
   axios
     .post("http://localhost:3001/api/finance/", {
@@ -52,24 +63,50 @@ export const getStockData = (tickers, setPerformance) => {
     .catch((err) => console.log(err));
 };
 
-export const getForexData = async (currencies, setForexData) => {
+export const getUserForex = async (currencies, setForexData) => {
+  try {
+    const update = await axios.post(
+      "http://localhost:3001/api/finance/forex/user",
+      {
+        currencies: currencies,
+      }
+    );
+    console.log(update);
+    setForexData(update);
+    /*     console.log(update);
+    if (update.status === 200) {
+      const get = await axios.post(
+        "http://localhost:3001/api/finance/forex/user",
+        {
+          filter: currencies,
+        }
+      );
+      console.log(get);
+      return setForexData(get.data);
+    } */
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getForexData = async (currencies, callback) => {
   try {
     const res = await axios.post("http://localhost:3001/api/finance/forex", {
       currencies: currencies,
     });
-    /*     const filterData = res.data.data.filter((currency) =>
-      currencies.includes(currency.symbol)
-    ); */
-    console.log(currencies);
-    return setForexData(res.data);
+    //console.log(res.data.rates);
+    /*     if (update.status === 200) {
+      const get = await axios.post(
+        "http://localhost:3001/api/finance/forex/user",
+        {
+          filter: currencies,
+        }
+      );
+      console.log(get); */
 
-    /*     let rates = res.data.response.rates;
-    let watched = [{ USD: 1 }];
-
-    Object.keys(rates).map((rate) => {
-      currencies.includes(rate) && watched.push({ [rate]: rates[rate] });
-    });
-    setForexData(watched); */
+    const rates = res;
+    callback(rates.data);
+    console.log(rates.data);
   } catch (err) {
     console.log(err);
   }
