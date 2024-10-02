@@ -11,12 +11,22 @@ const ForEx = ({ forexData, currencies }) => {
   // Your component logic goes here
   console.log(forexData);
 
-  const columns = ["Currency", "Exchange Rate"];
+  const columns = ["Country", "Currency", "Exchange Rate"];
 
+  const moveUSDToFront = (data) => {
+    const index = data.findIndex((item) => item.currencyCode === "USD");
+    if (index !== -1) {
+      const [usdItem] = data.splice(index, 1);
+      data.unshift(usdItem);
+    }
+    return data;
+  };
+
+  const updatedForexData = moveUSDToFront([...forexData]);
   return (
     // Your JSX code goes here
     <div>
-      <Table className="portfolio-table" aria-label="simple table" size="small">
+      <Table aria-label="simple table" size="small">
         <TableHead>
           {columns.map((c) => (
             <TableCell key={c} style={{ color: "#FFF" }}>
@@ -25,27 +35,20 @@ const ForEx = ({ forexData, currencies }) => {
           ))}
         </TableHead>
         <TableBody>
-          {forexData.map((c, index) => (
+          {updatedForexData.map((c, index) => (
             <TableRow key={index}>
-              <TableCell style={{ color: "#FFF" }}>
-                {" "}
-                <img
-                  style={{ marginRight: 10 }}
-                  src={`https://flagsapi.com/${c.countryCode}/flat/24.png`}
-                />
-              </TableCell>
-              <TableCell
-                style={{ color: "#FFF" }}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                {c.currency}
-              </TableCell>
-              <TableCell
-                style={{ color: "#FFF" }}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                {c.rate}
-              </TableCell>
+              <Tooltip title={c.countryName}>
+                <TableCell style={{ color: "#FFF", cursor: "pointer" }}>
+                  <img
+                    style={{ marginRight: 10 }}
+                    width="24"
+                    height="18"
+                    src={`https://flagcdn.com/24x18/${c.countryCode.toLowerCase()}.png`}
+                  />
+                </TableCell>
+              </Tooltip>
+              <TableCell style={{ color: "#FFF" }}>{c.currencyCode}</TableCell>
+              <TableCell style={{ color: "#FFF" }}>{c.rate}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -46,9 +46,8 @@ router.post("/forex", async (req, res) => {
       updateCurrency(item, filteredRates[item])
     );
 
-    const updatedList = await getUserForex(currencies);
-    console.log(updatedList);
-    return res.status(200).send(updatedList);
+    const newRates = await getUserForex(currencies);
+    return res.status(200).send(newRates);
   } catch (err) {
     return res.status(500).send(err);
   }

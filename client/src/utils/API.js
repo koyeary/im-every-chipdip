@@ -94,16 +94,6 @@ export const getForexData = async (currencies, callback) => {
     const res = await axios.post("http://localhost:3001/api/finance/forex", {
       currencies: currencies,
     });
-    //console.log(res.data.rates);
-    /*     if (update.status === 200) {
-      const get = await axios.post(
-        "http://localhost:3001/api/finance/forex/user",
-        {
-          filter: currencies,
-        }
-      );
-      console.log(get); */
-
     const rates = res;
     callback(rates.data);
     console.log(rates.data);
