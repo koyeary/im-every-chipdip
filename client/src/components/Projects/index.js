@@ -92,6 +92,22 @@ const Projects = ({ darkMode }) => {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
+              <Link to="/orgchart" target="_blank">
+                Here
+              </Link>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ArrowDownwardIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            <Typography>Interactive Org Chart</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
               <Link to="/finance" target="_blank">
                 Here
               </Link>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo, Suspense, lazy } from "react";
+import { useEffect, useState, useMemo, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FAB from "./components/Buttons/FAB";
 import Splash from "./components/Splash";
@@ -6,6 +6,7 @@ import { animated, config, useSpring } from "react-spring";
 import "./App.css";
 import Status from "./components/Projects/Status";
 import FinanceDashboard from "./components/Projects/FinanceDashboard";
+import Org from "./components/Projects/Org";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
             path="/advocate"
             element={<Splash darkMode={darkMode} advocateMode={true} />}
           />
+          <Route path="/orgchart" element={<Org darkMode={darkMode} />} />
           <Route
             path="/finance"
             element={<FinanceDashboard darkMode={darkMode} />}

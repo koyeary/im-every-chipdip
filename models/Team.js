@@ -13,21 +13,12 @@ const TeamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  upstream: {
-    type: String,
+  level: {
+    type: Number,
     required: true,
   },
-  downstream: {
-    type: String,
-    required: true,
-  },
-  groups: {
+  crossFunction: {
     type: Array,
-  },
-  lead: {
-    type: Boolean,
-    required: true,
-    default: false,
   },
 });
 

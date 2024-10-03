@@ -84,7 +84,7 @@ const NavButton = () => {
     setHover(true);
   };
 
-  const ref = useRef(null);
+  //const ref = useRef(null);
 
   const handleStyle = () => {
     ref !== null
@@ -99,7 +99,7 @@ const NavButton = () => {
     <>
       <div className="button-row" onMouseOver={handleMouseOver}>
         <Button
-          ref={ref}
+          /* ref={ref} */
           style={buttonStyle}
           onMouseOut={handleMouseOut}
           //onMouseOver={handleStyle}
@@ -110,7 +110,7 @@ const NavButton = () => {
         {hover && (
           <>
             <Button
-              ref={ref}
+              /* ref={ref} */
               style={buttonStyle}
               onClick={handleOpen}
               //onMouseOver={handleStyle}
@@ -119,7 +119,7 @@ const NavButton = () => {
               Make a Payment
             </Button>
             <Button
-              ref={ref}
+              /* ref={ref} */
               style={buttonStyle}
               onClick={handleOpenAccount}
               //onMouseOver={handleStyle}

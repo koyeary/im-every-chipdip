@@ -1,5 +1,51 @@
 import axios from "axios";
 
+const formatData = (data) => {
+  const cLevel = data[1].level;
+  const mLevel = data[2].level;
+  const dLevel = data[3].level;
+  const eLevel = data[4].level;
+
+  const colors = [
+    "hsl(214, 70%, 50%)",
+    "hsl(43, 70%, 50%)",
+    "hsl(168, 70%, 50%)",
+    "hsl(34, 70%, 50%)",
+    "hsl(51, 70%, 50%)",
+    "hsl(15, 70%, 50%)",
+    "hsl(140, 70%, 50%)",
+  ];
+
+  const locations = [77449, 190542, 34364, 93132];
+
+  /*   const output = [
+    {
+      children: [
+        {
+          children: [
+            cLevel.map((c, i) => {
+              console.log(c);
+              return { color: colors[i], name: c.role, location: locations[i] };
+            }),
+          ],
+        },
+      ],
+      color: "hsl(214, 70%, 50%)",
+      name: data[0].role,
+    },
+  ];
+  return output; */
+};
+
+export const getOrgChart = async (callback) => {
+  try {
+    const res = await axios.get("http://localhost:3001/api/team");
+    console.log(res.data);
+    callback(res.data.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
 export const getUser = async () => {
   await axios
     .get("http://localhost:3001/api/user")

@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   try {
     const results = {
       message: "success",
-      data: await Team.find(req.body),
+      data: await Team.find(),
     };
     return res.status(200).json(results);
   } catch (error) {
