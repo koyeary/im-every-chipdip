@@ -82,14 +82,19 @@ const About = ({ advocateMode }) => {
             ) : (
               <>
                 <p>
-                  Hi, I'm Kat. I live in New York City with my wife, Lauren, and
-                  our two cats.
+                  Hi, I'm Kat. I'm a Project Manager, a frontend-leaning,
+                  Fullstack Software Developer, and I have over ten years of
+                  proven leadership experience. I live in New York City with my
+                  wife, Lauren, and our two cats. I'm currently seeking new
+                  opportunities, expecially as a project or program manager.
                 </p>
                 <p>
-                  I'm a frontend-leaning, fullstack software developer with
-                  proven leadership experience. I'm passionate about creating
-                  beautiful, user-friendly applications that give time back to
-                  us and take us outside.
+                  As a Project Manager, I am a natural fit. I know the ins and
+                  outs of software development, I have the attention to detail,
+                  sense of organization, and the experience with agile practices
+                  necessary to bring projects from concept to delivery. I also
+                  have the soft skills to firmly grasp and communicate the needs
+                  of engineers, executives, and other internal stakeholders.
                 </p>
               </>
             )}
