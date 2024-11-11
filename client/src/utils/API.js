@@ -1,4 +1,5 @@
 import axios from "axios";
+import env from "react-dotenv";
 
 const formatData = (data) => {
   const cLevel = data[1].level;
@@ -142,7 +143,6 @@ export const getForexData = async (currencies, callback) => {
     });
     const rates = res;
     callback(rates.data);
-    console.log(rates.data);
   } catch (err) {
     console.log(err);
   }
@@ -168,7 +168,7 @@ export const sendEmail = async (emailData, callback) => {
   const data = {
     service_id: "gmail",
     template_id: "portfolio",
-    user_id: creds.EJS_PUBLIC_KEY,
+    user_id: env.EJS_PUBLIC_KEY,
     template_params: {
       name: emailData.name,
       email: emailData.email,
@@ -176,7 +176,7 @@ export const sendEmail = async (emailData, callback) => {
       message: emailData.message,
       reply_to: emailData.email,
     },
-    accessToken: creds.EJS_PRIVATE_KEY,
+    accessToken: env.EJS_PRIVATE_KEY,
   };
   try {
     const res = await axios.post(
