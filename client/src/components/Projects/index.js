@@ -32,7 +32,8 @@ const Projects = ({ darkMode }) => {
         </Link>
       </h2>
       <div className="accordion-wrapper">
-        <Accordion>
+        <h2>Coming soon!</h2>
+        {/*      <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}
             aria-controls="panel1-content"
@@ -127,7 +128,7 @@ const Projects = ({ darkMode }) => {
           <AccordionDetails>
             <Typography>Coming soon!</Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
       </div>
     </div>
   );

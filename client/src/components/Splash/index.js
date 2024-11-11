@@ -7,7 +7,7 @@ const Splash = (props) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [start, setStart] = useState(true);
   const [moving, setMoving] = useState(false);
-  const { darkMode, advocateMode } = props;
+  const { darkMode, advocateMode, projectMode } = props;
 
   return (
     <div className="splash-container">
@@ -15,6 +15,7 @@ const Splash = (props) => {
         <Animation
           open={start}
           advocateMode={advocateMode}
+          projectMode={projectMode}
           darkMode={darkMode}
           activeIndex={activeIndex}
         />

@@ -30,6 +30,16 @@ const App = () => {
             path="/advocate"
             element={<Splash darkMode={darkMode} advocateMode={true} />}
           />
+          <Route
+            path="/pm"
+            element={
+              <Splash
+                darkMode={darkMode}
+                advocateMode={false}
+                projectMode={true}
+              />
+            }
+          />
           <Route path="/orgchart" element={<Org darkMode={darkMode} />} />
           <Route
             path="/finance"
