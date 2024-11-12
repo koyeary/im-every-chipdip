@@ -127,34 +127,27 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
               Manager
             </span>
           </animated.div>
-          {advocateMode ||
-            (projectMode && (
-              <animated.div
-                style={{
-                  ...graphicStyles3,
-                  color: "var(--darkest-blue)",
+          <animated.div
+            style={{
+              ...graphicStyles3,
+              color: "var(--darkest-blue)",
 
-                  paddingTop: 2.5,
-                }}
-              >
-                &
-              </animated.div>
-            ))}
+              paddingTop: 2.5,
+            }}
+          >
+            &
+          </animated.div>
         </div>
       </div>
-      {advocateMode && (
+      {/*       {advocateMode && (
         <div className="header">
           <Advocate spring={graphicStyles4} advocateMode={advocateMode} />
         </div>
-      )}
-      {projectMode && (
-        <div className="header" id="header-pm-div">
-          <ProjectManagement
-            spring={graphicStyles4}
-            projectMode={projectMode}
-          />
-        </div>
-      )}
+      )} */}
+
+      <div className="header" id="header-pm-div">
+        <ProjectManagement spring={graphicStyles4} projectMode={projectMode} />
+      </div>
 
       <div className="header-sub">
         {trail.map((style, index) => (
