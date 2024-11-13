@@ -7,7 +7,7 @@ const CV = ({ darkMode }) => {
     <>
       <div className="page">
         <embed
-          src="/assets/Resume2024.pdf"
+          src="/assets/Resume 2024.pdf"
           type="application/pdf"
           width="100%"
           height="100%"
