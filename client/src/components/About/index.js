@@ -96,6 +96,13 @@ const About = ({ advocateMode }) => {
                   have the soft skills to firmly grasp and communicate the needs
                   of engineers, executives, and other internal stakeholders.
                 </p>
+                <p>
+                  In my free time, I'm happiest in a library. I am a bit of an
+                  amateur archivist, as well as a writer. I love to find, to
+                  find out, and to understand. It's a trait that influences
+                  everything I do, and I believe it keeps me engaged and
+                  positive at work.
+                </p>
               </>
             )}
           </div>
