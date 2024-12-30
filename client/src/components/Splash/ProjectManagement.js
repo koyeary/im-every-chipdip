@@ -8,10 +8,10 @@ const ProjectManagement = ({ spring, projectMode }) => {
         style={{ ...spring, display: "flex", flexDirection: "row" }}
       >
         <animated.span style={{ color: "var(--light-blue)" }}>
-          Fullstack
+          Project
         </animated.span>
         <animated.span style={{ color: "var(--dark-blue)", marginLeft: 10 }}>
-          Developer
+          Manager
         </animated.span>
       </animated.div>
     </div>

@@ -90,7 +90,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           className="header-div"
           style={{
             color: "var(--darkest-blue)",
-            fontWeight: 600,
+
             ...graphicStyles,
           }}
         >
@@ -101,7 +101,6 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           style={{
             ...graphicStyles1,
             color: "var(--darkest-blue)",
-            fontWeight: 600,
           }}
         >
           Yeary
@@ -122,9 +121,9 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
               minWidth: 340,
             }}
           >
-            Project
+            Software
             <span style={{ color: "var(--light-blue)", marginLeft: 10 }}>
-              Manager
+              Engineer
             </span>
           </animated.div>
           <animated.div

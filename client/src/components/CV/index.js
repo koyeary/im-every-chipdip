@@ -12,7 +12,7 @@ const CV = ({ darkMode }) => {
           width="100%"
           height="100%"
         ></embed>
-      </div>{" "}
+      </div>
       {/* closing tag is only for testing */}
       {/*         <div className="dark-blue">
           <h1>Curriculum Vitae</h1>
