@@ -17,11 +17,11 @@ const Projects = ({ darkMode }) => {
         width: "90%",
         margin: "auto",
         height: "100%",
+        paddingTop: "100px",
         overflow: "auto",
+        scrollbarWidth: "none",
         display: "flex",
         flexDirection: "column",
-
-        /*         justifyContent: "center", */
       }}
     >
       <h1 className="projects-header">Projects</h1>
@@ -32,7 +32,8 @@ const Projects = ({ darkMode }) => {
         </Link>
       </h2>
       <div className="accordion-wrapper">
-        <Accordion>
+        <h2>Coming soon!</h2>
+        {/*      <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}
             aria-controls="panel1-content"
@@ -41,7 +42,9 @@ const Projects = ({ darkMode }) => {
             <Typography>Admin Status and Error Reporting</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Coming soon!</Typography>
+            <Typography>
+              <Link to="/status">Here</Link>
+            </Typography>
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -89,7 +92,27 @@ const Projects = ({ darkMode }) => {
             <Typography>Investment Portfolio Dashboard</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Coming soon!</Typography>
+            <Typography>
+              <Link to="/orgchart" target="_blank">
+                Here
+              </Link>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ArrowDownwardIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            <Typography>Interactive Org Chart</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <Link to="/finance" target="_blank">
+                Here
+              </Link>
+            </Typography>
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -105,7 +128,7 @@ const Projects = ({ darkMode }) => {
           <AccordionDetails>
             <Typography>Coming soon!</Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
       </div>
     </div>
   );

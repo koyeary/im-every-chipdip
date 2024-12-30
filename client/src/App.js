@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState, useMemo, Suspense, lazy } from "react";
+import { useEffect, useState, useMemo, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-//import Splash from "./components/Splash";
 import FAB from "./components/Buttons/FAB";
-import NavButton from "./components/Buttons/NavButton";
+import Splash from "./components/Splash";
 import { animated, config, useSpring } from "react-spring";
 import "./App.css";
-import Payment from "./components/Payment";
-
-const Splash = lazy(() => import("./components/Splash"));
+import Status from "./components/Projects/Status";
+import FinanceDashboard from "./components/Projects/FinanceDashboard";
+import Org from "./components/Projects/Org";
 
 const App = () => {
-  const darkMode = useRef(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   const spring = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -30,13 +30,28 @@ const App = () => {
             path="/advocate"
             element={<Splash darkMode={darkMode} advocateMode={true} />}
           />
+          <Route
+            path="/pm"
+            element={
+              <Splash
+                darkMode={darkMode}
+                advocateMode={false}
+                projectMode={true}
+              />
+            }
+          />
+          <Route path="/orgchart" element={<Org darkMode={darkMode} />} />
+          <Route
+            path="/finance"
+            element={<FinanceDashboard darkMode={darkMode} />}
+          />
+          <Route path="/status" element={<Status />} />
         </Routes>
       </div>
 
-      <animated.div style={spring}>
+      <animated.div style={spring} className="fab">
         <FAB darkMode={darkMode} icon="linkedIn" />
         <FAB darkMode={darkMode} icon="gitHub" />
-        {/*        <NavButton darkMode={darkMode} /> */}
       </animated.div>
     </Router>
   );

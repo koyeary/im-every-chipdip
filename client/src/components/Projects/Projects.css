@@ -22,7 +22,7 @@
 .accordion-wrapper {
   width: 90%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -79,10 +79,11 @@
 .link {
   text-decoration: none;
   margin: 5;
-  color: #4061d7;
+  color: #6cc644;
+  text-wrap: nowrap;
 }
 
 .link:hover {
   text-decoration: underline;
-  color: #6cc644;
+  color: #4061d7;
 }

@@ -1,4 +1,5 @@
 import FAB from "../Buttons/FAB";
+
 import "./CV.css";
 
 const CV = ({ darkMode }) => {
@@ -6,12 +7,12 @@ const CV = ({ darkMode }) => {
     <>
       <div className="page">
         <embed
-          src="/assets/Resume2024.pdf"
+          src="/assets/Resume 2024.pdf"
           type="application/pdf"
           width="100%"
           height="100%"
         ></embed>
-      </div>{" "}
+      </div>
       {/* closing tag is only for testing */}
       {/*         <div className="dark-blue">
           <h1>Curriculum Vitae</h1>
