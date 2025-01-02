@@ -165,6 +165,7 @@ export const getUserId = async (email) => {
 };
 
 export const sendEmail = async (emailData, callback) => {
+  console.log(env.EJS_PUBLIC_KEY);
   const data = {
     service_id: "gmail",
     template_id: "portfolio",
