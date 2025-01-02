@@ -5,7 +5,12 @@ const ProjectManagement = ({ spring, projectMode }) => {
   return (
     <div className="header-div">
       <animated.div
-        style={{ ...spring, display: "flex", flexDirection: "row" }}
+        style={{
+          ...spring,
+          display: "flex",
+          flexDirection: "row",
+          fontWeight: 500,
+        }}
       >
         <animated.span style={{ color: "var(--light-blue)" }}>
           Project

@@ -1,8 +1,8 @@
 import { animated, useSpring, useTrail, config } from "react-spring";
 import "./Splash.css";
 import ProjectManagement from "./ProjectManagement";
-import Advocate from "./Advocate";
 import Page from "./Page";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
   const graphicStyles = useSpring({
@@ -54,6 +54,13 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
     delay: 1500,
   });
 
+  const gearAnimation = useSpring({
+    from: { rotate: 0 },
+    to: { rotate: 720 },
+    config: { duration: 1500, mass: 1, tension: 200, friction: 50, wobbly: 1 },
+    delay: 1000,
+  });
+
   const links = [
     { linkTitle: "about", dialog: "About" },
     { linkTitle: "projects", dialog: "Projects" },
@@ -74,6 +81,12 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
     delay: advocateMode ? 2000 : 1000,
   });
 
+  const Gear = () => {
+    <animated.span style={{ paddingTop: 5, ...gearAnimation }}>
+      <SettingsIcon sx={{ fontSize: "75%" }} />
+    </animated.span>;
+  };
+
   return (
     <div
       style={{
@@ -90,7 +103,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           className="header-div"
           style={{
             color: "var(--darkest-blue)",
-
+            fontWeight: 600,
             ...graphicStyles,
           }}
         >
@@ -100,6 +113,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           className="header-div"
           style={{
             ...graphicStyles1,
+            fontWeight: 600,
             color: "var(--darkest-blue)",
           }}
         >
@@ -119,12 +133,11 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
               color: "var(--dark-blue)",
               flexWrap: "wrap",
               minWidth: 340,
+              fontWeight: 500,
             }}
           >
             Software
-            <span style={{ color: "var(--light-blue)", marginLeft: 10 }}>
-              Engineer
-            </span>
+            <span style={{ color: "var(--light-blue)" }}> Engineer</span>
           </animated.div>
           <animated.div
             style={{
