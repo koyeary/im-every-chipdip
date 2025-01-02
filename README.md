@@ -114,7 +114,7 @@ A modern, responsive portfolio web application built with **React** for the fron
 ## Folder Structure
 
 ```
-portfolio-project/
+im-every-chipdip/
 ├── client/               # React frontend
 │   ├── public/           # Static files
 │   ├── src/              # Main application code
@@ -122,11 +122,11 @@ portfolio-project/
 │       ├── pages/        # Page components
 │       ├── utils/        # Helper functions
 │       └── App.js        # Main App component
-├── server/               # Node.js backend
-│   ├── controllers/      # API controllers
-│   ├── models/           # Database schemas
-│   ├── routes/           # API routes
-│   └── server.js         # Entry point for the backend
+├──              # Node.js backend
+│── controllers/      # API controllers
+│── models/           # Database schemas
+│── routes/           # API routes
+│── server.js         # Entry point for the backend
 ```
 
 ---
