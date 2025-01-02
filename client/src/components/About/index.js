@@ -82,26 +82,25 @@ const About = ({ advocateMode }) => {
             ) : (
               <>
                 <p>
-                  Hi, I'm Kat. I'm a Project Manager, a frontend-leaning,
-                  Fullstack Software Developer, and I have over ten years of
-                  proven leadership experience. I live in New York City with my
-                  wife, Lauren, and our two cats. I'm currently seeking new
-                  opportunities, expecially as a project or program manager.
+                  Hi, I'm Kat. I'm a frontend-leaning, Fullstack Software
+                  Engineer and project manager. I live in New York City with my
+                  wife, Lauren, and our two cats.
                 </p>
                 <p>
-                  As a Project Manager, I am a natural fit. I know the ins and
-                  outs of software development, I have the attention to detail,
-                  sense of organization, and the experience with agile practices
-                  necessary to bring projects from concept to delivery. I also
-                  have the soft skills to firmly grasp and communicate the needs
-                  of engineers, executives, and other internal stakeholders.
+                  I have the attention to detail, sense of organization, and the
+                  experience with agile practices necessary to bring projects
+                  from concept to delivery. I also have the soft skills to
+                  firmly grasp and communicate the needs of engineers,
+                  executives, and other stakeholders. All of these skills are
+                  equally vital to both project management and development
+                  roles.
                 </p>
                 <p>
-                  In my free time, I'm happiest in a library. I am a bit of an
-                  amateur archivist, as well as a writer. I love to find, to
-                  find out, and to understand. It's a trait that influences
-                  everything I do, and I believe it keeps me engaged and
-                  positive at work.
+                  As an engineer, I have extensive experience with
+                  JavaScript-based frontend development. I'm also experienced in
+                  back-end development and building REST APIs. I enjoy every
+                  aspect of full stack development and I'm always trying to
+                  learn more.
                 </p>
               </>
             )}
