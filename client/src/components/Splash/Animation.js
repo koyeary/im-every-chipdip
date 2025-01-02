@@ -103,7 +103,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           className="header-div"
           style={{
             color: "var(--darkest-blue)",
-
+            fontWeight: 600,
             ...graphicStyles,
           }}
         >
@@ -113,6 +113,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           className="header-div"
           style={{
             ...graphicStyles1,
+            fontWeight: 600,
             color: "var(--darkest-blue)",
           }}
         >
@@ -132,6 +133,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
               color: "var(--dark-blue)",
               flexWrap: "wrap",
               minWidth: 340,
+              fontWeight: 500,
             }}
           >
             Software
