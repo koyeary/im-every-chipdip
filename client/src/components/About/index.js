@@ -97,8 +97,8 @@ const About = ({ advocateMode }) => {
                   As an engineer, I have extensive experience with
                   JavaScript-based frontend development, as well as experience
                   in backend development and building REST APIs. I enjoy every
-                  aspect of full stack dev and I'm always challenging myself to
-                  learn more.
+                  aspect of full stack development and I'm always challenging
+                  myself to learn more.
                 </p>
               </>
             )}
