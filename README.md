@@ -122,11 +122,11 @@ portfolio-project/
 │       ├── pages/        # Page components
 │       ├── utils/        # Helper functions
 │       └── App.js        # Main App component
-├── server/               # Node.js backend
-│   ├── controllers/      # API controllers
-│   ├── models/           # Database schemas
-│   ├── routes/           # API routes
-│   └── server.js         # Entry point for the backend
+├──              # Node.js backend
+│── controllers/      # API controllers
+│── models/           # Database schemas
+│── routes/           # API routes
+│── server.js         # Entry point for the backend
 ```
 
 ---
