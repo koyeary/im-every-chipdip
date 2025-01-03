@@ -3,10 +3,8 @@ import About from "../About";
 import Contact from "../Contact";
 import CV from "../CV";
 import Projects from "../Projects";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 
-import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
