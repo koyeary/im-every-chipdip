@@ -5,12 +5,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FAB from "./components/Buttons/FAB";
-import Splash from "./pages/About/Splash";
-import Status from "./components/Projects/Status";
-import FinanceDashboard from "./components/Projects/FinanceDashboard";
-import Org from "./components/Projects/Org";
+import Splash from "./pages/Splash";
+import Status from "./pages/Projects/Status";
+import FinanceDashboard from "./pages/Projects/FinanceDashboard";
+//import ThemeContext from "./contexts/ThemeContext";
+//import Org from "./components/Projects/Org";
 import "./App.css";
-import { set } from "mongoose";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,54 +29,56 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div
-        style={{
-          backgroundColor: darkMode && "var(--darkest-blue)",
-          height: "100vh",
-          width: "100vw",
-        }}
-      >
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={darkMode}
-                onChange={handleDarkModeToggle}
-                inputProps={{ "aria-label": "Dark mode" }}
-              />
-            }
-            label="Dark mode"
-          />
-        </FormGroup>
-        <Routes>
-          <Route
-            path="*"
-            element={
-              <Splash darkMode={darkMode} advocateMode={false} open={open} />
-            }
-          />
-          <Route
-            path="/advocate"
-            element={<Splash darkMode={darkMode} advocateMode={true} />}
-          />
-          <Route
-            path="/pm"
-            element={<Splash open={open} darkMode={darkMode} />}
-          />
-          <Route path="/orgchart" element={<Org darkMode={darkMode} />} />
-          <Route
-            path="/finance"
-            element={<FinanceDashboard darkMode={darkMode} />}
-          />
-          <Route path="/status" element={<Status />} />
-        </Routes>
-        <animated.div style={spring} className="fab">
-          <FAB darkMode={darkMode} icon="linkedIn" />
-          <FAB darkMode={darkMode} icon="gitHub" />
-        </animated.div>{" "}
-      </div>
-    </Router>
+    <>
+      <Router>
+        <div
+          style={{
+            backgroundColor: darkMode && "var(--darkest-blue)",
+            height: "100vh",
+            width: "100vw",
+          }}
+        >
+          {/*           <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={darkMode}
+                  onChange={handleDarkModeToggle}
+                  inputProps={{ "aria-label": "Dark mode" }}
+                />
+              }
+              label="Dark mode"
+            />
+          </FormGroup> */}
+          <Routes>
+            <Route
+              path="*"
+              element={
+                <Splash darkMode={darkMode} advocateMode={false} open={open} />
+              }
+            />
+            <Route
+              path="/advocate"
+              element={<Splash darkMode={darkMode} advocateMode={true} />}
+            />
+            <Route
+              path="/pm"
+              element={<Splash open={open} darkMode={darkMode} />}
+            />
+            {/* <Route path="/orgchart" element={<Org darkMode={darkMode} />} /> */}
+            <Route
+              path="/finance"
+              element={<FinanceDashboard darkMode={darkMode} />}
+            />
+            <Route path="/status" element={<Status />} />
+          </Routes>
+          <animated.div style={spring} className="fab">
+            <FAB darkMode={darkMode} icon="linkedIn" />
+            <FAB darkMode={darkMode} icon="gitHub" />
+          </animated.div>{" "}
+        </div>
+      </Router>
+    </>
   );
 };
 

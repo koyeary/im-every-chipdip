@@ -3,7 +3,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { sendEmail } from "../../../utils/API";
+import { sendEmail } from "../../utils/API";
 import "./Contact.css";
 
 const Contact = ({ darkMode }) => {

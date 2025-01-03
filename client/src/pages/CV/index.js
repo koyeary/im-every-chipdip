@@ -1,4 +1,4 @@
-import FAB from "../Buttons/FAB";
+import FAB from "../../components/Buttons/FAB";
 
 import "./CV.css";
 

@@ -88,10 +88,10 @@ const About = ({ advocateMode }) => {
                 </p>
                 <p>
                   I have the attention to detail, sense of organization, and the
-                  experience with agile practices that bring projects from
-                  concept to delivery. I also have the soft skills to firmly
-                  grasp and communicate the needs of engineers, executives, and
-                  other stakeholders.
+                  experience with agile practices to bring projects from concept
+                  to delivery. I also have the soft skills to firmly grasp and
+                  communicate the needs of engineers, executives, and other
+                  stakeholders.
                 </p>
                 <p>
                   As an engineer, I have extensive experience with
