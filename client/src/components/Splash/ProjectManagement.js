@@ -3,7 +3,28 @@ import "./Splash.css";
 
 const ProjectManagement = ({ spring, projectMode }) => {
   return (
-    <div className="header-div">
+    <>
+      {/*       <animated.div
+        className="header-div"
+        style={{
+          color: "var(--darkest-blue)",
+          fontWeight: 600,
+          ...graphicStyles,
+        }}
+      >
+        Project
+      </animated.div>
+      <animated.div
+        className="header-div"
+        style={{
+          ...graphicStyles1,
+          fontWeight: 600,
+          color: "var(--darkest-blue)",
+        }}
+      >
+        Manager
+      </animated.div> */}
+
       <animated.div
         style={{
           ...spring,
@@ -19,7 +40,7 @@ const ProjectManagement = ({ spring, projectMode }) => {
           Manager
         </animated.span>
       </animated.div>
-    </div>
+    </>
   );
 };
 

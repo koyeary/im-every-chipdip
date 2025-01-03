@@ -51,7 +51,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
     ],
     from: { opacity: 0, transform: "translateX(20%)" },
     config: config.default,
-    delay: 1500,
+    delay: 1250,
   });
 
   const gearAnimation = useSpring({
@@ -78,7 +78,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
       { opacity: 1, transform: open ? "translateY(0%)" : "translateY(0%)" },
     ],
     config: config.wobbly,
-    delay: advocateMode ? 2000 : 1000,
+    delay: 1750,
   });
 
   const Gear = () => {
@@ -154,14 +154,24 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           </animated.div>
         </div>
       </div>
-      {/*       {advocateMode && (
-        <div className="header">
-          <Advocate spring={graphicStyles4} advocateMode={advocateMode} />
-        </div>
-      )} */}
 
       <div className="header" id="header-pm-div">
-        <ProjectManagement spring={graphicStyles4} projectMode={projectMode} />
+        <animated.div
+          style={{
+            ...graphicStyles4,
+            display: "flex",
+            flexDirection: "row",
+            fontWeight: 500,
+          }}
+        >
+          <animated.span style={{ color: "var(--light-blue)" }}>
+            Project
+          </animated.span>
+          <animated.span style={{ color: "var(--dark-blue)", marginLeft: 10 }}>
+            Manager
+          </animated.span>
+        </animated.div>
+        {/*   <ProjectManagement spring={graphicStyles4} projectMode={projectMode} /> */}
       </div>
 
       <div className="header-sub">
