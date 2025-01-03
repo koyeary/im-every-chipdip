@@ -46,7 +46,14 @@ const Contact = ({ darkMode }) => {
   };
 
   return (
-    <div style={{ padding: 40, height: "fit-content" }}>
+    <div
+      style={{
+        margin: "40px auto 0 auto",
+        minHeight: "fit-content",
+        overflow: "auto",
+        scrollbarWidth: "none",
+      }}
+    >
       <form
         onSubmit={handleSend}
         style={{
@@ -58,7 +65,7 @@ const Contact = ({ darkMode }) => {
           flexDirection: "column",
           gap: 20,
           height: "calc(100% - 50px)",
-          overflow: "auto",
+          overflow: "hidden",
           scrollbarWidth: "none",
           display: "flex",
           justifyContent: "center",
@@ -68,7 +75,7 @@ const Contact = ({ darkMode }) => {
           <div className="header-wrap">
             <h1 className="contact-header">Send me a message.</h1>
             <h2 className="subheader">
-              You can also contact me at katyeary @ gmail dot com
+              Or contact me at katyeary @ gmail dot com
             </h2>
           </div>
         ) : (
