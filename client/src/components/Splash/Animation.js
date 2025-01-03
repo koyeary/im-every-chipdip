@@ -1,10 +1,8 @@
 import { animated, useSpring, useTrail, config } from "react-spring";
 import "./Splash.css";
-import ProjectManagement from "./ProjectManagement";
 import Page from "./Page";
-import SettingsIcon from "@mui/icons-material/Settings";
 
-const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
+const Animation = ({ darkMode, open }) => {
   const graphicStyles = useSpring({
     to: [
       { opacity: 0, transform: "translateY(-100%)" },
@@ -41,7 +39,7 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
     ],
     from: { opacity: 0, transform: "translateX(-100%)" },
     config: config.wobbly,
-    delay: 1250,
+    delay: 1000,
   });
 
   const graphicStyles4 = useSpring({
@@ -51,13 +49,6 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
     ],
     from: { opacity: 0, transform: "translateX(20%)" },
     config: config.default,
-    delay: 1500,
-  });
-
-  const gearAnimation = useSpring({
-    from: { rotate: 0 },
-    to: { rotate: 720 },
-    config: { duration: 1500, mass: 1, tension: 200, friction: 50, wobbly: 1 },
     delay: 1000,
   });
 
@@ -71,21 +62,15 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
   const trail = useTrail(links.length, {
     from: {
       opacity: 0,
-      transform: open ? "translateY(-20%)" : "translateY(0%)",
+      transform: "translateY(-20%)",
     },
     to: [
-      { opacity: 0, transform: open ? "translateY(-200%)" : "translateY(0%)" },
-      { opacity: 1, transform: open ? "translateY(0%)" : "translateY(0%)" },
+      { opacity: 0, transform: "translateY(-200%)" },
+      { opacity: 1, transform: "translateY(0%)" },
     ],
     config: config.wobbly,
-    delay: advocateMode ? 2000 : 1000,
+    delay: 1100,
   });
-
-  const Gear = () => {
-    <animated.span style={{ paddingTop: 5, ...gearAnimation }}>
-      <SettingsIcon sx={{ fontSize: "75%" }} />
-    </animated.span>;
-  };
 
   return (
     <div
@@ -154,14 +139,23 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           </animated.div>
         </div>
       </div>
-      {/*       {advocateMode && (
-        <div className="header">
-          <Advocate spring={graphicStyles4} advocateMode={advocateMode} />
-        </div>
-      )} */}
 
       <div className="header" id="header-pm-div">
-        <ProjectManagement spring={graphicStyles4} projectMode={projectMode} />
+        <animated.div
+          style={{
+            ...graphicStyles4,
+            display: "flex",
+            flexDirection: "row",
+            fontWeight: 500,
+          }}
+        >
+          <animated.span style={{ color: "var(--light-blue)" }}>
+            Project
+          </animated.span>
+          <animated.span style={{ color: "var(--dark-blue)", marginLeft: 10 }}>
+            Manager
+          </animated.span>
+        </animated.div>
       </div>
 
       <div className="header-sub">
