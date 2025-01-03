@@ -143,7 +143,6 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
             style={{
               ...graphicStyles3,
               color: "var(--darkest-blue)",
-
               paddingTop: 2.5,
             }}
           >
