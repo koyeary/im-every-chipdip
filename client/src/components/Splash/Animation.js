@@ -36,10 +36,10 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
 
   const graphicStyles3 = useSpring({
     to: [
-      { opacity: 0, transform: "translateX(200%)" },
+      { opacity: 0, transform: "translateX(100%)" },
       { opacity: 1, transform: "translateX(0%)" },
     ],
-    from: { opacity: 0, transform: "translateX(20%)" },
+    from: { opacity: 0, transform: "translateX(-100%)" },
     config: config.wobbly,
     delay: 1250,
   });
@@ -123,7 +123,11 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
       <div className="header">
         <div
           className="header-div"
-          style={{ display: "flex", flexDirection: "row", flexWrap: "nowrap" }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+          }}
         >
           <animated.div
             style={{
@@ -138,15 +142,15 @@ const Animation = ({ darkMode, open, advocateMode, projectMode }) => {
           >
             Software
             <span style={{ color: "var(--light-blue)" }}> Engineer</span>
-          </animated.div>
-          <animated.div
-            style={{
-              ...graphicStyles3,
-              color: "var(--darkest-blue)",
-              paddingTop: 2.5,
-            }}
-          >
-            &
+            <animated.span
+              style={{
+                ...graphicStyles3,
+                color: "var(--darkest-blue)",
+                paddingTop: 2.5,
+              }}
+            >
+              &
+            </animated.span>
           </animated.div>
         </div>
       </div>
