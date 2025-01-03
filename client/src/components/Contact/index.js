@@ -64,32 +64,35 @@ const Contact = ({ darkMode }) => {
           display: "flex",
           flexDirection: "column",
           gap: 20,
-          height: "calc(100% - 50px)",
+          height: "fit-content",
           scrollbarWidth: "none",
           display: "flex",
+          overflowX: "hidden",
           justifyContent: "center",
         }}
       >
-        {msg === "" ? (
+        {/*    {msg === "" ? (
           <div className="header-wrap">
             <h1 className="contact-header">Send me a message.</h1>
             <h2 className="subheader">
               Or contact me at katyeary @ gmail dot com
             </h2>
           </div>
-        ) : (
-          <>
-            <div className="header-wrap">
-              <h1 className="contact-header">Send me a message.</h1>
-            </div>
+        ) : ( */}
+        <>
+          {/*         <div className="header-wrap"> */}
+          <h1 className="contact-header">Send me a message.</h1>
+          {/*    </div> */}
+          {msg === "" && (
             <Alert severity={severity} style={{ zIndex: 1000 }}>
               <AlertTitle>
                 {severity.charAt(0).toUpperCase() + severity.slice(1)}
               </AlertTitle>
               {msg}
             </Alert>
-          </>
-        )}
+          )}
+        </>
+
         <>
           <TextField
             onChange={handleChange}
