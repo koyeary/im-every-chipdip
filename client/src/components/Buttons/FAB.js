@@ -34,7 +34,7 @@ const FAB = ({ icon }) => {
           position: "absolute",
           bottom: 30,
           right: icon === "linkedIn" ? 84 : 32,
-          backgroundColor: "#FFF",
+          backgroundColor: "none",
           height: 60,
           width: 60,
           borderRadius: "50%",

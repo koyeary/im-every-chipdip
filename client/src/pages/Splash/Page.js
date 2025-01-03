@@ -1,7 +1,7 @@
 import * as React from "react";
-import About from "../About";
+import About from "..";
 import Contact from "../Contact";
-import CV from "../CV";
+import CV from "../../../components/CV";
 import Projects from "../Projects";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";

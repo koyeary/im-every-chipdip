@@ -1,52 +1,63 @@
 import { animated, useSpring, useTrail, config } from "react-spring";
 import "./Splash.css";
 import Page from "./Page";
+import css from "./Splash.css";
 
-const Animation = ({ darkMode, open }) => {
+const Jumbotron = ({ darkMode, open }) => {
   const graphicStyles = useSpring({
-    to: [
-      { opacity: 0, transform: "translateY(-100%)" },
-      { opacity: 1, transform: "translateY(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateY(-100%)" },
+          { opacity: 1, transform: "translateY(0%)" },
+        ]
+      : {},
     from: { opacity: 0, transform: "translateY(-10%)" },
     config: config.wobbly,
   });
 
   const graphicStyles1 = useSpring({
-    to: [
-      { opacity: 0, transform: "translateX(150%)" },
-      { opacity: 1, transform: "translateX(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateX(150%)" },
+          { opacity: 1, transform: "translateX(0%)" },
+        ]
+      : {},
     from: { opacity: 0, transform: "translateX(-15%)" },
     config: { mass: 1, tension: 200, friction: 20 },
     delay: 500,
   });
 
   const graphicStyles2 = useSpring({
-    to: [
-      { opacity: 0, transform: "translateY(-200%)" },
-      { opacity: 1, transform: "translateY(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateY(-200%)" },
+          { opacity: 1, transform: "translateY(0%)" },
+        ]
+      : {},
     from: { opacity: 0, transform: "translateX(0%)" },
     config: config.wobbly,
     delay: 550,
   });
 
   const graphicStyles3 = useSpring({
-    to: [
-      { opacity: 0, transform: "translateX(100%)" },
-      { opacity: 1, transform: "translateX(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateX(100%)" },
+          { opacity: 1, transform: "translateX(0%)" },
+        ]
+      : {},
     from: { opacity: 0, transform: "translateX(-100%)" },
     config: config.wobbly,
     delay: 1000,
   });
 
   const graphicStyles4 = useSpring({
-    to: [
-      { opacity: 0, transform: "translateY(200%)" },
-      { opacity: 1, transform: "translateY(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateY(200%)" },
+          { opacity: 1, transform: "translateY(0%)" },
+        ]
+      : {},
     from: { opacity: 0, transform: "translateX(20%)" },
     config: config.default,
     delay: 1000,
@@ -64,10 +75,12 @@ const Animation = ({ darkMode, open }) => {
       opacity: 0,
       transform: "translateY(-20%)",
     },
-    to: [
-      { opacity: 0, transform: "translateY(-200%)" },
-      { opacity: 1, transform: "translateY(0%)" },
-    ],
+    to: open
+      ? [
+          { opacity: 0, transform: "translateY(-200%)" },
+          { opacity: 1, transform: "translateY(0%)" },
+        ]
+      : {},
     config: config.wobbly,
     delay: 1100,
   });
@@ -174,4 +187,4 @@ const Animation = ({ darkMode, open }) => {
   );
 };
 
-export default Animation;
+export default Jumbotron;
