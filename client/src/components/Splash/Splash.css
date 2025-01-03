@@ -19,7 +19,7 @@
 h1 {
   font-size: 2.5rem;
   font-weight: 600;
-  margin: 3.5% auto 0 auto;
+  margin: 3.5% auto 0;
 }
 
 /* Layout */
@@ -36,7 +36,7 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0 0 5% 0;
+  margin-bottom: 5%;
   justify-content: space-between;
 }
 .splash {
@@ -75,8 +75,6 @@ h1 {
   max-width: 100vw;
 }
 
-/* Header Font Sizes */
-
 /* Header Div */
 .header-div,
 #header-pm-div {
@@ -99,14 +97,12 @@ h1 {
     font-size: 3.5rem;
   }
 }
-
 @media (min-width: 355px) and (max-width: 439px) {
   .header-div,
   #header-pm-div {
     font-size: 3rem;
   }
 }
-
 @media (max-width: 354px) {
   .header-div,
   #header-pm-div {
@@ -138,14 +134,11 @@ h1 {
   border-bottom: 3px solid #22377a;
 }
 
-/* Header Sub Font Sizes */
-
 @media (min-width: 600px) {
   .header-sub-div {
     font-size: 2rem;
   }
 }
-
 @media (max-width: 599px) {
   .header-sub {
     flex-direction: column;
