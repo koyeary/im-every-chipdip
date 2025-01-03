@@ -65,7 +65,6 @@ const Contact = ({ darkMode }) => {
           flexDirection: "column",
           gap: 20,
           height: "calc(100% - 50px)",
-          overflow: "hidden",
           scrollbarWidth: "none",
           display: "flex",
           justifyContent: "center",
