@@ -33,20 +33,21 @@ const Projects = ({ darkMode }) => {
       </h2>
       <div className="accordion-wrapper">
         <h2>Coming soon!</h2>
-        {/*      <Accordion>
+        <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            <Typography>Admin Status and Error Reporting</Typography>
+            <Typography>Create a User Profile</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <Link to="/status">Here</Link>
+              <Link to="/profile">Here</Link>
             </Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion>{" "}
+        {/*
         <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}

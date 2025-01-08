@@ -5,6 +5,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import FAB from "./components/Buttons/FAB";
+import Profile from "./pages/Projects/Profile";
 import Splash from "./pages/Splash";
 import Status from "./pages/Projects/Status";
 import FinanceDashboard from "./pages/Projects/FinanceDashboard";
@@ -58,19 +59,11 @@ const App = () => {
               }
             />
             <Route
-              path="/advocate"
-              element={<Splash darkMode={darkMode} advocateMode={true} />}
-            />
-            <Route
-              path="/pm"
-              element={<Splash open={open} darkMode={darkMode} />}
-            />
-            {/* <Route path="/orgchart" element={<Org darkMode={darkMode} />} /> */}
-            <Route
               path="/finance"
               element={<FinanceDashboard darkMode={darkMode} />}
             />
             <Route path="/status" element={<Status />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
           <animated.div style={spring} className="fab">
             <FAB darkMode={darkMode} icon="linkedIn" />
