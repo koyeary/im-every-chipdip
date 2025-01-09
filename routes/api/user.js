@@ -11,12 +11,14 @@ const User = require("../../models/User");
 // @access   Public
 router.post(
   "/create",
-  check("name", "Name is required").notEmpty(),
-  check("email", "Please include a valid email").isEmail(),
-  check(
-    "password",
-    "Please enter a password with 6 or more characters"
-  ).isLength({ min: 6 }),
+  [
+    check("name", "Name is required").notEmpty(),
+    check("email", "Please include a valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 }),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -31,22 +33,20 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .send({ errors: [{ msg: "User already exists" }] });
+          .json({ errors: [{ msg: "User already exists" }] });
       }
 
       const salt = await bcrypt.genSalt(10);
-      const pwd = await bcrypt.hash(password, salt);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
       user = new User({
         name,
         email,
-        password: pwd,
+        password: hashedPassword,
         created: Date.now(),
       });
 
-      user.save();
-      if (!user) {
-        return res.status(400).send({ errors: [{ msg: "User not created" }] });
-      }
+      await user.save();
 
       const payload = {
         user: {
@@ -54,7 +54,6 @@ router.post(
         },
       };
 
-      res.send(payload);
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
@@ -70,5 +69,65 @@ router.post(
     }
   }
 );
+
+// @route    PUT api/user/update/np
+// @desc     Update user password
+// @access   Public
+router.put("/update/np", async (req, res) => {
+  const { newPassword, email, token } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+
+    if (!token) {
+      return res.status(401).json({ msg: "No token, authorization denied" });
+    }
+
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "User not found" }] });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server Error: ${err.message}`);
+  }
+});
+
+// @route    PUT api/user/update
+// @desc     Update user details
+// @access   Public
+router.put("/update", async (req, res) => {
+  const { name, email, github, linkedIn, token } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+
+    if (!token) {
+      return res.status(401).json({ msg: "No token, authorization denied" });
+    }
+
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "User not found" }] });
+    }
+
+    user = await User.findOneAndUpdate(
+      { email },
+      { name, github, linkedIn },
+      { new: true }
+    );
+
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server Error: ${err.message}`);
+  }
+});
 
 module.exports = router;

@@ -233,7 +233,6 @@ export const createNewUser = async (name, email, password, callback) => {
       password: password,
     });
 
-    setAuthToken(results.data.token);
     callback(results.data);
     return window.location.reload();
   } catch {
