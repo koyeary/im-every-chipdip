@@ -191,3 +191,86 @@ export const sendEmail = async (emailData, callback) => {
     return callback(err.message, "error");
   }
 };
+
+export const updateUser = async (email, newPassword) => {
+  await axios
+    .put("http://localhost:3001/api/user/update", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      email: email,
+      newPassword: newPassword,
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err.message));
+};
+
+export const deleteUser = async (email) => {
+  await axios
+    .delete("http://localhost:3001/api/user/delete", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      email: email,
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err.message));
+};
+
+export const createNewUser = async (name, email, password, callback) => {
+  try {
+    const results = await axios.post("http://localhost:3001/api/user/create", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      name: name,
+      email: email,
+      password: password,
+    });
+
+    setAuthToken(results.data.token);
+    callback(results.data);
+    return window.location.reload();
+  } catch {
+    (err) => console.log(err);
+  }
+};
+
+const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common["x-auth-token"] = token;
+    localStorage.setItem("token", token);
+  } else {
+    delete axios.defaults.headers.common["x-auth-token"];
+    localStorage.removeItem("token");
+  }
+};
+
+export const authenticateUser = async (email, password, callback) => {
+  await axios
+    .post("http://localhost:3001/api/auth", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      email: email,
+      password: password,
+    })
+    .then((res) => {
+      setAuthToken(res.data.token);
+      callback(res.data);
+    })
+    .catch((err) => console.log(err.message));
+};
+
+export const logoutUser = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  delete axios.defaults.headers.common["x-auth-token"];
+  console.log("User logged out and token removed from localStorage");
+  window.location.reload();
+};

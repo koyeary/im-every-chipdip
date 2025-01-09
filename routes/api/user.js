@@ -1,81 +1,74 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const bcrypt = require("bcryptjs");
-const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
+const { check, validationResult } = require("express-validator");
+
 const User = require("../../models/User");
 
-//POST /api/user/create (Create a new user)
-router.post("/create", async (req, res) => {
-  const { email, username, password } = req.body;
-  try {
-    const newUser = new User({ email, username, password });
-    await newUser.save();
-    res
-      .status(201)
-      .send({ message: "User created successfully", data: newUser });
-  } catch (error) {
-    res.status(500).send({ message: "Error creating user", error });
-  }
-});
-
-//PUT /api/user/update (Update a user password)
-router.put("/update", async (req, res) => {
-  const { email, newPassword } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
+// @route    POST api/user
+// @desc     Register user
+// @access   Public
+router.post(
+  "/create",
+  check("name", "Name is required").notEmpty(),
+  check("email", "Please include a valid email").isEmail(),
+  check(
+    "password",
+    "Please enter a password with 6 or more characters"
+  ).isLength({ min: 6 }),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    user.password = newPassword;
-    await user.save();
-    res
-      .status(200)
-      .send({ message: "Password updated successfully", data: user });
-  } catch (error) {
-    res.status(500).send({ message: "Error updating password", error });
-  }
-});
 
-//DELETE /api/user/delete (Delete a user)
-router.delete("/delete", async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOneAndDelete({ email });
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-    res.status(200).send({ message: "User deleted successfully", data: user });
-  } catch (error) {
-    res.status(500).send({ message: "Error deleting user", error });
-  }
-});
-//POST /api/user (Find a user)
-router.post("/", async (req, res) => {
-  const { email, username, password } = req.body;
-  console.log(email);
+    const { name, email, password } = req.body;
 
-  try {
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-    res.status(200).send({ message: "User found", data: user });
-  } catch (error) {
-    return res.status(500).send({ message: "Error finding user", error });
-  }
-});
+    try {
+      let user = await User.findOne({ email });
 
-//GET /api/user (Get all users)
-router.get("/", async (req, res) => {
-  try {
-    const user = await User.find({});
-    if (!user) {
-      return res.status(404).send({ message: "Users not found" });
+      if (user) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "User already exists" }] });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const pwd = await bcrypt.hash(password, salt);
+      user = new User({
+        name,
+        email,
+        password: pwd,
+        created: Date.now(),
+      });
+
+      user.save();
+      if (!user) {
+        return res.status(400).send({ errors: [{ msg: "User not created" }] });
+      }
+
+      const payload = {
+        user: {
+          _id: user.id,
+        },
+      };
+
+      res.send(payload);
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET,
+        { expiresIn: "5 days" },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).json({ token });
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send(`Server Error: ${err.message}`);
     }
-    res.status(200).send({ message: "Users found", data: user });
-  } catch (error) {
-    return res.status(500).send({ message: "Error finding users", error });
   }
-});
+);
 
 module.exports = router;

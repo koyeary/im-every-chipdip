@@ -17,9 +17,6 @@ const TeamSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  crossFunction: {
-    type: Array,
-  },
 });
 
 module.exports = mongoose.model("teams", TeamSchema);
