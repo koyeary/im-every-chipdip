@@ -9,13 +9,17 @@ import Profile from "./pages/Projects/Profile";
 import Splash from "./pages/Splash";
 import Status from "./pages/Projects/Status";
 import FinanceDashboard from "./pages/Projects/FinanceDashboard";
+import useUser from "./hooks/useUser";
 //import ThemeContext from "./contexts/ThemeContext";
 //import Org from "./components/Projects/Org";
 import "./App.css";
 
+import Login from "./pages/Projects/Profile/Login";
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(true);
+  const { user, saveUser } = useUser();
 
   const spring = useSpring({
     to: { opacity: 1 },
@@ -63,7 +67,8 @@ const App = () => {
               element={<FinanceDashboard darkMode={darkMode} />}
             />
             <Route path="/status" element={<Status />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile auth={user !== null} />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
           <animated.div style={spring} className="fab">
             <FAB darkMode={darkMode} icon="linkedIn" />

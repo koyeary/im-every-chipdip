@@ -67,8 +67,6 @@ router.post(
           res.json({
             token: token,
             id: user.id,
-            name: user.name,
-            email: user.email,
           });
         }
       );

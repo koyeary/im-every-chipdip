@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   github: {
     type: String,
   },
-  aboutMe: {
+  activeInvoice: {
     type: String,
   },
 });

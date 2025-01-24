@@ -6,6 +6,21 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
 
+// @route    POST api/user/details
+// @desc     Find user by id
+// @access   Private
+
+router.post("/details", async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await User.findById(id);
+    console.log(id);
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(`Server Error: ${err.message}`);
+  }
+});
 // @route    POST api/user
 // @desc     Register user
 // @access   Public
@@ -43,6 +58,9 @@ router.post(
         name,
         email,
         password: hashedPassword,
+        github: "",
+        linkedIn: "",
+        activeInvoice: "",
         created: Date.now(),
       });
 
@@ -60,7 +78,7 @@ router.post(
         { expiresIn: "5 days" },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({ token });
+          res.status(200).json({ token, user });
         }
       );
     } catch (err) {
@@ -93,7 +111,7 @@ router.put("/update/np", async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    res.json(user);
+    res.status(200).json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send(`Server Error: ${err.message}`);
@@ -104,7 +122,8 @@ router.put("/update/np", async (req, res) => {
 // @desc     Update user details
 // @access   Public
 router.put("/update", async (req, res) => {
-  const { name, email, github, linkedIn, token } = req.body;
+  const { name, email, github, linkedIn } = req.body;
+  const token = req.header("x-auth-token");
 
   try {
     let user = await User.findOne({ email });
@@ -123,7 +142,7 @@ router.put("/update", async (req, res) => {
       { new: true }
     );
 
-    res.json(user);
+    res.status(200).json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send(`Server Error: ${err.message}`);

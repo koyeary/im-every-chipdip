@@ -1,4 +1,3 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { animated, useSpring } from "react-spring";
 import "./About.css";
 
@@ -20,13 +19,13 @@ const About = ({ advocateMode }) => {
     >
       <div className="about-wrapper" style={{ overflow: "auto" }}>
         <animated.div style={fadeIn} className="img-wrapper ">
-          <LazyLoadImage
+          {/*           <LazyLoadImage
             effect="blur"
             alt="Portrait of Kat Yeary"
             className="lg-img"
             height="100%"
             src="/assets/13-Kat_Yeary-6BW.png"
-          />
+          /> */}
         </animated.div>
         <div className="text-container">
           <div className="about-text">

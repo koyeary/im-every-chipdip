@@ -18,24 +18,6 @@ const formatData = (data) => {
   ];
 
   const locations = [77449, 190542, 34364, 93132];
-
-  /*   const output = [
-    {
-      children: [
-        {
-          children: [
-            cLevel.map((c, i) => {
-              console.log(c);
-              return { color: colors[i], name: c.role, location: locations[i] };
-            }),
-          ],
-        },
-      ],
-      color: "hsl(214, 70%, 50%)",
-      name: data[0].role,
-    },
-  ];
-  return output; */
 };
 
 export const getOrgChart = async (callback) => {
@@ -47,67 +29,61 @@ export const getOrgChart = async (callback) => {
     console.log(err);
   }
 };
-export const getUser = async () => {
-  await axios
-    .get("http://localhost:3001/api/user")
-    .then((res) => {
-      console.log(res.data);
 
-      //return setUser(res.data.data);
-    })
-    .catch((err) => console.log(err.message));
+export const getUser = async () => {
+  try {
+    const res = await axios.get("http://localhost:3001/api/user");
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export const getUserPortfolio = async (userId) => {
-  await axios
-    .post("http://localhost:3001/api/finance", {
+  try {
+    const res = await axios.post("http://localhost:3001/api/finance", {
       headers: {
         "Content-Type": "application/json",
       },
       data: userId,
-    })
-
-    .then((res) => {
-      console.log(res);
-
-      /*    setData(res.data.data);
-      setMessage(res.data.message); */
-
-      return setData(arr.push(res.data.data));
-    })
-    .catch((err) => console.log(err.message));
+    });
+    console.log(res);
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
-export const getAllTickers = () => {
-  axios
-    .get("http://localhost:3001/api/finance/all", {
+export const getAllTickers = async () => {
+  try {
+    const res = await axios.get("http://localhost:3001/api/finance/all", {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.error(err));
+    });
+    console.log(res);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-export const getStockData = (tickers, setPerformance) => {
-  axios
-    .post("http://localhost:3001/api/finance/", {
+export const getStockData = async (tickers, setPerformance) => {
+  try {
+    const res = await axios.post("http://localhost:3001/api/finance/", {
       headers: {
         "Content-Type": "application/json",
       },
       data: tickers,
-    })
-    .then((res) => {
-      const data = res.data;
-
-      let arr = [];
-      Object.values(data).map((d) => {
-        arr.push(d);
-      });
-      console.log(arr);
-      return setPerformance(arr);
-    })
-    .catch((err) => console.log(err));
+    });
+    const data = res.data;
+    let arr = [];
+    Object.values(data).map((d) => {
+      arr.push(d);
+    });
+    console.log(arr);
+    setPerformance(arr);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getUserForex = async (currencies, setForexData) => {
@@ -120,17 +96,6 @@ export const getUserForex = async (currencies, setForexData) => {
     );
     console.log(update);
     setForexData(update);
-    /*     console.log(update);
-    if (update.status === 200) {
-      const get = await axios.post(
-        "http://localhost:3001/api/finance/forex/user",
-        {
-          filter: currencies,
-        }
-      );
-      console.log(get);
-      return setForexData(get.data);
-    } */
   } catch (err) {
     console.log(err);
   }
@@ -149,19 +114,17 @@ export const getForexData = async (currencies, callback) => {
 };
 
 export const getUserId = async (email) => {
-  await axios
-    .post("http://localhost:3001/api/user", {
+  try {
+    const res = await axios.post("http://localhost:3001/api/user", {
       headers: {
         "Content-Type": "application/json",
       },
       email: email,
-    })
-    .then((res) => {
-      console.log(res.data);
-
-      //return setUserId(res.data.data);
-    })
-    .catch((err) => console.log(err.message));
+    });
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export const sendEmail = async (emailData, callback) => {
@@ -183,42 +146,42 @@ export const sendEmail = async (emailData, callback) => {
       "https://api.emailjs.com/api/v1.0/email/send",
       data
     );
-
     console.log(res);
-    return callback(res.data.message, "success");
+    callback(res.data.message, "success");
   } catch (err) {
     console.log(err);
-    return callback(err.message, "error");
+    callback(err.message, "error");
   }
 };
 
-export const updateUser = async (email, newPassword) => {
-  await axios
-    .put("http://localhost:3001/api/user/update", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      email: email,
-      newPassword: newPassword,
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => console.log(err.message));
+export const getUserDetails = async (saveUser) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    console.log("No user found in localStorage");
+    return;
+  }
+  try {
+    const res = await axios.post("http://localhost:3001/api/user/details", {
+      id: user.id,
+    });
+    saveUser(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export const deleteUser = async (email) => {
-  await axios
-    .delete("http://localhost:3001/api/user/delete", {
+  try {
+    const res = await axios.delete("http://localhost:3001/api/user/delete", {
       headers: {
         "Content-Type": "application/json",
       },
       email: email,
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => console.log(err.message));
+    });
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export const createNewUser = async (name, email, password, callback) => {
@@ -232,15 +195,34 @@ export const createNewUser = async (name, email, password, callback) => {
       email: email,
       password: password,
     });
-
     callback(results.data);
-    return window.location.reload();
-  } catch {
-    (err) => console.log(err);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
   }
 };
 
-const setAuthToken = (token) => {
+export const updateUserDetails = async (formData, saveUser, finishUpdate) => {
+  const { name, email, github, linkedIn } = formData;
+  try {
+    const res = await axios.put("http://localhost:3001/api/user/update", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      name: name,
+      email: email,
+      github: github,
+      linkedIn: linkedIn,
+    });
+    saveUser(res.data);
+    finishUpdate(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const setAuthToken = (token) => {
   if (token) {
     axios.defaults.headers.common["x-auth-token"] = token;
     localStorage.setItem("token", token);
@@ -250,26 +232,35 @@ const setAuthToken = (token) => {
   }
 };
 
-export const authenticateUser = async (email, password, callback) => {
-  await axios
-    .post("http://localhost:3001/api/auth", {
+export const authenticateUser = async (
+  email,
+  password,
+  saveUser,
+  finishLogin
+) => {
+  try {
+    const res = await axios.post("http://localhost:3001/api/auth", {
       headers: {
         "Content-Type": "application/json",
       },
       email: email,
       password: password,
-    })
-    .then((res) => {
-      setAuthToken(res.data.token);
-      callback(res.data);
-    })
-    .catch((err) => console.log(err.message));
+    });
+
+    setAuthToken(res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data));
+    saveUser(res.data);
+    finishLogin(res.data);
+  } catch (err) {
+    finishLogin(err);
+    console.log(err.message);
+  }
 };
 
-export const logoutUser = () => {
+export const logoutUser = (finsihLogout) => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   delete axios.defaults.headers.common["x-auth-token"];
   console.log("User logged out and token removed from localStorage");
-  window.location.reload();
+  //finishLogout();
 };

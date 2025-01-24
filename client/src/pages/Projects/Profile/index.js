@@ -1,46 +1,30 @@
-import { useState } from "react";
-import Login from "../../../components/Login";
-import { logoutUser } from "../../../utils/API";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import Login from "./Login";
+import { logoutUser, updateUserDetails } from "../../../utils/API";
 import useUser from "../../../hooks/useUser";
 import ProfileForm from "./ProfileForm";
+import Button from "@mui/material/Button";
 
-const Profile = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    linkedin: "",
-    gitHub: "",
-  });
-  const { user } = useUser();
+const Profile = ({ auth }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  let navigate = useNavigate();
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logoutUser();
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+    logoutUser(navigate("/login"));
   };
 
   return (
-    <div>
+    <div className="profile">
       <h1>Hello World! This is your profile</h1>
 
-      {user.current.id ? (
-        <div>
+      {auth ? (
+        <div className="profile-container">
           <h1>Welcome to My Profile</h1>
-          <button onClick={handleLogout}>Logout</button>
-          <ProfileForm
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
+          <Button onClick={handleLogout}>Logout</Button>
+          <ProfileForm user={user} />
         </div>
       ) : (
         <Login />

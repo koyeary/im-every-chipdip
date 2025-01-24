@@ -5,7 +5,9 @@ const UserContext = createContext();
 const defaultUser = {
   name: undefined,
   email: undefined,
-  token: undefined,
+  id: undefined,
+  github: undefined,
+  linkedIn: undefined,
 };
 
 const extractUser = () => {
