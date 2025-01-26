@@ -110,41 +110,7 @@ const Login = () => {
             required
           />
         )}
-        {/*   {createUser && (
-          <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="name" sx={{ marginTop: -0.9 }}>
-              Name
-            </InputLabel>
-            <OutlinedInput
-              sx={{ backgroundColor: "#FFF" }}
-              label={"Name"}
-              color="secondary"
-              name="name"
-              placeholder="Name"
-              value={name}
-              onChange={handleChange}
-              required={createUser}
-              size="small"
-            />
-          </FormControl>
-        )}
-           <FormControl fullWidth margin="small">
-          <InputLabel htmlFor="email" sx={{ marginTop: -0.9 }}>
-            Email
-          </InputLabel>
-          <OutlinedInput
-            sx={{ backgroundColor: "#FFF" }}
-            label="Email"
-            color="secondary"
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Email"
-            onChange={handleChange}
-            size="small"
-            required
-          />
-        </FormControl> */}
+
         <TextField
           fullWidth
           sx={{ backgroundColor: "#FFF" }}
@@ -172,27 +138,6 @@ const Login = () => {
             onChange={handleChange}
             required={createUser}
             type={showPassword ? "text" : "password"}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label={
-                        showPassword
-                          ? "hide the password"
-                          : "display the password"
-                      }
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      onMouseUp={handleMouseUpPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              },
-            }}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -229,13 +174,7 @@ const Login = () => {
               placeholder="Re-enter Password"
               required
             />
-            {/*             <FormHelperText sx={{ color: "red" }}>
-              {checkPasswordMatch === "error"
-                ? "Passwords do not match"
-                : checkPasswordMatch === "success"
-                ? "Passwords match"
-                : ""}
-            </FormHelperText> */}
+
             <MyFormHelperText />
           </FormControl>
         )}
@@ -247,7 +186,7 @@ const Login = () => {
           fullWidth
           variant="text"
         >
-          {createUser ? "Take Me to Login" : "Take Me to Create Profile"}
+          {createUser ? "Go to Login" : "Go to Create Profile"}
         </Button>
       </form>
     </Box>

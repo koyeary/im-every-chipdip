@@ -4,6 +4,7 @@ import Login from "./Login";
 import { logoutUser, updateUserDetails } from "../../../utils/API";
 import useUser from "../../../hooks/useUser";
 import ProfileForm from "./ProfileForm";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 const Profile = ({ auth }) => {
@@ -27,7 +28,17 @@ const Profile = ({ auth }) => {
           <ProfileForm user={user} />
         </div>
       ) : (
-        <Login />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            width: "fit-content",
+          }}
+        >
+          <Login />
+        </Box>
       )}
     </div>
   );
