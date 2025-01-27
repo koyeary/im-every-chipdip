@@ -67,7 +67,10 @@ const App = () => {
               element={<FinanceDashboard darkMode={darkMode} />}
             />
             <Route path="/status" element={<Status />} />
-            <Route path="/profile" element={<Profile auth={user !== null} />} />
+            <Route
+              path="/profile"
+              element={<Profile auth={user !== null} user={user} />}
+            />
             <Route path="/login" element={<Login />} />
           </Routes>
           <animated.div style={spring} className="fab">

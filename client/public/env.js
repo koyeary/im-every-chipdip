@@ -2,6 +2,7 @@ window.env = {
   "npm_config_save_dev": "",
   "npm_config_legacy_bundling": "",
   "npm_config_dry_run": "",
+  "npm_package_dependencies_react_lazy_load_image_component": "^1.6.3",
   "npm_package_dependencies__fortawesome_fontawesome_svg_core": "^6.7.2",
   "npm_config_only": "",
   "npm_config_browser": "",

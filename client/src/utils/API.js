@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import env from "react-dotenv";
 
 const formatData = (data) => {
@@ -154,17 +155,18 @@ export const sendEmail = async (emailData, callback) => {
   }
 };
 
-export const getUserDetails = async (saveUser) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) {
-    console.log("No user found in localStorage");
-    return;
-  }
+export const getUserById = async (id, saveUser) => {
   try {
     const res = await axios.post("http://localhost:3001/api/user/details", {
-      id: user.id,
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      id: id,
     });
-    saveUser(res.data);
+    console.log(res.data);
+    return saveUser(res.data);
+    //return navigate("/profile");
   } catch (err) {
     console.log(err.message);
   }
@@ -186,7 +188,7 @@ export const deleteUser = async (email) => {
 
 export const createNewUser = async (name, email, password, callback) => {
   try {
-    const results = await axios.post("http://localhost:3001/api/user/create", {
+    const res = await axios.post("http://localhost:3001/api/user/create", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -195,15 +197,16 @@ export const createNewUser = async (name, email, password, callback) => {
       email: email,
       password: password,
     });
-    callback(results.data);
+    callback(res.data);
     window.location.reload();
   } catch (err) {
     console.log(err);
   }
 };
 
-export const updateUserDetails = async (formData, saveUser, finishUpdate) => {
+export const updateUserDetails = async (formData, saveUser) => {
   const { name, email, github, linkedIn } = formData;
+
   try {
     const res = await axios.put("http://localhost:3001/api/user/update", {
       headers: {
@@ -215,8 +218,8 @@ export const updateUserDetails = async (formData, saveUser, finishUpdate) => {
       github: github,
       linkedIn: linkedIn,
     });
+
     saveUser(res.data);
-    finishUpdate(res.data);
   } catch (err) {
     console.log(err.message);
   }
@@ -238,6 +241,7 @@ export const authenticateUser = async (
   saveUser,
   finishLogin
 ) => {
+  console.log(email, password);
   try {
     const res = await axios.post("http://localhost:3001/api/auth", {
       headers: {
@@ -248,19 +252,21 @@ export const authenticateUser = async (
     });
 
     setAuthToken(res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data));
-    saveUser(res.data);
-    finishLogin(res.data);
+    getUserById(res.data.id, saveUser);
+    const user = localStorage.setItem("user", JSON.stringify(res.data));
+
+    saveUser(user);
+    finishLogin("User authenticated", "success");
+    return console.log("User authenticated");
   } catch (err) {
-    finishLogin(err);
     console.log(err.message);
   }
 };
 
-export const logoutUser = (finsihLogout) => {
+export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+  //localStorage.removeItem("current");
   delete axios.defaults.headers.common["x-auth-token"];
   console.log("User logged out and token removed from localStorage");
-  //finishLogout();
 };

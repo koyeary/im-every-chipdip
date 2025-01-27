@@ -45,17 +45,16 @@ const extractUser = () => {
 //Axios Section
 export const UserProvider = ({ children, user }) => {
   const [currentUser, setCurrentUser] = useState(user || extractUser());
-  const userRef = useRef(currentUser);
 
   const saveUser = (values) => {
     if (values) {
       localStorage.setItem("user", JSON.stringify(values));
 
-      userRef.current = values;
       setCurrentUser(values);
+      console.log("User saved");
     } else {
       localStorage.removeItem("user");
-      userRef.current = defaultUser;
+
       setCurrentUser(defaultUser);
     }
   };
@@ -63,8 +62,7 @@ export const UserProvider = ({ children, user }) => {
   return (
     <UserContext.Provider
       value={{
-        user: userRef,
-        currentUser,
+        user: currentUser,
         saveUser,
       }}
     >

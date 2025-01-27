@@ -1,9 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { createNewUser, authenticateUser } from "../../../../utils/API";
+import {
+  createNewUser,
+  authenticateUser,
+  getUserById,
+} from "../../../../utils/API";
 
 import Alert from "@mui/material/Alert";
-import useUser from "../../../../hooks/useUser";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -15,7 +19,7 @@ import TextField from "@mui/material/TextField";
 import { useFormControl } from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
+import useUser from "../../../../hooks/useUser";
 import "../Profile.css";
 import { FormHelperText, OutlinedInput } from "@mui/material";
 
@@ -30,42 +34,36 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { name, email, password, rePassword } = formData;
-  const { saveUser } = useUser();
-  let navigate = useNavigate();
+  const { user, saveUser } = useUser();
+  const navigate = useNavigate();
 
-  const finishLogin = (user) => {
-    if (user.message) {
-      return <Alert severity="error">{user.message}</Alert>;
-    } else if (user.id !== undefined) {
+  const finishLogin = (message, status) => {
+    if (status === "success") {
       navigate("/profile");
+    } else {
+      console.log(message);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    createUser && password !== rePassword
-      ? console.log("Passwords do not match")
-      : createUser && password === rePassword
-      ? createNewUser(name, email, password, saveUser, finishLogin)
-      : authenticateUser(email, password, saveUser, finishLogin);
+    if (createUser) {
+      if (password !== rePassword) {
+        console.log("Passwords do not match");
+      } else {
+        createNewUser(name, email, password, saveUser);
+      }
+    } else {
+      authenticateUser(email, password, saveUser, finishLogin);
+    }
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handleMouseUpPassword = (event) => {
-    event.preventDefault();
   };
 
   const checkPasswordMatch =
@@ -86,7 +84,6 @@ const Login = () => {
           ? "Passwords match"
           : "";
       }
-
       return "";
     }, [focused]);
 
@@ -95,7 +92,7 @@ const Login = () => {
 
   return (
     <Box sx={{ width: 360, maxWidth: "100%", margin: "auto", padding: 20 }}>
-      {createUser ? <h2>Create profile</h2> : <h2>Login</h2>}
+      <h2>{createUser ? "Create profile" : "Login"}</h2>
       <form className="profile-form" onSubmit={handleSubmit}>
         {createUser && (
           <TextField
@@ -110,7 +107,6 @@ const Login = () => {
             required
           />
         )}
-
         <TextField
           fullWidth
           sx={{ backgroundColor: "#FFF" }}
@@ -123,7 +119,6 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-
         <FormControl fullWidth>
           <InputLabel color="secondary" htmlFor="password">
             Password
@@ -131,7 +126,6 @@ const Login = () => {
           <OutlinedInput
             sx={{ backgroundColor: "#FFF" }}
             label="Password"
-            showPassword={true}
             color="secondary"
             name="password"
             value={password}
@@ -145,8 +139,6 @@ const Login = () => {
                     showPassword ? "hide the password" : "display the password"
                   }
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  onMouseUp={handleMouseUpPassword}
                   edge="end"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -156,7 +148,6 @@ const Login = () => {
             placeholder="Password"
           />
         </FormControl>
-
         {createUser && (
           <FormControl fullWidth>
             <InputLabel htmlFor="rePassword" color="secondary">
@@ -166,7 +157,6 @@ const Login = () => {
               sx={{ backgroundColor: "#FFF" }}
               type="password"
               label="Re-enter Password"
-              showPassword={true}
               color={checkPasswordMatch}
               name="rePassword"
               value={rePassword}
@@ -174,7 +164,6 @@ const Login = () => {
               placeholder="Re-enter Password"
               required
             />
-
             <MyFormHelperText />
           </FormControl>
         )}

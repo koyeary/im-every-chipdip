@@ -123,8 +123,8 @@ router.put("/update/np", async (req, res) => {
 // @access   Public
 router.put("/update", async (req, res) => {
   const { name, email, github, linkedIn } = req.body;
-  const token = req.header("x-auth-token");
-
+  const token = req.body.headers["x-auth-token"];
+  console.log(req.body);
   try {
     let user = await User.findOne({ email });
 
