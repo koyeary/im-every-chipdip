@@ -1,27 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import {
-  createNewUser,
-  authenticateUser,
-  getUserById,
-} from "../../../../utils/API";
+import { createNewUser, authenticateUser } from "../../../../utils/API";
 
+//Hooks
+import { useFormControl } from "@mui/material/FormControl";
+import useUser from "../../../../hooks/useUser";
+
+//Material UI
 import Alert from "@mui/material/Alert";
-
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-
+import FormHelperText from "@mui/material/FormHelperText";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
-import { useFormControl } from "@mui/material/FormControl";
+
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import useUser from "../../../../hooks/useUser";
+
+//Styles
 import "../Profile.css";
-import { FormHelperText, OutlinedInput } from "@mui/material";
 
 const Login = () => {
   const [createUser, setCreateUser] = useState(false);
@@ -37,11 +37,19 @@ const Login = () => {
   const { user, saveUser } = useUser();
   const navigate = useNavigate();
 
-  const finishLogin = (message, status) => {
+  const finishLogin = (message, status, data) => {
     if (status === "success") {
+      console.log("User authenticated - redirecting to profile");
       navigate("/profile");
+
+      setFormData({
+        name: user.name,
+        email: user.email,
+        password: "",
+        rePassword: "",
+      });
     } else {
-      console.log(message);
+      console.error("FinishLogin" + message);
     }
   };
 
@@ -54,7 +62,10 @@ const Login = () => {
         createNewUser(name, email, password, saveUser);
       }
     } else {
-      authenticateUser(email, password, saveUser, finishLogin);
+      authenticateUser(email, password, saveUser);
+    }
+    if (user) {
+      finishLogin("User authenticated", "success", user);
     }
   };
 
@@ -91,13 +102,14 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ width: 360, maxWidth: "100%", margin: "auto", padding: 20 }}>
+    <>
       <h2>{createUser ? "Create profile" : "Login"}</h2>
       <form className="profile-form" onSubmit={handleSubmit}>
         {createUser && (
           <TextField
-            sx={{ backgroundColor: "#FFF" }}
-            fullWidth
+            sx={{ backgroundColor: "#FFF", width: "100%" }}
+            /* fullWidth */
+
             label="Name"
             color="secondary"
             name="name"
@@ -108,8 +120,7 @@ const Login = () => {
           />
         )}
         <TextField
-          fullWidth
-          sx={{ backgroundColor: "#FFF" }}
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
           label="Email"
           color="secondary"
           type="email"
@@ -119,7 +130,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <FormControl fullWidth>
+        <FormControl sx={{ width: "100%" }}>
           <InputLabel color="secondary" htmlFor="password">
             Password
           </InputLabel>
@@ -149,7 +160,7 @@ const Login = () => {
           />
         </FormControl>
         {createUser && (
-          <FormControl fullWidth>
+          <FormControl sx={{ width: "100%" }}>
             <InputLabel htmlFor="rePassword" color="secondary">
               Re-enter Password
             </InputLabel>
@@ -167,18 +178,18 @@ const Login = () => {
             <MyFormHelperText />
           </FormControl>
         )}
-        <Button type="submit" variant="contained" fullWidth>
+        <Button type="submit" variant="contained" /* fullWidth */>
           Submit
         </Button>
         <Button
           onClick={() => setCreateUser(!createUser)}
-          fullWidth
+          /* fullWidth */
           variant="text"
         >
           {createUser ? "Go to Login" : "Go to Create Profile"}
         </Button>
       </form>
-    </Box>
+    </>
   );
 };
 

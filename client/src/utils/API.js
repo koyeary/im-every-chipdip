@@ -164,9 +164,8 @@ export const getUserById = async (id, saveUser) => {
       },
       id: id,
     });
-    console.log(res.data);
-    return saveUser(res.data);
-    //return navigate("/profile");
+
+    saveUser(res.data);
   } catch (err) {
     console.log(err.message);
   }
@@ -241,7 +240,6 @@ export const authenticateUser = async (
   saveUser,
   finishLogin
 ) => {
-  console.log(email, password);
   try {
     const res = await axios.post("http://localhost:3001/api/auth", {
       headers: {
@@ -252,12 +250,11 @@ export const authenticateUser = async (
     });
 
     setAuthToken(res.data.token);
-    getUserById(res.data.id, saveUser);
-    const user = localStorage.setItem("user", JSON.stringify(res.data));
 
+    const user = localStorage.setItem("user", JSON.stringify(res.data));
     saveUser(user);
-    finishLogin("User authenticated", "success");
-    return console.log("User authenticated");
+
+    return getUserById(res.data.id, saveUser);
   } catch (err) {
     console.log(err.message);
   }

@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 
 const Profile = () => {
   //const user = localStorage.getItem("user");
-  const { user, saveUser } = useUser();
+  const { user } = useUser();
   let navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -17,29 +17,26 @@ const Profile = () => {
     logoutUser(navigate("/login"));
   };
 
-  return (
-    <div className="profile">
-      <h1>Hello World! This is your profile</h1>
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-      {user ? (
-        <div className="profile-container">
-          <h1>Welcome to My Profile</h1>
-          <Button onClick={handleLogout}>Logout</Button>
-          <ProfileForm />
-        </div>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            width: "fit-content",
-          }}
-        >
-          <Login />
-        </Box>
-      )}
+  return (
+    <div
+      style={{
+        margin: "0 auto",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h1>Hello World! This is your profile</h1>
+      <h2>Welcome to My Profile</h2>
+      <Button onClick={handleLogout}>Logout</Button>
+      <ProfileForm />
     </div>
   );
 };
