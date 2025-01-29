@@ -43,7 +43,7 @@ const Projects = ({ darkMode }) => {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <Link to="/profile">Here</Link>
+              <Link to="/login">Here</Link>
             </Typography>
           </AccordionDetails>
         </Accordion>{" "}

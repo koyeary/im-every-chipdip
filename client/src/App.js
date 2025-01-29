@@ -19,7 +19,7 @@ import Login from "./pages/Projects/Profile/Login";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(true);
-  const { user, saveUser } = useUser();
+  const { user } = useUser();
 
   const spring = useSpring({
     to: { opacity: 1 },
@@ -43,18 +43,6 @@ const App = () => {
             width: "100vw",
           }}
         >
-          {/*           <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={darkMode}
-                  onChange={handleDarkModeToggle}
-                  inputProps={{ "aria-label": "Dark mode" }}
-                />
-              }
-              label="Dark mode"
-            />
-          </FormGroup> */}
           <Routes>
             <Route
               path="*"
@@ -67,10 +55,7 @@ const App = () => {
               element={<FinanceDashboard darkMode={darkMode} />}
             />
             <Route path="/status" element={<Status />} />
-            <Route
-              path="/profile"
-              element={<Profile auth={user !== null} user={user} />}
-            />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
           </Routes>
           <animated.div style={spring} className="fab">

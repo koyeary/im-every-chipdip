@@ -1,13 +1,13 @@
-import { createContext, useRef, useState } from "react";
+import { createContext, useState } from "react";
 
 const UserContext = createContext();
 
 const defaultUser = {
-  name: undefined,
-  email: undefined,
-  id: undefined,
-  github: undefined,
-  linkedIn: undefined,
+  name: "",
+  email: "",
+  id: "",
+  github: "",
+  linkedIn: "",
 };
 
 const extractUser = () => {
@@ -59,11 +59,18 @@ export const UserProvider = ({ children, user }) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setCurrentUser(defaultUser);
+  };
+
   return (
     <UserContext.Provider
       value={{
         user: currentUser,
         saveUser,
+        logout,
       }}
     >
       {children}

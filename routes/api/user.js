@@ -12,9 +12,10 @@ const User = require("../../models/User");
 
 router.post("/details", async (req, res) => {
   const { id } = req.body;
+  console.log("hit the back" + id);
   try {
     const user = await User.findById(id);
-    console.log(id);
+
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -92,7 +93,7 @@ router.post(
 // @desc     Update user password
 // @access   Public
 router.put("/update/np", async (req, res) => {
-  const { newPassword, email, token } = req.body;
+  const { password, email, token } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -106,7 +107,7 @@ router.put("/update/np", async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     user.password = hashedPassword;
     await user.save();

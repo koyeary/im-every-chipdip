@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { createNewUser, authenticateUser } from "../../../../utils/API";
 
@@ -35,26 +35,22 @@ const Login = () => {
 
   const { name, email, password, rePassword } = formData;
   const { user, saveUser } = useUser();
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
-  const finishLogin = (message, status, data) => {
-    if (status === "success") {
+  const finishLogin = () => {
+    console.log("FinishLogin");
+    /*     if (status === "success") {
       console.log("User authenticated - redirecting to profile");
-      navigate("/profile");
 
-      setFormData({
-        name: user.name,
-        email: user.email,
-        password: "",
-        rePassword: "",
-      });
+      navigate("/profile");
     } else {
-      console.error("FinishLogin" + message);
-    }
+      console.error("FinishLogin" + status + message);
+    } */
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (createUser) {
       if (password !== rePassword) {
         console.log("Passwords do not match");
@@ -62,10 +58,10 @@ const Login = () => {
         createNewUser(name, email, password, saveUser);
       }
     } else {
-      authenticateUser(email, password, saveUser);
-    }
-    if (user) {
-      finishLogin("User authenticated", "success", user);
+      authenticateUser(email, password, saveUser, finishLogin).then(() => {
+        navigate("/profile");
+      });
+      console.log(user);
     }
   };
 
@@ -101,6 +97,16 @@ const Login = () => {
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/profile");
+    }
+    () => {
+      console.log("Login page unmounted");
+    };
+  }, []);
+
   return (
     <>
       <h2>{createUser ? "Create profile" : "Login"}</h2>
@@ -108,8 +114,6 @@ const Login = () => {
         {createUser && (
           <TextField
             sx={{ backgroundColor: "#FFF", width: "100%" }}
-            /* fullWidth */
-
             label="Name"
             color="secondary"
             name="name"

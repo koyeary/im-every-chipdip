@@ -155,8 +155,10 @@ export const sendEmail = async (emailData, callback) => {
   }
 };
 
-export const getUserById = async (id, saveUser) => {
+export const getUserById = async (id, saveUser, finishLogin) => {
   try {
+    console.log("saving user details");
+    console.log(id);
     const res = await axios.post("http://localhost:3001/api/user/details", {
       headers: {
         "Content-Type": "application/json",
@@ -165,7 +167,12 @@ export const getUserById = async (id, saveUser) => {
       id: id,
     });
 
-    saveUser(res.data);
+    console.log(res.data);
+
+    if (finishLogin) {
+      finishLogin("User authenticated", "success", res.data);
+    }
+    return saveUser(res.data);
   } catch (err) {
     console.log(err.message);
   }
@@ -197,9 +204,25 @@ export const createNewUser = async (name, email, password, callback) => {
       password: password,
     });
     callback(res.data);
-    window.location.reload();
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const updatePassword = async (newPassword, email, token) => {
+  try {
+    const res = await axios.put("http://localhost:3001/api/user/update/np", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      password: newPassword,
+      email: email,
+      token: token,
+    });
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
   }
 };
 
@@ -254,7 +277,7 @@ export const authenticateUser = async (
     const user = localStorage.setItem("user", JSON.stringify(res.data));
     saveUser(user);
 
-    return getUserById(res.data.id, saveUser);
+    return getUserById(res.data.id, saveUser, finishLogin);
   } catch (err) {
     console.log(err.message);
   }

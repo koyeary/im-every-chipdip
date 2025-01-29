@@ -1,27 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import { useNavigate } from "react-router";
-import Login from "./Login";
-import { logoutUser } from "../../../utils/API";
 import useUser from "../../../hooks/useUser";
-import ProfileForm from "./ProfileForm";
-import Box from "@mui/material/Box";
+import UserDetails from "./UserDetails";
 import Button from "@mui/material/Button";
 
 const Profile = () => {
-  //const user = localStorage.getItem("user");
-  const { user } = useUser();
+  const [localStorageValue, setLocalStorageValue] = useState(
+    localStorage.getItem("user")
+  );
+
   let navigate = useNavigate();
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logoutUser(navigate("/login"));
+  const { user, logout } = useUser();
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "myKey") {
+        setLocalStorageValue(e.newValue);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   useEffect(() => {
-    if (!user) {
+    if (user._id) {
+      console.log("User is logged in");
+    }
+    if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   return (
     <div
@@ -33,10 +51,23 @@ const Profile = () => {
         alignItems: "center",
       }}
     >
-      <h1>Hello World! This is your profile</h1>
-      <h2>Welcome to My Profile</h2>
       <Button onClick={handleLogout}>Logout</Button>
-      <ProfileForm />
+      <h1>This is Your Profile</h1>
+      <h2>Think of this as an entry in my guestbook.</h2>
+      <h3>
+        It's a work in progress. For now, as you can see from your avatar, you
+        look like me. But soon you'll be able to upload photos and resumes, add
+        a bio, and probably other great stuff.
+      </h3>
+      <h3>
+        If you'd like to see more of my work, this portfolio has its own repo,
+        which you can find by clicking on the right bottom corner
+      </h3>
+      <h3>
+        If you're interested in working with me, please feel free to reach out
+        to me on LinkedIn or GitHub, or use the contact form on the main page.
+      </h3>
+      <UserDetails currentUser={localStorageValue} />
     </div>
   );
 };
