@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Button from "@mui/material/Button";
+
 import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import {
   List,
@@ -8,9 +9,9 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  Divider,
   Link,
 } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
 const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -50,7 +51,16 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
   return (
     <>
       <List
-        sx={{ width: 600, maxWidth: "100%", bgcolor: "background.paper" }}
+        sx={{
+          width: 600,
+          maxWidth: "100%",
+          bgcolor: "background.paper",
+          margin: "100px auto",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
@@ -83,7 +93,6 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
                 ) : (
                   <ListItemText primary={user[item]} />
                 )}
-                {/*   <ListItemIcon>{icons[index]}</ListItemIcon> */}
               </ListItemButton>
             </ListItem>
             <Divider variant="inset" component="li" />

@@ -109,7 +109,24 @@ const Login = () => {
 
   return (
     <>
-      <h2>{createUser ? "Create profile" : "Login"}</h2>
+      <div className="profile-header">
+        <h1>Sign My Guestbook.</h1>
+
+        <h2>Create a login and build a profile.</h2>
+        <h3>
+          It's a work in progress. For now, the atmosphere leave something to be
+          desired, and your avatar will look like me. But very soon you'll be
+          able to upload photos and resumes, add a bio, and probably other great
+          stuff.
+        </h3>
+        <h3>
+          If you'd like to see my work in more detail, this portfolio has its
+          own repo, which you can find by clicking on the right bottom corner.
+        </h3>
+      </div>
+      <h2 style={{ margin: "50px auto 10px auto", width: "fit-content" }}>
+        {createUser ? "Create profile" : "Login"}
+      </h2>
       <form className="profile-form" onSubmit={handleSubmit}>
         {createUser && (
           <TextField
