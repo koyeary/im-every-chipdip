@@ -115,6 +115,7 @@ const Login = () => {
         flexDirection: "column",
       }}
     >
+      <Button onClick={() => navigate("/")}>Home</Button>
       <div className="profile-header">
         <h1>Sign My Guestbook.</h1>
 
