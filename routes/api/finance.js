@@ -11,16 +11,18 @@ const axios = require("axios");
 // Matches with "/api/finance"
 
 router.get("/forex", async (req, res) => {
-  const forex = await axios.get(
+  /* const forex = await axios.get(
     `https://api.currencybeacon.com/v1/latest${process.env.CB_API_KEY}`
-  );
+  ); */
+
   try {
-    const data = forex.data;
+    res.send("Hello World");
+    /*  const data = forex.data;
     const rates = forex.data.response;
 
     console.log(rates);
     //rates.map((d) => updateCurrency(d));
-    res.status(200).send(data);
+    res.status(200).send(data); */
   } catch (error) {
     return console.error(error);
   }

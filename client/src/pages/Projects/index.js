@@ -32,21 +32,29 @@ const Projects = ({ darkMode }) => {
         </Link>
       </h2>
       <div className="accordion-wrapper">
-        <h2>Coming soon!</h2>
-        {/*      <Accordion>
+        Here are some projects you can checkout. This site was built using
+        React, Express, and MongoDB. It's hosted on Heroku. You can find the
+        code on my GitHub, the repo is im-every-chipdip.
+        <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            <Typography>Admin Status and Error Reporting</Typography>
+            <Typography>Guestbook</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <Link to="/status">Here</Link>
+              <Link to="/login">Sign My Guestbook</Link>
+              <p>
+                This is a small program that allows you to create a username and
+                password, and once authenticated, you can create a small
+                profile.
+              </p>
             </Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion>{" "}
+        {/*
         <Accordion>
           <AccordionSummary
             expandIcon={<ArrowDownwardIcon />}

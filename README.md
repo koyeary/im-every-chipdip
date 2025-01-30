@@ -116,13 +116,19 @@ A modern, responsive portfolio web application built with **React** for the fron
 ```
 im-every-chipdip/
 ├── client/               # React frontend
-│   ├── public/           # Static files
-│   ├── src/              # Main application code
-│       ├── components/   # Reusable components
-│       ├── pages/        # Page components
-│       ├── utils/        # Helper functions
-│       └── App.js        # Main App component
+│   ├── public/
+│   ├── src/
+      ├── components/
+      ├── contexts/
+      ├── hooks/
+      ├── pages/
+      ├── styles/
+      ├── utils/
+      ├── App.js
+      ├── index.js
+
 ├──              # Node.js backend
+|-- config/           # Database connection
 │── controllers/      # API controllers
 │── models/           # Database schemas
 │── routes/           # API routes
