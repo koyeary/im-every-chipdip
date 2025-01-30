@@ -28,7 +28,8 @@ const Profile = () => {
     };
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     logout();
     navigate("/login");
   };
@@ -44,8 +45,6 @@ const Profile = () => {
 
   return (
     <div>
-      <Button onClick={() => navigate("/")}>Home</Button>
-      <Button onClick={() => logout()}>Logout</Button>
       <div
         style={{
           margin: "0 auto",
@@ -55,6 +54,20 @@ const Profile = () => {
           alignItems: "center",
         }}
       >
+        {localStorageValue && (
+          <div
+            style={{
+              margin: "20px auto",
+              width: "90%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button onClick={() => navigate("/")}>Home</Button>
+            <Button onClick={handleLogout}>Logout</Button>
+          </div>
+        )}
         <div style={{ width: "fit-content", margin: "50px auto" }}></div>
         <UserDetails currentUser={localStorageValue} />
       </div>

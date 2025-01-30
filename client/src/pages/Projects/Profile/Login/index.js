@@ -108,7 +108,13 @@ const Login = () => {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <div className="profile-header">
         <h1>Sign My Guestbook.</h1>
 
@@ -210,7 +216,7 @@ const Login = () => {
           {createUser ? "Go to Login" : "Go to Create Profile"}
         </Button>
       </form>
-    </>
+    </div>
   );
 };
 
