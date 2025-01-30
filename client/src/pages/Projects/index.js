@@ -46,11 +46,11 @@ const Projects = ({ darkMode }) => {
           <AccordionDetails>
             <Typography>
               <Link to="/login">Sign My Guestbook</Link>
-              <p>
+              <div>
                 This is a small program that allows you to create a username and
                 password, and once authenticated, you can create a small
                 profile.
-              </p>
+              </div>
             </Typography>
           </AccordionDetails>
         </Accordion>{" "}

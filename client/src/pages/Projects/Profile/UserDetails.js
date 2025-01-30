@@ -50,23 +50,6 @@ const UserDetails = () => {
     newPassword: "",
   });
 
-  /*   useEffect(() => {
-    const currentUser = localStorage.getItem("user");
-    if (currentUser) {
-      setData(JSON.parse(currentUser));
-    }
-    setFormData({
-      name: data.name,
-      email: data.email,
-      linkedIn: data.linkedIn,
-      github: data.github,
-      password: "",
-      rePassword: "",
-      newPassword: "",
-    });
-    () => console.log(formData);
-  }, []); */
-
   const { name, email, linkedIn, github, password, rePassword, newPassword } =
     formData;
 
@@ -88,28 +71,28 @@ const UserDetails = () => {
     setEdit(true);
   };
 
-  const handleChange = (e) => {
+  /*   const handleChange = (e) => {
     e.preventDefault();
 
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(formData);
-  };
+  }; */
 
-  const handleSubmit = (e) => {
+  /*  const handleSubmit = (e, formData) => {
     e.preventDefault();
 
     updateUserDetails(formData, saveUser);
     setEdit(false);
-  };
+  }; */
 
-  const handleClickShowPassword = () => {
+  /*   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     updatePassword(password, email);
-  };
+  }; */
 
   const fields = ["name", "email", "linkedIn", "github"];
   const icons = [
@@ -135,15 +118,7 @@ const UserDetails = () => {
     >
       {edit ? (
         <>
-          <UserForm user={user} edit={edit} />
-          <div style={{ margin: "auto", width: "fit-content" }}>
-            <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Save
-            </Button>
-            <Button onClick={handleCancel} type="submit" variant="contained">
-              Cancel
-            </Button>
-          </div>
+          <UserForm user={user} handleCancel={handleCancel} />
         </>
       ) : (
         <>
