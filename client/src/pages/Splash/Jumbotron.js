@@ -1,9 +1,18 @@
-import { animated, useSpring, useTrail, config } from "react-spring";
+import React from "react";
+import {
+  a,
+  animated,
+  useSpring,
+  useTrail,
+  config,
+  useSprings,
+} from "react-spring";
 import "./Splash.css";
 import Page from "./Page";
 import css from "./Splash.css";
 
 const Jumbotron = ({ darkMode, open }) => {
+  // Animation for the first name
   const graphicStyles = useSpring({
     to: open
       ? [
@@ -15,6 +24,7 @@ const Jumbotron = ({ darkMode, open }) => {
     config: config.wobbly,
   });
 
+  // Animation for the last name
   const graphicStyles1 = useSpring({
     to: open
       ? [
@@ -27,6 +37,7 @@ const Jumbotron = ({ darkMode, open }) => {
     delay: 500,
   });
 
+  // Animation for the first title (Software Engineer)
   const graphicStyles2 = useSpring({
     to: open
       ? [
@@ -39,6 +50,7 @@ const Jumbotron = ({ darkMode, open }) => {
     delay: 550,
   });
 
+  // Animation for the ampersand
   const graphicStyles3 = useSpring({
     to: open
       ? [
@@ -51,6 +63,7 @@ const Jumbotron = ({ darkMode, open }) => {
     delay: 1000,
   });
 
+  // Animation for the first title (Fullstack)
   const graphicStyles4 = useSpring({
     to: open
       ? [
@@ -59,6 +72,19 @@ const Jumbotron = ({ darkMode, open }) => {
         ]
       : {},
     from: { opacity: 0, transform: "translateX(20%)" },
+    config: config.default,
+    delay: 1000,
+  });
+
+  // Animation for the second title (Developer)
+  const graphicStyles5 = useSpring({
+    to: open
+      ? [
+          { opacity: 0, transform: "translateX(200%)" },
+          { opacity: 1, transform: "translateX(0%)" },
+        ]
+      : {},
+    from: { opacity: 0, transform: "translateY(-100%)" },
     config: config.default,
     delay: 1000,
   });
@@ -154,7 +180,7 @@ const Jumbotron = ({ darkMode, open }) => {
       </div>
 
       <div className="header" id="header-pm-div">
-        <animated.div
+        {/*         <animated.div
           style={{
             ...graphicStyles4,
             display: "flex",
@@ -163,14 +189,21 @@ const Jumbotron = ({ darkMode, open }) => {
           }}
         >
           <animated.span style={{ color: "var(--light-blue)" }}>
-            Project
+            Fullstack
           </animated.span>
           <animated.span style={{ color: "var(--dark-blue)", marginLeft: 10 }}>
-            Manager
+            Developer
           </animated.span>
-        </animated.div>
+        </animated.div> */}
+        <animated.span
+          style={{ ...graphicStyles4, color: "var(--light-blue)" }}
+        >
+          Fullstack
+        </animated.span>
+        <animated.span style={{ ...graphicStyles5, color: "var(--dark-blue)" }}>
+          Developer
+        </animated.span>
       </div>
-
       <div className="header-sub">
         {trail.map((style, index) => (
           <animated.div key={index} style={style}>
@@ -182,7 +215,8 @@ const Jumbotron = ({ darkMode, open }) => {
           </animated.div>
         ))}
       </div>
-      <Page />
+
+      {/* <Page /> */}
     </div>
   );
 };
