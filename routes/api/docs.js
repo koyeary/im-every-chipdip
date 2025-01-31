@@ -1,3 +1,6 @@
+/* const router = require("express").Router();
+const axios = require("axios"); */
+
 /**
  * Copyright 2022 Google LLC
  *
@@ -18,16 +21,20 @@
 /**
  * Upload file with conversion
  * @return{obj} file Id
- * */
-async function uploadWithConversion() {
+ * 
+export const uploadWithConversion = async () => {
   const fs = require("fs");
   const { GoogleAuth } = require("google-auth-library");
   const { google } = require("googleapis");
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-  const auth = new GoogleAuth({
+  /*  const auth = new GoogleAuth({
     scopes: "https://www.googleapis.com/auth/drive",
-  });
+  }); 
+  const auth = axios.post(
+    `https://www.googleapis.com//gmail/v1/users/${process.env.GMAIL_USER}/drafts/send`,
+    data
+  );
   const service = google.drive({ version: "v3", auth });
   const fileMetadata = {
     name: "My Report",
@@ -50,5 +57,7 @@ async function uploadWithConversion() {
     // TODO(developer) - Handle error
     throw err;
   }
-}
+};
 // [END drive_upload_with_conversion]
+
+module.exports = router; */
