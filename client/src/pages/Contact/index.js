@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import { sendEmail } from "../../utils/API";
 import "./Contact.css";
@@ -10,6 +10,7 @@ const Contact = ({ darkMode }) => {
   const [show, setShow] = useState(false);
   const [severity, setSeverity] = useState("");
   const [msg, setMsg] = useState("");
+
   const [emailData, setEmailData] = useState({
     name: "",
     email: "",
@@ -24,25 +25,32 @@ const Contact = ({ darkMode }) => {
     setEmailData({ ...emailData, [e.target.name]: e.target.value });
   };
 
-  const sendToast = (msg, severity) => {
-    setSeverity(severity);
-    setMsg(msg);
-    severity === "success" && handleClear();
+  const handleClose = (severity) => {
+    setShow(false);
   };
 
-  const handleClear = () => {
-    setEmailData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+  const handleClear = (severity) => {
+    if (severity === "success") {
+      setEmailData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else return;
+  };
+
+  const sendToast = (msg, severity) => {
+    setMsg(msg);
+    setSeverity(severity);
+    setShow(true);
+    console.log(severity);
   };
 
   const handleSend = (e) => {
     e.preventDefault();
 
-    sendEmail(emailData, sendToast);
+    sendEmail(emailData, sendToast, handleClear);
   };
 
   return (
@@ -71,26 +79,10 @@ const Contact = ({ darkMode }) => {
           justifyContent: "center",
         }}
       >
-        {/*    {msg === "" ? (
+        <>
           <div className="header-wrap">
             <h1 className="contact-header">Send me a message.</h1>
-            <h2 className="subheader">
-              Or contact me at katyeary @ gmail dot com
-            </h2>
           </div>
-        ) : ( */}
-        <>
-          {/*         <div className="header-wrap"> */}
-          <h1 className="contact-header">Send me a message.</h1>
-          {/*    </div> */}
-          {msg === "" && (
-            <Alert severity={severity} style={{ zIndex: 1000 }}>
-              <AlertTitle>
-                {severity.charAt(0).toUpperCase() + severity.slice(1)}
-              </AlertTitle>
-              {msg}
-            </Alert>
-          )}
         </>
 
         <>
@@ -101,6 +93,7 @@ const Contact = ({ darkMode }) => {
             label="Your Name"
             value={name}
             required
+            type="text"
           />
           <TextField
             onChange={handleChange}
@@ -108,6 +101,7 @@ const Contact = ({ darkMode }) => {
             id="outlined-basic"
             label="Your Email"
             value={email}
+            type="email"
             required
           />
           <TextField
@@ -116,6 +110,7 @@ const Contact = ({ darkMode }) => {
             id="outlined-basic"
             label="Subject"
             value={subject}
+            type="text"
             required
           />
           <TextField
@@ -126,6 +121,7 @@ const Contact = ({ darkMode }) => {
             multiline
             rows={10}
             value={message}
+            type="text"
             required
           />
           <Button
@@ -138,6 +134,21 @@ const Contact = ({ darkMode }) => {
           </Button>
         </>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={show}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {msg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

@@ -128,7 +128,7 @@ export const getUserId = async (email) => {
   }
 };
 
-export const sendEmail = async (emailData, callback) => {
+export const sendEmail = async (emailData, send, reset) => {
   const data = {
     service_id: "gmail",
     template_id: "portfolio",
@@ -142,16 +142,27 @@ export const sendEmail = async (emailData, callback) => {
     },
     accessToken: env.EJS_PRIVATE_KEY,
   };
+  let regEmail =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!regEmail.test(data.template_params.email)) {
+    return send("Invalid Email Address", "error");
+  }
+
   try {
     const res = await axios.post(
       "https://api.emailjs.com/api/v1.0/email/send",
       data
     );
-    console.log(res);
-    callback(res.data.message, "success");
+
+    if (res.data === "OK") {
+      send("Your message has been sent.", "success");
+      reset("success");
+    } else {
+      send("Something went wrong.", "error");
+    }
   } catch (err) {
     console.log(err);
-    callback(err.message, "error");
+    send(err.message, "error");
   }
 };
 

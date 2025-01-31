@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { animated, config, useSpring } from "react-spring";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import FAB from "./components/Buttons/FAB";
 import Profile from "./pages/Projects/Profile";
 import Splash from "./pages/Splash";
 import Status from "./pages/Projects/Status";
 import FinanceDashboard from "./pages/Projects/FinanceDashboard";
 import useUser from "./hooks/useUser";
-//import ThemeContext from "./contexts/ThemeContext";
-//import Org from "./components/Projects/Org";
 import "./App.css";
 
 import Login from "./pages/Projects/Profile/Login";
@@ -46,9 +41,7 @@ const App = () => {
           <Routes>
             <Route
               path="*"
-              element={
-                <Splash darkMode={darkMode} advocateMode={false} open={open} />
-              }
+              element={<Splash darkMode={darkMode} open={open} />}
             />
             <Route
               path="/finance"
