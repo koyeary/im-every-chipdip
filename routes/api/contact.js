@@ -1,35 +1,21 @@
 const router = require("express").Router();
-
+const axios = require("axios");
 // Matches with "/api/contact"
 router.post("/", async (req, res) => {
-  /*   console.log(req.body);
+  console.log(req.body);
   const { name, email, subject, message } = req.body;
   console.log(req.body);
-  const data = {
-    service_id: "gmail",
-    template_id: "portfolio",
-    user_id: process.env.EJS_PUBLIC_KEY,
-    template_params: {
-      name: name,
-      email: email,
-      subject: subject,
-      message: message,
-      reply_to: email,
-    },
-    accessToken: process.env.EJS_PRIVATE_KEY,
-  }; */
+  const data = req.body;
 
   try {
-    /*   const res = await axios.post(
-      "https://api.emailjs.com/api/v1.0/email/send",
+    const res = await axios.post(
+      `https://www.googleapis.com//gmail/v1/users/${process.env.GMAIL_USER}/drafts/send`,
       data
     );
-    console.log(res);
-    return res.status(200).json(res.data.message);  */
-    console.log(req);
-    console.log(req.body);
+    console.log(res.data);
+    return res.status(200).json(res.data.message);
   } catch (error) {
-    console.log(req);
+    console.log(error);
     return error;
   }
 });
