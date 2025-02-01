@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import useUser from "../../../hooks/useUser";
 import UserDetails from "./UserDetails";
 import Button from "@mui/material/Button";
+import HomeIcon from "@mui/icons-material/Home";
+import LogoutIcon from "@mui/icons-material/Logout";
 import "./Profile.css";
 
 const Profile = () => {
@@ -64,8 +66,14 @@ const Profile = () => {
               justifyContent: "space-between",
             }}
           >
-            <Button onClick={() => navigate("/")}>Home</Button>
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button onClick={() => navigate("/")}>
+              <HomeIcon sx={{ mr: 1 }} />
+              <span style={{ paddingTop: 5 }}>Home</span>
+            </Button>
+            <Button onClick={handleLogout}>
+              <span style={{ paddingTop: 5 }}>Logout</span>
+              <LogoutIcon sx={{ ml: 1 }} />
+            </Button>
           </div>
         )}
 

@@ -123,7 +123,7 @@ router.put("/update/np", async (req, res) => {
 // @desc     Update user details
 // @access   Public
 router.put("/update", async (req, res) => {
-  const { name, email, github, linkedIn } = req.body;
+  const { name, email, github, pronouns, linkedIn, site, title } = req.body;
   const token = req.body.headers["x-auth-token"];
   console.log(req.body);
   try {
@@ -139,7 +139,7 @@ router.put("/update", async (req, res) => {
 
     user = await User.findOneAndUpdate(
       { email },
-      { name, github, linkedIn },
+      { name, github, linkedIn, pronouns, site, title },
       { new: true }
     );
 

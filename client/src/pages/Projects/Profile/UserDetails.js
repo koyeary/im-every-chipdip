@@ -41,9 +41,9 @@ import PasswordForm from "./PasswordForm";
 import useUser from "../../../hooks/useUser";
 import Container from "@mui/material/Container";
 
-const UserDetails = () => {
+const currentUser = () => {
   const { user, saveUser } = useUser();
-  const userDetails = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const [edit, setEdit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -135,96 +135,96 @@ const UserDetails = () => {
           height: "100vh",
         }}
       >
-        <Box sx={{ minWidth: 275 }}>
-          <Card variant="outlined" sx={{ padding: 1 }}>
-            <CardContent>
-              {/*               <Typography
-                gutterBottom
-                sx={{ color: "text.secondary", fontSize: 14, mx: 1 }}
-              >
-                <Avatar alt={userDetails.name} src={Img} sx={{ mx: 1 }} />
-              </Typography> */}
-              <Typography
-                variant="h5"
-                component="div"
-                sx={{ display: "flex", flexDirection: "row" }}
-              >
-                <Avatar alt={userDetails.name} src={Img} sx={{ mx: 1 }} />
-                <span style={{ alignSelf: "flex-end" }}>
-                  {" "}
-                  {userDetails.name}
-                </span>
-              </Typography>
-              <Typography sx={{ color: "text.secondary", my: 1.5, mx: 1 }}>
-                {userDetails.title ? userDetails.title : "Title"}
-              </Typography>
-              <Typography variant="body2" sx={{ mx: 1 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
+        {!edit ? (
+          <Box sx={{ minWidth: 275 }}>
+            <Card variant="outlined" sx={{ padding: 1, borderRadius: 2 }}>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{ display: "flex", flexDirection: "row" }}
                 >
-                  <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
-                  <div style={{ paddingTop: 7 }}>{userDetails.email}</div>
-                </div>{" "}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
-                >
-                  <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
-                  <div style={{ paddingTop: 7 }}>
-                    {userDetails.linkedIn
-                      ? userDetails.linkedIn.replace("https://www.", "")
-                      : "LinkedIn"}{" "}
+                  <Avatar alt={currentUser.name} src={Img} sx={{ mx: 1 }} />
+                  <span style={{ alignSelf: "flex-end" }}>
+                    {currentUser.name}
+                  </span>
+                </Typography>
+                <Typography sx={{ color: "text.secondary", mt: 1.5, mx: 1 }}>
+                  {currentUser.pronouns ? currentUser.pronouns : ""}
+                </Typography>
+                <Typography sx={{ color: "text.secondary", mb: 1.5, mx: 1 }}>
+                  {currentUser.title ? currentUser.title : "Title"}
+                </Typography>
+                <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 5,
+                      alignContent: "center",
+                    }}
+                  >
+                    <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
+                    <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
+                  </div>{" "}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 5,
+                      alignContent: "center",
+                    }}
+                  >
+                    <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
+                    <div style={{ paddingTop: 4 }}>
+                      {currentUser.linkedIn
+                        ? currentUser.linkedIn.replace("https://www.", "")
+                        : "LinkedIn"}{" "}
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    justifyContent: "left",
-                  }}
-                >
-                  <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
-                  <div style={{ paddingTop: 7 }}>
-                    {userDetails.github
-                      ? userDetails.github.replace("https://www.", "")
-                      : "GitHub"}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 5,
+                      justifyContent: "left",
+                    }}
+                  >
+                    <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
+                    <div style={{ paddingTop: 4 }}>
+                      {currentUser.github
+                        ? currentUser.github.replace("https://www.", "")
+                        : "GitHub"}
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
-                >
-                  <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
-                  <div style={{ paddingTop: 7 }}>
-                    {userDetails.site
-                      ? userDetails.site.replace("https://www.", "")
-                      : "Website"}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 5,
+                      alignContent: "center",
+                    }}
+                  >
+                    <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
+                    <div style={{ paddingTop: 4 }}>
+                      {currentUser.site
+                        ? currentUser.site.replace("https://www.", "")
+                        : "Website"}
+                    </div>
                   </div>
-                </div>
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" onClick={handleEdit}>
-                Edit
-              </Button>
-            </CardActions>
-          </Card>
-        </Box>
-        {edit && <UserForm user={user} handleCancel={handleCancel} />} :
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" variant="outlined" onClick={handleEdit}>
+                  Edit
+                </Button>
+              </CardActions>
+            </Card>
+          </Box>
+        ) : (
+          <UserForm user={user} handleCancel={handleCancel} />
+        )}{" "}
+        :
         {/*} (
           <UserProfile
             user={user}
@@ -267,18 +267,7 @@ const UserDetails = () => {
             formData={formData}
             setFormData={setFormData}
             checkPasswordMatch={checkPasswordMatch}
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-          />
-          <ButtonGroup fullWidth>
-            <Button
-              type="submit"
-              variant="contained"
-              onClick={handleUpdatePassword}
-            >
-              Confirm Change Password
-            </Button>
-            <Button type="reset" onClick={() => setUpdateMode(false)}>
+="reset" onClick={() => setUpdateMode(false)}>
               Cancel
             </Button>
           </ButtonGroup>
@@ -288,4 +277,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default currentUser;
