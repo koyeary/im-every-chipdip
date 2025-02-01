@@ -54,7 +54,7 @@ const App = () => {
           <animated.div style={spring} className="fab">
             <FAB darkMode={darkMode} icon="linkedIn" />
             <FAB darkMode={darkMode} icon="gitHub" />
-          </animated.div>{" "}
+          </animated.div>
         </div>
       </Router>
     </>

@@ -95,12 +95,12 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
                 )}
               </ListItemButton>
             </ListItem>
-            <Divider variant="inset" component="li" />
           </Fragment>
         ))}
       </List>
       {edit && (
         <div style={{ margin: "auto", width: "fit-content" }}>
+          <Divider variant="inset" component="li" />
           <Button type="submit" variant="contained" onClick={handleSubmit}>
             Save
           </Button>
