@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
@@ -49,13 +50,23 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
     console.log(result); // Output: /in/kat-yea
     // ry */
   return (
-    <>
+    <Box
+      sx={{
+        width: "100%",
+
+        borderRadius: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <List
         sx={{
           width: 600,
           maxWidth: "100%",
           bgcolor: "background.paper",
-          margin: "100px auto",
+          margin: "100px auto 20px auto",
           height: "100%",
           display: "flex",
           flexDirection: "column",
@@ -98,7 +109,7 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
           </Fragment>
         ))}
       </List>
-      {edit && (
+      {/*       {edit && (
         <div style={{ margin: "auto", width: "fit-content" }}>
           <Divider variant="inset" component="li" />
           <Button type="submit" variant="contained" onClick={handleSubmit}>
@@ -108,8 +119,8 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
             Cancel
           </Button>
         </div>
-      )}
-    </>
+      )} */}
+    </Box>
   );
 };
 

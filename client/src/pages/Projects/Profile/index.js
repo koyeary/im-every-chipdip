@@ -68,7 +68,7 @@ const Profile = () => {
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         )}
-        <div style={{ width: "fit-content", margin: "50px auto" }}></div>
+
         <UserDetails currentUser={localStorageValue} />
       </div>
     </div>

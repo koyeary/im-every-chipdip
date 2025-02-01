@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import { updateUserDetails, updatePassword } from "../../../utils/API";
 
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+
 import Divider from "@mui/material/Divider";
 import EmailIcon from "@mui/icons-material/Email";
 import FormControl from "@mui/material/FormControl";
@@ -15,7 +22,7 @@ import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
+import LinkIcon from "@mui/icons-material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -32,19 +39,23 @@ import UserForm from "./UserForm";
 import PasswordForm from "./PasswordForm";
 
 import useUser from "../../../hooks/useUser";
+import Container from "@mui/material/Container";
 
 const UserDetails = () => {
   const { user, saveUser } = useUser();
+  const userDetails = JSON.parse(localStorage.getItem("user"));
   const [edit, setEdit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [changePassword, setChangePassword] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
   const [data, setData] = useState({});
   const [formData, setFormData] = useState({
     name: "",
+    title: "",
     email: "",
     linkedIn: "",
     github: "",
+    site: "",
     password: "",
     rePassword: "",
     newPassword: "",
@@ -78,21 +89,21 @@ const UserDetails = () => {
     console.log(formData);
   }; */
 
-  /*  const handleSubmit = (e, formData) => {
+  const handleSubmit = (e, formData) => {
     e.preventDefault();
 
     updateUserDetails(formData, saveUser);
     setEdit(false);
-  }; */
+  };
 
-  /*   const handleClickShowPassword = () => {
+  const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     updatePassword(password, email);
-  }; */
+  };
 
   const fields = ["name", "email", "linkedIn", "github"];
   const icons = [
@@ -101,12 +112,9 @@ const UserDetails = () => {
     <LinkedInIcon />,
     <GitHubIcon />,
   ];
-  const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644"];
+  const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644", "#7366f0"];
 
-  return loading ? (
-    /* create hooks loading feature later */
-    <div>Loading</div>
-  ) : (
+  return (
     <div
       style={{
         margin: "auto",
@@ -116,12 +124,108 @@ const UserDetails = () => {
         alignItems: "center",
       }}
     >
-      {edit ? (
-        <>
-          <UserForm user={user} handleCancel={handleCancel} />
-        </>
-      ) : (
-        <>
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "auto",
+          justifyContent: "center",
+          gap: 20,
+          height: "100vh",
+        }}
+      >
+        <Box sx={{ minWidth: 275 }}>
+          <Card variant="outlined" sx={{ padding: 1 }}>
+            <CardContent>
+              {/*               <Typography
+                gutterBottom
+                sx={{ color: "text.secondary", fontSize: 14, mx: 1 }}
+              >
+                <Avatar alt={userDetails.name} src={Img} sx={{ mx: 1 }} />
+              </Typography> */}
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ display: "flex", flexDirection: "row" }}
+              >
+                <Avatar alt={userDetails.name} src={Img} sx={{ mx: 1 }} />
+                <span style={{ alignSelf: "flex-end" }}>
+                  {" "}
+                  {userDetails.name}
+                </span>
+              </Typography>
+              <Typography sx={{ color: "text.secondary", my: 1.5, mx: 1 }}>
+                {userDetails.title ? userDetails.title : "Title"}
+              </Typography>
+              <Typography variant="body2" sx={{ mx: 1 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
+                  <div style={{ paddingTop: 7 }}>{userDetails.email}</div>
+                </div>{" "}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
+                  <div style={{ paddingTop: 7 }}>
+                    {userDetails.linkedIn
+                      ? userDetails.linkedIn.replace("https://www.", "")
+                      : "LinkedIn"}{" "}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    justifyContent: "left",
+                  }}
+                >
+                  <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
+                  <div style={{ paddingTop: 7 }}>
+                    {userDetails.github
+                      ? userDetails.github.replace("https://www.", "")
+                      : "GitHub"}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
+                  <div style={{ paddingTop: 7 }}>
+                    {userDetails.site
+                      ? userDetails.site.replace("https://www.", "")
+                      : "Website"}
+                  </div>
+                </div>
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={handleEdit}>
+                Edit
+              </Button>
+            </CardActions>
+          </Card>
+        </Box>
+        {edit && <UserForm user={user} handleCancel={handleCancel} />} :
+        {/*} (
           <UserProfile
             user={user}
             colors={colors}
@@ -130,91 +234,56 @@ const UserDetails = () => {
             edit={edit}
             setEdit={setEdit}
           />
-          {!edit && (
-            <Button variant="contained" onClick={handleEdit}>
-              Edit Profile Details
-            </Button>
-          )}
-        </>
-      )}
-
-      {/*  <PasswordForm /> */}
-      {!changePassword && (
-        <Button onClick={setChangePassword(true)}>Update password</Button>
-      )}
-      {/*  <form onSubmit={handleUpdatePassword}>
-          <FormControl
-            sx={{ width: "100%", backgroundColor: "#FFF" }}
-            size="small"
-            margin="dense"
-            label="New Password"
-            required
-          >
-            <InputLabel
-              sx={{ backgroundColor: "#FFF" }}
-              color="secondary"
-              htmlFor="password"
-            >
-              New Password
-            </InputLabel>
-            <OutlinedInput
-              color="secondary"
-              name="password"
-              value={newPassword}
-              onChange={handleChange}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={
-                      showPassword
-                        ? "hide the password"
-                        : "display the password"
-                    }
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-
-          <TextField
-            size="small"
-            margin="dense"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type={showPassword ? "text" : "password"}
-            label="Re-enter New Password"
-            color={checkPasswordMatch}
-            helperText={
-              checkPasswordMatch === "error"
-                ? "Passwords do not match"
-                : checkPasswordMatch === "success"
-                ? "Passwords match"
-                : ""
-            }
-            name="rePassword"
-            value={rePassword}
-            onChange={handleChange}
-            required
-          />
-          {changePassword && (
-            <>
-              <Button
-                disabled={checkPasswordMatch === "error"}
-                onClick={() => setChangePassword(false)}
-                type="submit"
-              >
-                Save Update
+        )} */}
+        {/*       {!edit ? (
+          <Button variant="contained" onClick={handleEdit}>
+            Edit Profile
+          </Button>
+        ) : (
+          <>
+            <ButtonGroup fullWidth>
+              <Button type="submit" variant="contained" onClick={handleSubmit}>
+                Save
               </Button>
-              <Button type="reset" onClick={() => setChangePassword(false)}>
+              <Button onClick={handleCancel} type="reset">
                 Cancel
               </Button>
-            </>
-          )}
-        </form> */}
+            </ButtonGroup>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                setUpdateMode(true);
+              }}
+            >
+              Change Password
+            </Button>
+          </>
+        )} */}
+      </Container>
+
+      {/*       {updateMode && (
+        <>
+          <PasswordForm
+            formData={formData}
+            setFormData={setFormData}
+            checkPasswordMatch={checkPasswordMatch}
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+          <ButtonGroup fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={handleUpdatePassword}
+            >
+              Confirm Change Password
+            </Button>
+            <Button type="reset" onClick={() => setUpdateMode(false)}>
+              Cancel
+            </Button>
+          </ButtonGroup>
+        </>
+      )} */}
     </div>
   );
 };

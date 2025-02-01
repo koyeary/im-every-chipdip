@@ -99,14 +99,6 @@ const UserForm = ({ handleCancel }) => {
         value={github}
         onChange={handleChange}
       />
-      <div style={{ margin: "auto", width: "fit-content" }}>
-        <Button type="submit" variant="contained" onClick={handleSubmit}>
-          Save
-        </Button>
-        <Button onClick={handleCancel} type="submit" variant="contained">
-          Cancel
-        </Button>
-      </div>
     </form>
   );
 };
