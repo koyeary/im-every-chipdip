@@ -14,7 +14,7 @@
 .profile-header h1 {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 20px;
+
   font-weight: 500;
 }
 
@@ -62,15 +62,16 @@
 .profile-form {
   display: flex;
   flex-direction: column;
-  background-color: aliceblue;
   padding: 1rem;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
   max-width: 100%;
   width: 400px;
-  margin: auto;
+
+  margin: 0 auto 0 auto;
 }
+
 .profile-input {
   background-color: #fff;
   width: 270px;

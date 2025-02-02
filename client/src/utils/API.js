@@ -237,7 +237,7 @@ export const updatePassword = async (newPassword, email, token) => {
   }
 };
 
-export const updateUserDetails = async (formData, saveUser) => {
+export const updateUserDetails = async (formData, saveUser, sendToast) => {
   const { name, email, github, linkedIn, pronouns, site, title } = formData;
 
   try {
@@ -256,8 +256,10 @@ export const updateUserDetails = async (formData, saveUser) => {
       title: title,
     });
 
+    sendToast("User details updated", "success");
     saveUser(res.data);
   } catch (err) {
+    sendToast(err.message, "error");
     console.log(err.message);
   }
 };

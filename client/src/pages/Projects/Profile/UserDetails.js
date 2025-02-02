@@ -1,80 +1,39 @@
-import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { updateUserDetails, updatePassword } from "../../../utils/API";
+import useUser from "../../../hooks/useUser";
 
+import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
-import Divider from "@mui/material/Divider";
 import EmailIcon from "@mui/icons-material/Email";
-import FormControl from "@mui/material/FormControl";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LinkIcon from "@mui/icons-material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import TextField from "@mui/material/TextField";
-import UserProfile from "./UserProfile";
+
+import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import UserForm from "./UserForm";
 
-import PasswordForm from "./PasswordForm";
-
-import useUser from "../../../hooks/useUser";
-import Container from "@mui/material/Container";
-
-const currentUser = () => {
-  const { user, saveUser } = useUser();
+const UserDetails = () => {
+  const { user } = useUser();
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const [edit, setEdit] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
-  const [data, setData] = useState({});
-  const [formData, setFormData] = useState({
-    name: "",
-    title: "",
-    email: "",
-    linkedIn: "",
-    github: "",
-    site: "",
-    password: "",
-    rePassword: "",
-    newPassword: "",
+  const [show, setShow] = useState(false);
+  const [alert, setAlert] = useState({
+    severity: "",
+    msg: "",
   });
 
-  const { name, email, linkedIn, github, password, rePassword, newPassword } =
-    formData;
-
-  const checkPasswordMatch =
-    password === "" && rePassword === ""
-      ? "secondary"
-      : password === rePassword
-      ? "success"
-      : "error";
-
-  const handleCancel = (e) => {
-    e.preventDefault();
-
-    setEdit(false);
+  const { severity, msg } = alert;
+  const handleClose = () => {
+    setShow(false);
   };
 
   const handleEdit = (e) => {
@@ -82,42 +41,17 @@ const currentUser = () => {
     setEdit(true);
   };
 
-  /*   const handleChange = (e) => {
-    e.preventDefault();
-
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
-  }; */
-
-  const handleSubmit = (e, formData) => {
-    e.preventDefault();
-
-    updateUserDetails(formData, saveUser);
-    setEdit(false);
+  const sendToast = (msg, severity) => {
+    setAlert({ msg, severity });
+    setShow(true);
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleUpdatePassword = (e) => {
-    e.preventDefault();
-    updatePassword(password, email);
-  };
-
-  const fields = ["name", "email", "linkedIn", "github"];
-  const icons = [
-    <PermIdentityIcon />,
-    <EmailIcon />,
-    <LinkedInIcon />,
-    <GitHubIcon />,
-  ];
   const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644", "#7366f0"];
 
   return (
     <div
       style={{
-        margin: "auto",
+        marginTop: -50,
         width: "fit-content",
         display: "flex",
         flexDirection: "column",
@@ -137,7 +71,15 @@ const currentUser = () => {
       >
         {!edit ? (
           <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined" sx={{ padding: 1, borderRadius: 2 }}>
+            <Card
+              variant="outlined"
+              sx={{
+                padding: 1,
+                borderRadius: 2,
+                width: 450,
+                maxWidth: "90vw",
+              }}
+            >
               <CardContent>
                 <Typography
                   variant="h5"
@@ -222,59 +164,26 @@ const currentUser = () => {
             </Card>
           </Box>
         ) : (
-          <UserForm user={user} handleCancel={handleCancel} />
-        )}{" "}
-        :
-        {/*} (
-          <UserProfile
-            user={user}
-            colors={colors}
-            icons={icons}
-            fields={fields}
-            edit={edit}
-            setEdit={setEdit}
-          />
-        )} */}
-        {/*       {!edit ? (
-          <Button variant="contained" onClick={handleEdit}>
-            Edit Profile
-          </Button>
-        ) : (
-          <>
-            <ButtonGroup fullWidth>
-              <Button type="submit" variant="contained" onClick={handleSubmit}>
-                Save
-              </Button>
-              <Button onClick={handleCancel} type="reset">
-                Cancel
-              </Button>
-            </ButtonGroup>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                setUpdateMode(true);
-              }}
-            >
-              Change Password
-            </Button>
-          </>
-        )} */}
+          <UserForm user={user} setEdit={setEdit} sendToast={sendToast} />
+        )}
       </Container>
-
-      {/*       {updateMode && (
-        <>
-          <PasswordForm
-            formData={formData}
-            setFormData={setFormData}
-            checkPasswordMatch={checkPasswordMatch}
-="reset" onClick={() => setUpdateMode(false)}>
-              Cancel
-            </Button>
-          </ButtonGroup>
-        </>
-      )} */}
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={show}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {msg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
 
-export default currentUser;
+export default UserDetails;
