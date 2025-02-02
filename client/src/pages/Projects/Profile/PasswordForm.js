@@ -11,12 +11,12 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-const PasswordForm = () => {
+const PasswordForm = ({ sendToast }) => {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
+  const [changeMode, setChangeMode] = useState(false);
 
   const checkPasswordMatch =
     password === "" && rePassword === ""
@@ -107,20 +107,16 @@ const PasswordForm = () => {
         onChange={handleChange}
         required
       />
-      {/*       {updateMode && (
-        <>
-          <Button
-            disabled={checkPasswordMatch === "error"}
-            onClick={() => setUpdateMode(false)}
-            type="submit"
-          >
-            Save Update
-          </Button>
-          <Button type="reset" onClick={() => setUpdateMode(false)}>
-            Cancel
-          </Button>
-        </>
-      )} */}
+      <Button
+        disabled={checkPasswordMatch === "error"}
+        onClick={() => setChangeMode(false)}
+        type="submit"
+      >
+        Save Update
+      </Button>
+      <Button type="reset" onClick={() => setUpdateMode(false)}>
+        Cancel
+      </Button>
     </form>
   );
 };

@@ -7,7 +7,8 @@ import { useFormControl } from "@mui/material/FormControl";
 import useUser from "../../../../hooks/useUser";
 
 //Material UI
-import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -17,11 +18,14 @@ import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
 
+//Icons
+import HomeIcon from "@mui/icons-material/Home";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 //Styles
 import "../Profile.css";
+import { Box, CardHeader } from "@mui/material";
 
 const Login = () => {
   const [createUser, setCreateUser] = useState(false);
@@ -110,122 +114,142 @@ const Login = () => {
   return (
     <div
       style={{
-        height: "80vh",
-        width: "100vw",
+        width: "fit-content",
         display: "flex",
         flexDirection: "column",
-        paddingTop: 40,
-        overflow: "auto",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "auto",
+        height: "100vh",
       }}
     >
-      <Button onClick={() => navigate("/")}>Home</Button>
-      <div className="profile-header">
-        <h1>Sign My Guestbook.</h1>
-
-        <div className="profile-description">
-          This is an in-progress project that allows a user to create a
-          password-protected account, with a profile they can save and view
-          later. They can then choose to write a message in the guestbook, which
-          they have the option to make public or private. <br />
-          <br />
-          For now, the user is able to create an account, log in, and view or
-          update their profile. Future features will include the ability to
-          change their password, upload a profile image, and write messages in
-          the guestbook.
-          <br />
-          <br />
-          This application is built with React, Node.js, Express, and MongoDB.
-        </div>
-      </div>
-      <h2
-        className="profile-header"
-        style={{ margin: "auto", width: "fit-content" }}
+      <Button onClick={() => navigate("/")}>
+        <HomeIcon sx={{ mr: 1 }} />
+        <span style={{ paddingTop: 5 }}>Home</span>
+      </Button>
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "auto",
+          justifyContent: "center",
+        }}
       >
-        {createUser ? "Create profile" : "Login"}
-      </h2>
-      <form className="profile-form" onSubmit={handleSubmit}>
-        {createUser && (
-          <TextField
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            label="Name"
-            color="secondary"
-            name="name"
-            placeholder="Name"
-            value={name}
-            onChange={handleChange}
-            required
-          />
-        )}
-        <TextField
-          sx={{ backgroundColor: "#FFF", width: "100%" }}
-          label="Email"
-          color="secondary"
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <FormControl sx={{ width: "100%" }}>
-          <InputLabel color="secondary" htmlFor="password">
-            Password
-          </InputLabel>
-          <OutlinedInput
-            sx={{ backgroundColor: "#FFF" }}
-            label="Password"
-            color="secondary"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            required={createUser}
-            type={showPassword ? "text" : "password"}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label={
-                    showPassword ? "hide the password" : "display the password"
-                  }
-                  onClick={handleClickShowPassword}
-                  edge="end"
+        <Box sx={{ minWidth: 275, justifyContent: "center", gap: 20 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              padding: 1,
+              borderRadius: 2,
+              width: 450,
+              maxWidth: "90vw",
+            }}
+          >
+            <CardHeader title={createUser ? "Create Profile" : "Login"} />
+
+            <form className="profile-form" onSubmit={handleSubmit}>
+              {createUser && (
+                <TextField
+                  sx={{ backgroundColor: "#FFF", width: "100%" }}
+                  label="Name"
+                  color="secondary"
+                  name="name"
+                  placeholder="Name"
+                  value={name}
+                  dense
+                  onChange={handleChange}
+                  size="small"
+                  required
+                  margin="dense"
+                />
+              )}
+              <TextField
+                sx={{ backgroundColor: "#FFF", width: "100%" }}
+                label="Email"
+                color="secondary"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="Email"
+                dense
+                onChange={handleChange}
+                required
+                size="small"
+                margin="dense"
+              />
+              <FormControl
+                sx={{ width: "100%" }}
+                size="small"
+                margin="dense"
+                label="password"
+                required
+              >
+                <InputLabel
+                  sx={{ backgroundColor: "#FFF" }}
+                  color="secondary"
+                  htmlFor="password"
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            placeholder="Password"
-          />
-        </FormControl>
-        {createUser && (
-          <FormControl sx={{ width: "100%" }}>
-            <InputLabel htmlFor="rePassword" color="secondary">
-              Re-enter Password
-            </InputLabel>
-            <OutlinedInput
-              sx={{ backgroundColor: "#FFF" }}
-              type="password"
-              label="Re-enter Password"
-              color={checkPasswordMatch}
-              name="rePassword"
-              value={rePassword}
-              onChange={handleChange}
-              placeholder="Re-enter Password"
-              required
-            />
-            <MyFormHelperText />
-          </FormControl>
-        )}
-        <Button type="submit" variant="contained" /* fullWidth */>
-          Submit
-        </Button>
-        <Button
-          onClick={() => setCreateUser(!createUser)}
-          /* fullWidth */
-          variant="text"
-        >
-          {createUser ? "Go to Login" : "Go to Create Profile"}
-        </Button>
-      </form>
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  color="secondary"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label={
+                          showPassword
+                            ? "hide the password"
+                            : "display the password"
+                        }
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              {createUser && (
+                <TextField
+                  size="small"
+                  margin="dense"
+                  sx={{ backgroundColor: "#FFF", width: "100%" }}
+                  type={showPassword ? "text" : "password"}
+                  label="Re-enter New Password"
+                  color={checkPasswordMatch}
+                  helperText={
+                    checkPasswordMatch === "error"
+                      ? "Passwords do not match"
+                      : checkPasswordMatch === "success"
+                      ? "Passwords match"
+                      : ""
+                  }
+                  name="rePassword"
+                  value={rePassword}
+                  onChange={handleChange}
+                  required
+                />
+              )}
+              <Button type="submit" variant="contained" /* fullWidth */>
+                Submit
+              </Button>
+              <Button
+                onClick={() => setCreateUser(!createUser)}
+                /* fullWidth */
+                variant="text"
+              >
+                {createUser ? "Go to Login" : "Go to Create Profile"}
+              </Button>
+            </form>
+          </Card>
+        </Box>
+      </Container>
     </div>
   );
 };

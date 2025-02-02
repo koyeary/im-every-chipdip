@@ -27,7 +27,7 @@ const Contact = ({ darkMode }) => {
     setEmailData({ ...emailData, [e.target.name]: e.target.value });
   };
 
-  const handleClose = (severity) => {
+  const handleClose = () => {
     setShow(false);
   };
 
