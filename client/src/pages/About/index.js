@@ -87,14 +87,7 @@ const About = ({ advocateMode }) => {
                   Hi, I'm Kat. I'm a frontend-leaning, fullstack software
                   engineer and project manager. I live in New York City with my
                   wife and our two cats.
-                </p>
-                <p>
-                  I have the attention to detail, sense of organization, and the
-                  experience with agile practices to bring projects from concept
-                  to delivery. I also have the soft skills to firmly grasp and
-                  communicate the needs of engineers, executives, and other
-                  stakeholders.
-                </p>
+                </p>{" "}
                 <p>
                   As an engineer, I have extensive experience with
                   JavaScript-based frontend development, as well as experience
@@ -102,6 +95,13 @@ const About = ({ advocateMode }) => {
                   aspect of full stack development and I'm always challenging
                   myself to learn more.
                 </p>
+                {/*                 <p>
+                  I have the attention to detail, sense of organization, and the
+                  experience with agile practices to bring projects from concept
+                  to delivery. I also have the soft skills to firmly grasp and
+                  communicate the needs of engineers, executives, and other
+                  stakeholders.
+                </p> */}
               </>
             )}
           </div>

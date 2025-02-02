@@ -238,7 +238,7 @@ export const updatePassword = async (newPassword, email, token) => {
 };
 
 export const updateUserDetails = async (formData, saveUser) => {
-  const { name, email, github, linkedIn } = formData;
+  const { name, email, github, linkedIn, pronouns, site, title } = formData;
 
   try {
     const res = await axios.put("http://localhost:3001/api/user/update", {
@@ -246,10 +246,14 @@ export const updateUserDetails = async (formData, saveUser) => {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
       },
+
       name: name,
       email: email,
       github: github,
       linkedIn: linkedIn,
+      pronouns: pronouns,
+      site: site,
+      title: title,
     });
 
     saveUser(res.data);
@@ -287,7 +291,7 @@ export const authenticateUser = async (
 
     const user = localStorage.setItem("user", JSON.stringify(res.data));
     saveUser(user);
-
+    console.log(user);
     return getUserById(res.data.id, saveUser, finishLogin);
   } catch (err) {
     console.log(err.message);

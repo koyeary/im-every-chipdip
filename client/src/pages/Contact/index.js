@@ -1,9 +1,11 @@
 import { useState } from "react";
+
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import { sendEmail } from "../../utils/API";
+import "../About/About.css";
 import "./Contact.css";
 
 const Contact = ({ darkMode }) => {

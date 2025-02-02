@@ -4,6 +4,9 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  title: {
+    type: String,
+  },
   email: {
     type: String,
   },
@@ -13,10 +16,16 @@ const UserSchema = new mongoose.Schema({
   created: {
     type: Date,
   },
+  pronouns: {
+    type: String,
+  },
   linkedIn: {
     type: String,
   },
   github: {
+    type: String,
+  },
+  site: {
     type: String,
   },
   activeInvoice: {

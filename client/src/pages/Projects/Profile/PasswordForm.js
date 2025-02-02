@@ -107,7 +107,7 @@ const PasswordForm = () => {
         onChange={handleChange}
         required
       />
-      {updateMode && (
+      {/*       {updateMode && (
         <>
           <Button
             disabled={checkPasswordMatch === "error"}
@@ -120,7 +120,7 @@ const PasswordForm = () => {
             Cancel
           </Button>
         </>
-      )}
+      )} */}
     </form>
   );
 };

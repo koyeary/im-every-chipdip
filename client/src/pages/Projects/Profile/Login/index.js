@@ -110,28 +110,37 @@ const Login = () => {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "80vh",
+        width: "100vw",
         display: "flex",
         flexDirection: "column",
+        paddingTop: 40,
+        overflow: "auto",
       }}
     >
       <Button onClick={() => navigate("/")}>Home</Button>
       <div className="profile-header">
         <h1>Sign My Guestbook.</h1>
 
-        <h2>Create a login and build a profile.</h2>
-        <h3>
-          It's a work in progress. For now, the atmosphere leave something to be
-          desired, and your avatar will look like me. But very soon you'll be
-          able to upload photos and resumes, add a bio, and probably other great
-          stuff.
-        </h3>
-        <h3>
-          If you'd like to see my work in more detail, this portfolio has its
-          own repo, which you can find by clicking on the right bottom corner.
-        </h3>
+        <div className="profile-description">
+          This is an in-progress project that allows a user to create a
+          password-protected account, with a profile they can save and view
+          later. They can then choose to write a message in the guestbook, which
+          they have the option to make public or private. <br />
+          <br />
+          For now, the user is able to create an account, log in, and view or
+          update their profile. Future features will include the ability to
+          change their password, upload a profile image, and write messages in
+          the guestbook.
+          <br />
+          <br />
+          This application is built with React, Node.js, Express, and MongoDB.
+        </div>
       </div>
-      <h2 style={{ margin: "50px auto 10px auto", width: "fit-content" }}>
+      <h2
+        className="profile-header"
+        style={{ margin: "auto", width: "fit-content" }}
+      >
         {createUser ? "Create profile" : "Login"}
       </h2>
       <form className="profile-form" onSubmit={handleSubmit}>

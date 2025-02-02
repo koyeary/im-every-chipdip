@@ -4,10 +4,13 @@ const UserContext = createContext();
 
 const defaultUser = {
   name: "",
+  pronouns: "",
+  title: "",
   email: "",
   id: "",
   github: "",
   linkedIn: "",
+  site: "",
 };
 
 const extractUser = () => {
