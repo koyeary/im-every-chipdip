@@ -46,39 +46,39 @@ const Profile = () => {
   }, [navigate]);
 
   return (
-    <div>
-      <div
-        style={{
-          margin: "0 auto",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {localStorageValue && (
-          <div
-            style={{
-              margin: "20px auto",
-              width: "90%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button onClick={() => navigate("/")}>
-              <HomeIcon sx={{ mr: 1 }} />
-              <span style={{ paddingTop: 5 }}>Home</span>
-            </Button>
-            <Button onClick={handleLogout}>
-              <span style={{ paddingTop: 5 }}>Logout</span>
-              <LogoutIcon sx={{ ml: 1 }} />
-            </Button>
-          </div>
-        )}
+    <div
+      style={{
+        margin: "0 auto",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "100vh",
+        overflow: "auto",
+      }}
+    >
+      {localStorageValue && (
+        <div
+          style={{
+            margin: "20px auto",
+            width: "90%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Button onClick={() => navigate("/")}>
+            <HomeIcon sx={{ mr: 1 }} />
+            <span style={{ paddingTop: 5 }}>Home</span>
+          </Button>
+          <Button onClick={handleLogout}>
+            <span style={{ paddingTop: 5 }}>Logout</span>
+            <LogoutIcon sx={{ ml: 1 }} />
+          </Button>
+        </div>
+      )}
 
-        <UserDetails currentUser={localStorageValue} />
-      </div>
+      <UserDetails currentUser={localStorageValue} />
     </div>
   );
 };

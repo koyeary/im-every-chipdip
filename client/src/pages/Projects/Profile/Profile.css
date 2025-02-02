@@ -1,12 +1,12 @@
 .profile-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
   height: 25%;
-  width: 360px;
-  max-width: 100%;
-  margin: auto;
+  width: 800px;
+  max-width: 90%;
+  margin: 100px auto;
+  padding: 1rem;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
@@ -15,7 +15,7 @@
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 20px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .profile-header h2 {
@@ -28,7 +28,6 @@
 .profile-header h3 {
   text-align: left;
   font-size: 1rem;
-
   font-weight: 400;
 }
 
@@ -87,4 +86,12 @@
   .profile-input {
     max-width: 90%;
   }
+}
+
+.profile-description {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 20px auto;
 }

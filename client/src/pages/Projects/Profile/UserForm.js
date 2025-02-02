@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { updateUserDetails } from "../../../utils/API";
 import useUser from "../../../hooks/useUser";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import Tooltip from "@mui/material/Tooltip";
 
 const UserForm = ({ handleCancel }) => {
   const current = JSON.parse(localStorage.getItem("user"));
@@ -151,10 +152,18 @@ const UserForm = ({ handleCancel }) => {
         value={site}
         onChange={handleChange}
       />
-      <Button>
-        <AddPhotoAlternateIcon />
-        Add Your Photo
-      </Button>
+      <Tooltip
+        title="Photo upload coming soon!"
+        placement="top"
+        color="secondary"
+      >
+        <span>
+          <Button disabled>
+            <AddPhotoAlternateIcon />
+            Add Your Photo
+          </Button>
+        </span>
+      </Tooltip>
       <ButtonGroup fullWidth>
         <Button type="submit" variant="contained" onClick={handleSubmit}>
           Save Changes
