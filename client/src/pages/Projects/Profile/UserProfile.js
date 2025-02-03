@@ -32,11 +32,6 @@ const UserProfile = ({ colors, icons, fields, setEdit }) => {
     return null;
   };
 
-  /*     // Example usage:
-    const exampleString = "https://www.linkedin.com/in/kat-yeary";
-    const result = findInAndAfter(exampleString);
-    console.log(result); // Output: /in/kat-yea
-    // ry */
   return (
     <Box
       sx={{
