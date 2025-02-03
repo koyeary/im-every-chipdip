@@ -103,21 +103,6 @@ const Login = () => {
 
   return (
     <>
-      {/*   <div
-      style={{
-        width: "fit-content",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "auto",
-        height: "100vh",
-      }}
-    >
-      <Button onClick={() => navigate("/")}>
-        <HomeIcon sx={{ mr: 1 }} />
-        <span style={{ paddingTop: 5 }}>Home</span>
-      </Button> */}
       <Box
         sx={{
           minHeight: "100vh",

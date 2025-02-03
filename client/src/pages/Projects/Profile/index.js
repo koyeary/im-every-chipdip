@@ -48,18 +48,15 @@ const Profile = () => {
   }, [navigate]);
 
   return (
-    /*     <div
-      style={{
-                 margin: "0 auto",
-        width: "100%", 
+    <Box
+      sx={{
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-                 height: "100vh",
-        overflow: "auto", 
+        justifyContent: "flex-start",
+        overflow: "auto",
       }}
-      
-    > */ <>
+    >
       {localStorageValue && (
         <Box
           sx={{
@@ -82,29 +79,20 @@ const Profile = () => {
           </Button>
         </Box>
       )}
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-        }}
-      >
-        <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              borderRadius: 1,
-              pl: 0,
-            }}
-          >
-            <UserDetails currentUser={localStorageValue} />
-          </Box>
-        </Container>
-      </Box>
-    </>
+      <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            borderRadius: 1,
+            pl: 0,
+          }}
+        >
+          <UserDetails currentUser={localStorageValue} />
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
