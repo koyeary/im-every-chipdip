@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useUser from "../../../hooks/useUser";
 import UserDetails from "./UserDetails";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Profile.css";
@@ -46,25 +48,28 @@ const Profile = () => {
   }, [navigate]);
 
   return (
-    <div
+    /*     <div
       style={{
-        /*         margin: "0 auto",
-        width: "100%", */
+                 margin: "0 auto",
+        width: "100%", 
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        /*         height: "100vh",
-        overflow: "auto", */
+                 height: "100vh",
+        overflow: "auto", 
       }}
-    >
+      
+    > */ <>
       {localStorageValue && (
-        <div
-          style={{
-            margin: "20px auto 50px auto",
-            width: "90%",
+        <Box
+          sx={{
+            width: "90vw",
+            mt: 3,
+            mb: 3,
+            mx: "auto",
+            justifyContent: "space-between",
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
           }}
         >
           <Button onClick={() => navigate("/")}>
@@ -75,11 +80,31 @@ const Profile = () => {
             <span style={{ paddingTop: 5 }}>Logout</span>
             <LogoutIcon sx={{ ml: 1 }} />
           </Button>
-        </div>
+        </Box>
       )}
-
-      <UserDetails currentUser={localStorageValue} />
-    </div>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+        }}
+      >
+        <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              borderRadius: 1,
+              pl: 0,
+            }}
+          >
+            <UserDetails currentUser={localStorageValue} />
+          </Box>
+        </Container>
+      </Box>
+    </>
   );
 };
 
