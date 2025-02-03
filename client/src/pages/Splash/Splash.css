@@ -111,7 +111,7 @@ h1 {
   line-height: 0.95;
   margin: 5px 2.5px;
   text-wrap: nowrap;
-  font-size: 5.5rem;
+  font-size: 5rem;
 }
 
 @media (min-width: 770px) and (max-width: 1200px) {
@@ -123,19 +123,19 @@ h1 {
 @media (min-width: 440px) and (max-width: 770px) {
   .header-div,
   #header-pm-div {
-    font-size: 3.25rem;
-  }
-}
-@media (min-width: 355px) and (max-width: 439px) {
-  .header-div,
-  #header-pm-div {
     font-size: 3rem;
   }
 }
-@media (max-width: 354px) {
+@media (min-width: 376px) and (max-width: 439px) {
   .header-div,
   #header-pm-div {
     font-size: 2.5rem;
+  }
+}
+@media (max-width: 375px) {
+  .header-div,
+  #header-pm-div {
+    font-size: 2rem;
   }
 }
 
@@ -163,12 +163,12 @@ h1 {
   border-bottom: 3px solid #22377a;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 770px) {
   .header-sub-div {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 769px) {
   .header-sub {
     flex-direction: column;
     margin: 40px auto;
@@ -176,5 +176,11 @@ h1 {
   .header-sub-div {
     font-size: 1.5rem;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 375px) {
+  .header-sub-div {
+    font-size: 1.25rem;
   }
 }
