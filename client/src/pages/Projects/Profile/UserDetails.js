@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { updateUserDetails, updatePassword } from "../../../utils/API";
 import useUser from "../../../hooks/useUser";
 
 import Alert from "@mui/material/Alert";
@@ -49,30 +48,29 @@ const UserDetails = () => {
   const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644", "#7366f0"];
 
   return (
-    <div
-      style={{
-        marginTop: -50,
-        width: "fit-content",
+    <Box
+      sx={{
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        justifyContent: "flex-start",
       }}
     >
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          margin: "auto",
-          justifyContent: "center",
-          gap: 20,
-          height: "100vh",
-        }}
-      >
-        {!edit ? (
-          <Box sx={{ minWidth: 275 }}>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            borderRadius: 1,
+            pr: 2,
+          }}
+        >
+          {!edit ? (
+            /*         <Box sx={{ minWidth: 275, mt: 5, mx: "auto", width: "90%" }}> */
             <Card
               variant="outlined"
+              mx="auto"
               sx={{
                 padding: 1,
                 borderRadius: 2,
@@ -162,27 +160,28 @@ const UserDetails = () => {
                 </Button>
               </CardActions>
             </Card>
-          </Box>
-        ) : (
-          <UserForm user={user} setEdit={setEdit} sendToast={sendToast} />
-        )}
+          ) : (
+            <UserForm user={user} setEdit={setEdit} sendToast={sendToast} />
+          )}
+          {/*     </Container> */}
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            open={show}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity={severity}
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              {msg}
+            </Alert>
+          </Snackbar>
+        </Box>
       </Container>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={show}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={severity}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {msg}
-        </Alert>
-      </Snackbar>
-    </div>
+    </Box>
   );
 };
 

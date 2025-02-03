@@ -2,7 +2,7 @@ import axios from "axios";
 
 import env from "react-dotenv";
 
-const formatData = (data) => {
+export const formatData = (data) => {
   const cLevel = data[1].level;
   const mLevel = data[2].level;
   const dLevel = data[3].level;
@@ -166,7 +166,7 @@ export const sendEmail = async (emailData, send, reset) => {
   }
 };
 
-export const getUserById = async (id, saveUser, finishLogin) => {
+export const getUserById = async (id, saveUser, sendToast) => {
   try {
     console.log("saving user details");
     console.log(id);
@@ -179,12 +179,11 @@ export const getUserById = async (id, saveUser, finishLogin) => {
     });
 
     console.log(res.data);
+    sendToast("User authenticated", "success");
 
-    if (finishLogin) {
-      finishLogin("User authenticated", "success", res.data);
-    }
     return saveUser(res.data);
   } catch (err) {
+    sendToast(err.message, "error");
     console.log(err.message);
   }
 };
@@ -203,7 +202,13 @@ export const deleteUser = async (email) => {
   }
 };
 
-export const createNewUser = async (name, email, password, callback) => {
+export const createNewUser = async (
+  name,
+  email,
+  password,
+  saveUser,
+  sendToast
+) => {
   try {
     const res = await axios.post("http://localhost:3001/api/user/create", {
       headers: {
@@ -214,8 +219,9 @@ export const createNewUser = async (name, email, password, callback) => {
       email: email,
       password: password,
     });
-    callback(res.data);
+    sendToast("User created. You can now login to your account", "success");
   } catch (err) {
+    sendToast(err.message, "error");
     console.log(err);
   }
 };
@@ -256,8 +262,8 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
       title: title,
     });
 
-    sendToast("User details updated", "success");
     saveUser(res.data);
+    sendToast("User details updated", "success");
   } catch (err) {
     sendToast(err.message, "error");
     console.log(err.message);
@@ -278,7 +284,7 @@ export const authenticateUser = async (
   email,
   password,
   saveUser,
-  finishLogin
+  sendToast
 ) => {
   try {
     const res = await axios.post("http://localhost:3001/api/auth", {
@@ -289,12 +295,14 @@ export const authenticateUser = async (
       password: password,
     });
 
+    console.log(res.data);
     setAuthToken(res.data.token);
 
     const user = localStorage.setItem("user", JSON.stringify(res.data));
     saveUser(user);
     console.log(user);
-    return getUserById(res.data.id, saveUser, finishLogin);
+
+    return getUserById(res.data.id, saveUser, sendToast);
   } catch (err) {
     console.log(err.message);
   }

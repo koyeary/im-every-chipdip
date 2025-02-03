@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 
 import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import {
@@ -12,20 +11,9 @@ import {
   ListItemText,
   Link,
 } from "@mui/material";
-import Divider from "@mui/material/Divider";
 
-const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
+const UserProfile = ({ colors, icons, fields, setEdit }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-
-  const handleCancel = (e) => {
-    e.preventDefault();
-
-    setEdit(false);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("User details updated");
-  };
 
   const findInAndAfter = (str) => {
     const index = str.indexOf("/in/");
@@ -109,17 +97,6 @@ const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
           </Fragment>
         ))}
       </List>
-      {/*       {edit && (
-        <div style={{ margin: "auto", width: "fit-content" }}>
-          <Divider variant="inset" component="li" />
-          <Button type="submit" variant="contained" onClick={handleSubmit}>
-            Save
-          </Button>
-          <Button onClick={handleCancel} type="submit" variant="contained">
-            Cancel
-          </Button>
-        </div>
-      )} */}
     </Box>
   );
 };

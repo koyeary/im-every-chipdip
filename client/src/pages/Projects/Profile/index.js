@@ -48,19 +48,19 @@ const Profile = () => {
   return (
     <div
       style={{
-        margin: "0 auto",
-        width: "100%",
+        /*         margin: "0 auto",
+        width: "100%", */
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "100vh",
-        overflow: "auto",
+        /*         height: "100vh",
+        overflow: "auto", */
       }}
     >
       {localStorageValue && (
         <div
           style={{
-            margin: "20px auto",
+            margin: "20px auto 50px auto",
             width: "90%",
             display: "flex",
             flexDirection: "row",
