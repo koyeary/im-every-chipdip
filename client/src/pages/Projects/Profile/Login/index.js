@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { createNewUser, authenticateUser } from "../../../../utils/API";
 
 //Hooks
-import { useFormControl } from "@mui/material/FormControl";
 import useUser from "../../../../hooks/useUser";
 
 //Material UI
+import Alert from "@mui/material/Alert";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
@@ -16,6 +16,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 
 //Icons
@@ -35,21 +36,25 @@ const Login = () => {
     password: "",
     rePassword: "",
   });
+  const [alert, setAlert] = useState({
+    severity: "",
+    msg: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [show, setShow] = useState(false);
 
   const { name, email, password, rePassword } = formData;
   const { user, saveUser } = useUser();
   let navigate = useNavigate();
 
-  const finishLogin = () => {
-    console.log("FinishLogin");
-    /*     if (status === "success") {
-      console.log("User authenticated - redirecting to profile");
+  const { severity, msg } = alert;
 
-      navigate("/profile");
-    } else {
-      console.error("FinishLogin" + status + message);
-    } */
+  const handleClose = () => {
+    setShow(false);
+  };
+  const sendToast = (msg, severity) => {
+    setAlert({ severity, msg });
+    setShow(true);
   };
 
   const handleSubmit = (e) => {
@@ -59,10 +64,12 @@ const Login = () => {
       if (password !== rePassword) {
         console.log("Passwords do not match");
       } else {
-        createNewUser(name, email, password, saveUser);
+        createNewUser(name, email, password, saveUser, sendToast).then(() => {
+          setCreateUser(false);
+        });
       }
     } else {
-      authenticateUser(email, password, saveUser, finishLogin).then(() => {
+      authenticateUser(email, password, saveUser, sendToast).then(() => {
         navigate("/profile");
       });
       console.log(user);
@@ -84,23 +91,6 @@ const Login = () => {
       ? "success"
       : "error";
 
-  const MyFormHelperText = () => {
-    const { focused } = useFormControl() || {};
-
-    const helperText = useMemo(() => {
-      if (focused) {
-        return checkPasswordMatch === "error"
-          ? "Passwords do not match"
-          : checkPasswordMatch === "success"
-          ? "Passwords match"
-          : "";
-      }
-      return "";
-    }, [focused]);
-
-    return <FormHelperText>{helperText}</FormHelperText>;
-  };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -112,7 +102,8 @@ const Login = () => {
   }, []);
 
   return (
-    <div
+    <>
+      {/*   <div
       style={{
         width: "fit-content",
         display: "flex",
@@ -126,131 +117,161 @@ const Login = () => {
       <Button onClick={() => navigate("/")}>
         <HomeIcon sx={{ mr: 1 }} />
         <span style={{ paddingTop: 5 }}>Home</span>
-      </Button>
-      <Container
-        maxWidth="lg"
+      </Button> */}
+      <Box
         sx={{
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          margin: "auto",
-          justifyContent: "center",
+          justifyContent: "flex-start",
         }}
       >
-        <Box sx={{ minWidth: 275, justifyContent: "center", gap: 20 }}>
-          <Card
-            variant="outlined"
+        <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
+          <Box
             sx={{
-              padding: 1,
-              borderRadius: 2,
-              width: 450,
-              maxWidth: "90vw",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              borderRadius: 1,
+              pl: 0,
             }}
           >
-            <CardHeader title={createUser ? "Create Profile" : "Login"} />
+            <Box maxWidth="sm" sx={{ minWidth: 360, mt: 3, mb: 3, mx: 0 }}>
+              <Button onClick={() => navigate("/")}>
+                <HomeIcon sx={{ mr: 1 }} />
+                <span style={{ paddingTop: 5 }}>Home</span>
+              </Button>
+            </Box>
+            <Card
+              maxWidth="xs"
+              variant="outlined"
+              sx={{
+                p: 1,
+                borderRadius: 2,
+                width: "100%",
+              }}
+            >
+              <CardHeader title={createUser ? "Create Profile" : "Login"} />
 
-            <form className="profile-form" onSubmit={handleSubmit}>
-              {createUser && (
+              <form className="profile-form" onSubmit={handleSubmit}>
+                {createUser && (
+                  <TextField
+                    sx={{ backgroundColor: "#FFF", width: "100%" }}
+                    label="Name"
+                    color="secondary"
+                    name="name"
+                    placeholder="Name"
+                    value={name}
+                    dense
+                    onChange={handleChange}
+                    size="small"
+                    required
+                    margin="dense"
+                  />
+                )}
                 <TextField
                   sx={{ backgroundColor: "#FFF", width: "100%" }}
-                  label="Name"
+                  label="Email"
                   color="secondary"
-                  name="name"
-                  placeholder="Name"
-                  value={name}
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Email"
                   dense
                   onChange={handleChange}
-                  size="small"
                   required
+                  size="small"
                   margin="dense"
                 />
-              )}
-              <TextField
-                sx={{ backgroundColor: "#FFF", width: "100%" }}
-                label="Email"
-                color="secondary"
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Email"
-                dense
-                onChange={handleChange}
-                required
-                size="small"
-                margin="dense"
-              />
-              <FormControl
-                sx={{ width: "100%" }}
-                size="small"
-                margin="dense"
-                label="password"
-                required
-              >
-                <InputLabel
-                  sx={{ backgroundColor: "#FFF" }}
-                  color="secondary"
-                  htmlFor="password"
+                <FormControl
+                  sx={{ width: "100%" }}
+                  size="small"
+                  margin="dense"
+                  label="password"
+                  required
                 >
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  color="secondary"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label={
-                          showPassword
-                            ? "hide the password"
-                            : "display the password"
-                        }
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-              {createUser && (
-                <TextField
-                  size="small"
-                  margin="dense"
-                  sx={{ backgroundColor: "#FFF", width: "100%" }}
-                  type={showPassword ? "text" : "password"}
-                  label="Re-enter New Password"
-                  color={checkPasswordMatch}
-                  helperText={
-                    checkPasswordMatch === "error"
-                      ? "Passwords do not match"
-                      : checkPasswordMatch === "success"
-                      ? "Passwords match"
-                      : ""
-                  }
-                  name="rePassword"
-                  value={rePassword}
-                  onChange={handleChange}
-                  required
-                />
-              )}
-              <Button type="submit" variant="contained" /* fullWidth */>
-                Submit
-              </Button>
-              <Button
-                onClick={() => setCreateUser(!createUser)}
-                /* fullWidth */
-                variant="text"
-              >
-                {createUser ? "Go to Login" : "Go to Create Profile"}
-              </Button>
-            </form>
-          </Card>
-        </Box>
-      </Container>
-    </div>
+                  <InputLabel
+                    sx={{ backgroundColor: "#FFF" }}
+                    color="secondary"
+                    htmlFor="password"
+                  >
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    color="secondary"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={
+                            showPassword
+                              ? "hide the password"
+                              : "display the password"
+                          }
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                {createUser && (
+                  <TextField
+                    size="small"
+                    margin="dense"
+                    sx={{ backgroundColor: "#FFF", width: "100%" }}
+                    type={showPassword ? "text" : "password"}
+                    label="Re-enter Password"
+                    color={checkPasswordMatch}
+                    helperText={
+                      checkPasswordMatch === "error"
+                        ? "Passwords do not match"
+                        : checkPasswordMatch === "success"
+                        ? "Passwords match"
+                        : ""
+                    }
+                    name="rePassword"
+                    value={rePassword}
+                    onChange={handleChange}
+                    required
+                  />
+                )}
+                <Button type="submit" variant="contained" fullWidth>
+                  Submit
+                </Button>
+                <Button
+                  onClick={() => setCreateUser(!createUser)}
+                  fullWidth
+                  variant="text"
+                >
+                  {createUser ? "Go to Login" : "Go to Create Profile"}
+                </Button>
+              </form>
+            </Card>
+          </Box>
+        </Container>
+      </Box>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={show}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {msg}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
