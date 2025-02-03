@@ -23,7 +23,7 @@ export const formatData = (data) => {
 
 export const getOrgChart = async (callback) => {
   try {
-    const res = await axios.get("http://localhost:3001/api/team");
+    const res = await axios.get("/api/team");
     console.log(res.data);
     callback(res.data.data);
   } catch (err) {
@@ -33,7 +33,7 @@ export const getOrgChart = async (callback) => {
 
 export const getUser = async () => {
   try {
-    const res = await axios.get("http://localhost:3001/api/user");
+    const res = await axios.get("/api/user");
     console.log(res.data);
   } catch (err) {
     console.log(err.message);
@@ -42,7 +42,7 @@ export const getUser = async () => {
 
 export const getUserPortfolio = async (userId) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/finance", {
+    const res = await axios.post("/api/finance", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -56,7 +56,7 @@ export const getUserPortfolio = async (userId) => {
 
 export const getAllTickers = async () => {
   try {
-    const res = await axios.get("http://localhost:3001/api/finance/all", {
+    const res = await axios.get("/api/finance/all", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -69,7 +69,7 @@ export const getAllTickers = async () => {
 
 export const getStockData = async (tickers, setPerformance) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/finance/", {
+    const res = await axios.post("/api/finance/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -89,12 +89,9 @@ export const getStockData = async (tickers, setPerformance) => {
 
 export const getUserForex = async (currencies, setForexData) => {
   try {
-    const update = await axios.post(
-      "http://localhost:3001/api/finance/forex/user",
-      {
-        currencies: currencies,
-      }
-    );
+    const update = await axios.post("/api/finance/forex/user", {
+      currencies: currencies,
+    });
     console.log(update);
     setForexData(update);
   } catch (err) {
@@ -104,7 +101,7 @@ export const getUserForex = async (currencies, setForexData) => {
 
 export const getForexData = async (currencies, callback) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/finance/forex", {
+    const res = await axios.post("/api/finance/forex", {
       currencies: currencies,
     });
     const rates = res;
@@ -116,7 +113,7 @@ export const getForexData = async (currencies, callback) => {
 
 export const getUserId = async (email) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/user", {
+    const res = await axios.post("/api/user", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -170,7 +167,7 @@ export const getUserById = async (id, saveUser, sendToast) => {
   try {
     console.log("saving user details");
     console.log(id);
-    const res = await axios.post("http://localhost:3001/api/user/details", {
+    const res = await axios.post("/api/user/details", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -190,7 +187,7 @@ export const getUserById = async (id, saveUser, sendToast) => {
 
 export const deleteUser = async (email) => {
   try {
-    const res = await axios.delete("http://localhost:3001/api/user/delete", {
+    const res = await axios.delete("/api/user/delete", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -210,7 +207,7 @@ export const createNewUser = async (
   sendToast
 ) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/user/create", {
+    const res = await axios.post("/api/user/create", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -228,7 +225,7 @@ export const createNewUser = async (
 
 export const updatePassword = async (newPassword, email, token) => {
   try {
-    const res = await axios.put("http://localhost:3001/api/user/update/np", {
+    const res = await axios.put("/api/user/update/np", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -247,7 +244,7 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
   const { name, email, github, linkedIn, pronouns, site, title } = formData;
 
   try {
-    const res = await axios.put("http://localhost:3001/api/user/update", {
+    const res = await axios.put("/api/user/update", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -287,7 +284,7 @@ export const authenticateUser = async (
   sendToast
 ) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/auth", {
+    const res = await axios.post("/api/auth", {
       headers: {
         "Content-Type": "application/json",
       },
