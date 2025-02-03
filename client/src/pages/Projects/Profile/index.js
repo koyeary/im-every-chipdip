@@ -63,7 +63,7 @@ const Profile = () => {
       {localStorageValue && (
         <Box
           sx={{
-            width: "90vw",
+            width: "92vw",
             mt: 3,
             mb: 3,
             mx: "auto",

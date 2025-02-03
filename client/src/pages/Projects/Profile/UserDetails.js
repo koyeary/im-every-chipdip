@@ -49,26 +49,7 @@ const UserDetails = () => {
 
   return (
     <>
-      {/* Box
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-      }}
-    >
-      <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            borderRadius: 1,
-            pl: 0,
-          }}>
-         */}
       {!edit ? (
-        /*         <Box sx={{ minWidth: 275, mt: 5, mx: "auto", width: "90%" }}> */
         <Card
           maxWidth="xs"
           variant="outlined"
@@ -159,9 +140,14 @@ const UserDetails = () => {
           </CardActions>
         </Card>
       ) : (
-        <UserForm user={user} setEdit={setEdit} sendToast={sendToast} />
+        <UserForm
+          user={user}
+          setEdit={setEdit}
+          sendToast={sendToast}
+          setShow={setShow}
+        />
       )}
-      {/*     </Container> */}
+
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={show}
@@ -177,9 +163,6 @@ const UserDetails = () => {
           {msg}
         </Alert>
       </Snackbar>
-      {/*      </Box>
-      </Container>
-    </Box > */}
     </>
   );
 };
