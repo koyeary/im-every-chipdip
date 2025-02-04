@@ -3,12 +3,10 @@ import useUser from "../../../hooks/useUser";
 
 import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
@@ -65,14 +63,14 @@ const UserDetails = () => {
               component="div"
               sx={{ display: "flex", flexDirection: "row" }}
             >
-              <Avatar alt={currentUser.name} src={Img} sx={{ mx: 1 }} />
+              <Avatar alt={currentUser?.name} src={Img} sx={{ mx: 1 }} />
               <span style={{ alignSelf: "flex-end" }}>{currentUser.name}</span>
             </Typography>
             <Typography sx={{ color: "text.secondary", mt: 1.5, mx: 1 }}>
-              {currentUser.pronouns ? currentUser.pronouns : ""}
+              {currentUser?.pronouns ? currentUser.pronouns : ""}
             </Typography>
             <Typography sx={{ color: "text.secondary", mb: 1.5, mx: 1 }}>
-              {currentUser.title ? currentUser.title : "Title"}
+              {currentUser?.title ? currentUser.title : "Title"}
             </Typography>
             <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
               <div
@@ -96,8 +94,8 @@ const UserDetails = () => {
               >
                 <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser.linkedIn
-                    ? currentUser.linkedIn.replace("https://www.", "")
+                  {currentUser?.linkedIn
+                    ? currentUser?.linkedIn.replace("https://www.", "")
                     : "LinkedIn"}{" "}
                 </div>
               </div>
@@ -111,8 +109,8 @@ const UserDetails = () => {
               >
                 <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser.github
-                    ? currentUser.github.replace("https://www.", "")
+                  {currentUser?.github
+                    ? currentUser?.github.replace("https://www.", "")
                     : "GitHub"}
                 </div>
               </div>
@@ -126,8 +124,8 @@ const UserDetails = () => {
               >
                 <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser.site
-                    ? currentUser.site.replace("https://www.", "")
+                  {currentUser?.site
+                    ? currentUser?.site.replace("https://www.", "")
                     : "Website"}
                 </div>
               </div>

@@ -13,7 +13,7 @@ import useTheme from "@mui/material/styles/useTheme";
 
 const invoiceId = "123456";
 const clientId = "client@theircompany.com";
-const Payment = (/* { clientId } */) => {
+const Payment = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

@@ -42,7 +42,7 @@ const Profile = () => {
     if (user._id) {
       console.log("User is logged in");
     }
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") || !localStorage.getItem("user")) {
       navigate("/login");
     }
   }, [navigate]);
