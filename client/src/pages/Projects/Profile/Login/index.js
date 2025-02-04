@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { createNewUser, authenticateUser } from "../../../../utils/API";
+import {
+  createNewUser,
+  authenticateUser,
+  getUserById,
+} from "../../../../utils/API";
 
 //Hooks
 import useUser from "../../../../hooks/useUser";
@@ -44,7 +48,7 @@ const Login = () => {
   const [show, setShow] = useState(false);
 
   const { name, email, password, rePassword } = formData;
-  const { user, saveUser } = useUser();
+  const { saveUser } = useUser();
   let navigate = useNavigate();
 
   const { severity, msg } = alert;
@@ -69,10 +73,10 @@ const Login = () => {
         });
       }
     } else {
+      console.log("Login");
       authenticateUser(email, password, saveUser, sendToast).then(() => {
         navigate("/profile");
       });
-      console.log(user);
     }
   };
 
@@ -90,16 +94,6 @@ const Login = () => {
       : password === rePassword
       ? "success"
       : "error";
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/profile");
-    }
-    () => {
-      console.log("Login page unmounted");
-    };
-  }, []);
 
   return (
     <>

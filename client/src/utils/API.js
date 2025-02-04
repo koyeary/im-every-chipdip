@@ -21,9 +21,16 @@ export const formatData = (data) => {
   const locations = [77449, 190542, 34364, 93132];
 };
 
+const api = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export const getOrgChart = async (callback) => {
   try {
-    const res = await axios.get("/api/team");
+    const res = await api.get("/team");
     console.log(res.data);
     callback(res.data.data);
   } catch (err) {
@@ -33,7 +40,7 @@ export const getOrgChart = async (callback) => {
 
 export const getUser = async () => {
   try {
-    const res = await axios.get("/api/user");
+    const res = await api.get("/user");
     console.log(res.data);
   } catch (err) {
     console.log(err.message);
@@ -42,7 +49,7 @@ export const getUser = async () => {
 
 export const getUserPortfolio = async (userId) => {
   try {
-    const res = await axios.post("/api/finance", {
+    const res = await api.post("/finance", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -56,7 +63,7 @@ export const getUserPortfolio = async (userId) => {
 
 export const getAllTickers = async () => {
   try {
-    const res = await axios.get("/api/finance/all", {
+    const res = await api.get("/finance/all", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -69,7 +76,7 @@ export const getAllTickers = async () => {
 
 export const getStockData = async (tickers, setPerformance) => {
   try {
-    const res = await axios.post("/api/finance/", {
+    const res = await api.post("/finance/", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -89,7 +96,7 @@ export const getStockData = async (tickers, setPerformance) => {
 
 export const getUserForex = async (currencies, setForexData) => {
   try {
-    const update = await axios.post("/api/finance/forex/user", {
+    const update = await api.post("/finance/forex/user", {
       currencies: currencies,
     });
     console.log(update);
@@ -101,7 +108,7 @@ export const getUserForex = async (currencies, setForexData) => {
 
 export const getForexData = async (currencies, callback) => {
   try {
-    const res = await axios.post("/api/finance/forex", {
+    const res = await api.post("/finance/forex", {
       currencies: currencies,
     });
     const rates = res;
@@ -113,7 +120,7 @@ export const getForexData = async (currencies, callback) => {
 
 export const getUserId = async (email) => {
   try {
-    const res = await axios.post("/api/user", {
+    const res = await api.post("/user", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -146,7 +153,7 @@ export const sendEmail = async (emailData, send, reset) => {
   }
 
   try {
-    const res = await axios.post(
+    const res = await api.post(
       "https://api.emailjs.com/api/v1.0/email/send",
       data
     );
@@ -163,11 +170,11 @@ export const sendEmail = async (emailData, send, reset) => {
   }
 };
 
-export const getUserById = async (id, saveUser, sendToast) => {
+export const getUserById = async (id, saveUser, sendToast, navigate) => {
   try {
     console.log("saving user details");
     console.log(id);
-    const res = await axios.post("/api/user/details", {
+    const res = await api.post("/user/details", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -178,6 +185,7 @@ export const getUserById = async (id, saveUser, sendToast) => {
     console.log(res.data);
     sendToast("User authenticated", "success");
 
+    navigate("/profile");
     return saveUser(res.data);
   } catch (err) {
     sendToast(err.message, "error");
@@ -187,7 +195,7 @@ export const getUserById = async (id, saveUser, sendToast) => {
 
 export const deleteUser = async (email) => {
   try {
-    const res = await axios.delete("/api/user/delete", {
+    const res = await api.delete("/user/delete", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -207,7 +215,7 @@ export const createNewUser = async (
   sendToast
 ) => {
   try {
-    const res = await axios.post("/api/user/create", {
+    const res = await api.post("/user/create", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -225,7 +233,7 @@ export const createNewUser = async (
 
 export const updatePassword = async (newPassword, email, token) => {
   try {
-    const res = await axios.put("/api/user/update/np", {
+    const res = await api.put("/user/update/np", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -244,7 +252,7 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
   const { name, email, github, linkedIn, pronouns, site, title } = formData;
 
   try {
-    const res = await axios.put("/api/user/update", {
+    const res = await api.put("/user/update", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
@@ -267,12 +275,17 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
   }
 };
 
-export const setAuthToken = (token) => {
+export const setAuthToken = (token, user, saveUser) => {
+  if (user) {
+    //localStorage.setItem("user", JSON.stringify(user));
+    saveUser(user);
+  }
+
   if (token) {
-    axios.defaults.headers.common["x-auth-token"] = token;
+    api.defaults.headers.common["x-auth-token"] = token;
     localStorage.setItem("token", token);
   } else {
-    delete axios.defaults.headers.common["x-auth-token"];
+    delete api.defaults.headers.common["x-auth-token"];
     localStorage.removeItem("token");
   }
 };
@@ -284,23 +297,15 @@ export const authenticateUser = async (
   sendToast
 ) => {
   try {
-    const res = await axios.post("/api/auth", {
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const res = await api.post("/auth", {
       email: email,
       password: password,
     });
 
-    console.log(res.data);
-    setAuthToken(res.data.token);
-
-    const user = localStorage.setItem("user", JSON.stringify(res.data));
-    saveUser(user);
-    console.log(user);
-
-    return getUserById(res.data.id, saveUser, sendToast);
+    setAuthToken(res.data.token, res.data.user, saveUser);
+    sendToast("User authenticated", "success");
   } catch (err) {
+    sendToast(err.message, "error");
     console.log(err.message);
   }
 };
@@ -309,6 +314,6 @@ export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   //localStorage.removeItem("current");
-  delete axios.defaults.headers.common["x-auth-token"];
+  delete api.defaults.headers.common["x-auth-token"];
   console.log("User logged out and token removed from localStorage");
 };

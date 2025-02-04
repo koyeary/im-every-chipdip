@@ -33,10 +33,13 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    console.log("User auth started");
     const { email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
+      console.log(41);
+      console.log(user);
 
       if (!user) {
         return res
@@ -44,7 +47,7 @@ router.post(
           .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = bcrypt.compare(password, user.password);
 
       if (!isMatch) {
         return res
@@ -53,9 +56,7 @@ router.post(
       }
 
       const payload = {
-        user: {
-          id: user.id,
-        },
+        user: user,
       };
 
       jwt.sign(
@@ -64,10 +65,7 @@ router.post(
         { expiresIn: "5 days" },
         (err, token) => {
           if (err) throw err;
-          res.json({
-            token: token,
-            id: user.id,
-          });
+          res.status(200).json({ token, user });
         }
       );
     } catch (err) {

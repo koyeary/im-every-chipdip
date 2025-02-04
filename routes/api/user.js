@@ -12,7 +12,8 @@ const User = require("../../models/User");
 
 router.post("/details", async (req, res) => {
   const { id } = req.body;
-  console.log("hit the back" + id);
+  console.log(id);
+  console.log(req.body);
   try {
     const user = await User.findById(id);
 
@@ -40,7 +41,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
+    console.log("hit the back");
     const { name, email, password } = req.body;
 
     try {
@@ -59,9 +60,8 @@ router.post(
         name,
         email,
         password: hashedPassword,
-        github: "",
-        linkedIn: "",
-        activeInvoice: "",
+        github,
+        linkedIn,
         created: Date.now(),
       });
 
