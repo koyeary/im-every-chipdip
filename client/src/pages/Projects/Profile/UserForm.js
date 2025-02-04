@@ -61,7 +61,7 @@ const UserForm = ({ setEdit, sendToast }) => {
           <TextField
             variant="outlined"
             autoComplete="on"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="Name"
             color="secondary"
@@ -75,7 +75,7 @@ const UserForm = ({ setEdit, sendToast }) => {
           />
           <TextField
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="Pronouns"
             color="secondary"
@@ -88,7 +88,7 @@ const UserForm = ({ setEdit, sendToast }) => {
           />
           <TextField
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="Title"
             color="secondary"
@@ -103,7 +103,7 @@ const UserForm = ({ setEdit, sendToast }) => {
           <TextField
             autoComplete="on"
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="Email"
             color="secondary"
@@ -118,7 +118,7 @@ const UserForm = ({ setEdit, sendToast }) => {
 
           <TextField
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="LinkedIn"
             color="secondary"
@@ -132,7 +132,7 @@ const UserForm = ({ setEdit, sendToast }) => {
 
           <TextField
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="GitHub"
             color="secondary"
@@ -146,7 +146,7 @@ const UserForm = ({ setEdit, sendToast }) => {
 
           <TextField
             variant="outlined"
-            /* margin="dense" */
+            margin="dense"
             size="small"
             label="Website address"
             color="secondary"
