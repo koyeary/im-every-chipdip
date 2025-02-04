@@ -60,8 +60,11 @@ router.post(
         name,
         email,
         password: hashedPassword,
-        github,
-        linkedIn,
+        github: "",
+        linkedIn: "",
+        site: "",
+        pronouns: "",
+        title: "",
         created: Date.now(),
       });
 
