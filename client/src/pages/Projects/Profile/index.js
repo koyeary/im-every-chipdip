@@ -55,15 +55,18 @@ const Profile = () => {
         flexDirection: "column",
         justifyContent: "flex-start",
         overflow: "auto",
+        pr: 2,
+        pt: 2,
       }}
     >
       {localStorageValue && (
         <Box
           sx={{
             width: "92vw",
-            mt: 3,
+            mt: 5,
             mb: 3,
             mx: "auto",
+
             justifyContent: "space-between",
             display: "flex",
             flexDirection: "row",
@@ -79,7 +82,18 @@ const Profile = () => {
           </Button>
         </Box>
       )}
-      <Container component="main" maxWidth="xs" sx={{ mt: 5, pr: 6 }}>
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          /*   mt: 5, */
+          pr: 6,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          height: "100%",
+        }}
+      >
         <Box
           sx={{
             display: "flex",

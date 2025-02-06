@@ -5,7 +5,6 @@ const financeRoutes = require("./finance");
 const userRoutes = require("./user");
 const teamRoutes = require("./team");
 //const docsRoutes = require("./docs");
-// Contact routes
 
 router.use("/auth", authRoutes);
 router.use("/contact", contactRoutes);
