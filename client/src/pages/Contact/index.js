@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
@@ -56,7 +57,7 @@ const Contact = ({ darkMode }) => {
   };
 
   return (
-    <div
+    <Box
       style={{
         margin: "40px auto 0 auto",
         minHeight: "fit-content",
@@ -149,7 +150,7 @@ const Contact = ({ darkMode }) => {
           {msg}
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   );
 };
 
