@@ -53,6 +53,7 @@ const UserDetails = () => {
           variant="outlined"
           sx={{
             p: 1,
+            my: 5,
             borderRadius: 2,
             width: "100%",
           }}

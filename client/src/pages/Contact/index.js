@@ -15,11 +15,11 @@ const Contact = ({ darkMode }) => {
 
   const [emailData, setEmailData] = useState({
     name: "",
-    email: "",
+    from: "",
     subject: "",
-    message: "",
+    text: "",
   });
-  const { name, email, subject, message } = emailData;
+  const { name, from, subject, text } = emailData;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -35,9 +35,9 @@ const Contact = ({ darkMode }) => {
     if (severity === "success") {
       setEmailData({
         name: "",
-        email: "",
+        from: "",
         subject: "",
-        message: "",
+        text: "",
       });
     } else return;
   };
@@ -81,11 +81,9 @@ const Contact = ({ darkMode }) => {
           justifyContent: "center",
         }}
       >
-        <>
-          <div className="header-wrap">
-            <h1 className="contact-header">Send me a message.</h1>
-          </div>
-        </>
+        <div className="header-wrap">
+          <h1 className="contact-header">Send me a message.</h1>
+        </div>
 
         <>
           <TextField
@@ -99,10 +97,10 @@ const Contact = ({ darkMode }) => {
           />
           <TextField
             onChange={handleChange}
-            name="email"
+            name="from"
             id="outlined-basic"
             label="Your Email"
-            value={email}
+            value={from}
             type="email"
             required
           />
@@ -117,12 +115,12 @@ const Contact = ({ darkMode }) => {
           />
           <TextField
             onChange={handleChange}
-            name="message"
+            name="text"
             id="outlined-basic"
-            label="Message"
+            label="text"
             multiline
             rows={10}
-            value={message}
+            value={text}
             type="text"
             required
           />
