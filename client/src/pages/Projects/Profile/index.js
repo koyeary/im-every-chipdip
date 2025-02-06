@@ -86,7 +86,6 @@ const Profile = () => {
         component="main"
         maxWidth="xs"
         sx={{
-          /*   mt: 5, */
           pr: 6,
           display: "flex",
           flexDirection: "column",

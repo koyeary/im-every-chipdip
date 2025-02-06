@@ -134,12 +134,6 @@ export const getUserId = async (email) => {
 
 export const sendEmail = async (emailData, sendToast, reset) => {
   const { name, from, subject, text } = emailData;
-  const data = {
-    name,
-    from,
-    subject,
-    text,
-  };
 
   let regEmail =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -147,25 +141,31 @@ export const sendEmail = async (emailData, sendToast, reset) => {
     return sendToast("Invalid Email Address", "error");
   }
 
+  const data = {
+    service_id: "gmail",
+    template_id: "portfolio",
+    user_id: env.EJS_PUBLIC_KEY,
+    template_params: {
+      name: name,
+      email: from,
+      subject: subject,
+      message: text,
+      reply_to: from,
+    },
+    accessToken: env.EJS_PRIVATE_KEY,
+  };
+
   try {
     const res = await api.post(
-      "/api/contact",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-      { name, from, subject, text }
+      "https://api.emailjs.com/api/v1.0/email/send",
+      data
     );
 
-    if (res) {
-      console.log(res);
-      sendToast("Your message has been sent.", "success");
-      reset("success");
-    }
+    console.log(res);
+    sendToast("Your message has been sent.", "success");
+    return reset("success");
   } catch (err) {
-    console.log(err);
-    sendToast(err.message, "error");
+    sendToast(`Something went wrong. ${err.message}`, "error");
   }
 };
 
