@@ -26,4 +26,15 @@ router.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+router.delete("/delete", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    User.deleteOne({ _id: userId });
+    return res.send("File successfully deleted");
+  } catch (error) {
+    console.log(error);
+    return res.send("Error deleting file: " + error);
+  }
+});
+
 module.exports = router;
