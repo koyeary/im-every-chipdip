@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const User = require("../../models/User");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -14,8 +15,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
+  const { file, userId } = req;
   try {
     console.log(req.file);
+    User.findByIdAndUpdate(userId, { $set: { profilePic: file.filename } });
     return res.send("File successfully uploaded");
   } catch (error) {
     console.log(error);
