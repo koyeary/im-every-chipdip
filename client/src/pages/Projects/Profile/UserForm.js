@@ -10,6 +10,8 @@ import Snackbar from "@mui/material/Snackbar";
 
 import Tooltip from "@mui/material/Tooltip";
 import { Card } from "@mui/material";
+import Profile from ".";
+import ProfilePic from "./ProfilePic";
 
 const UserForm = ({ setEdit, sendToast }) => {
   const current = JSON.parse(localStorage.getItem("user"));
@@ -199,6 +201,7 @@ const UserForm = ({ setEdit, sendToast }) => {
           </Button>
         </Tooltip>
       </Card>
+      <ProfilePic />
     </div>
   );
 };
