@@ -276,8 +276,12 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
 
 export const uploadProfilePic = async (file, user, saveUser) => {
   console.log(file);
+
+  const formData = new FormData();
+  formData.append("image", file);
+  console.log(formData);
   try {
-    const res = await api.post("/pic/upload", file, {
+    const res = await api.post("/file", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "x-auth-token": localStorage.getItem("token"),

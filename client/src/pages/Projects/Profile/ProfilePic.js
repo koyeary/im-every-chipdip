@@ -4,36 +4,51 @@ import useUser from "../../../hooks/useUser";
 
 const ProfilePic = () => {
   const { user, saveUser } = useUser();
-  const [avatar, setAvatar] = useState("");
+  const [file, setFile] = useState();
 
-  const handleChange = (e) => {
-    console.log(e.target.file);
-    setAvatar(e.target.file);
+  const handleUpload = (e) => {
+    e.preventDefault();
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(avatar);
-    uploadProfilePic(avatar, user, saveUser);
+    console.log(file);
+    uploadProfilePic(file, user, saveUser);
   };
 
   return (
-    <form method="POST" action="/api/pic/upload" enctype="multipart/form-data">
+    <>
+      <h1>File Uploader</h1>
+      <input
+        type="file"
+        onChange={(e) => {
+          setFile(e.target.files[0]);
+          console.log(e.target.files[0]);
+        }}
+      />
+      <button onClick={() => uploadProfilePic(file, user, saveUser)}>
+        Upload File
+      </button>
+
+      {/*     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="file">Upload an avatar</label>
+        <label htmlFor="file">Upload a file</label>
         <input
+          onChange={handleUpload}
           type="file"
-          name="avatar"
-          id="avatar"
+          name="file"
+          id="file"
           accept="image/*"
-          /*   onChange={handleChange} */
         />
       </div>
 
       <div>
         <input type="submit" value="Upload" />
       </div>
-    </form>
+    </form> */}
+    </>
   );
 };
 
