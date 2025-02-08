@@ -164,10 +164,12 @@ const UserForm = ({ setEdit, sendToast }) => {
             placement="top"
             color="secondary"
           >
-            <Button disabled fullWidth sx={{ mt: 1, mx: "auto" }}>
-              <AddPhotoAlternateIcon />
-              Add Your Photo
-            </Button>
+            <span>
+              <Button disabled fullWidth sx={{ mt: 1, mx: "auto" }}>
+                <AddPhotoAlternateIcon />
+                Add Your Photo
+              </Button>
+            </span>
           </Tooltip>
 
           <ButtonGroup fullWidth sx={{ mt: 1, mx: "auto" }}>
@@ -190,15 +192,17 @@ const UserForm = ({ setEdit, sendToast }) => {
           placement="top"
           color="secondary"
         >
-          <Button
-            sx={{ my: 2, mx: "auto", borderRadius: 2 }}
-            fullWidth
-            variant="outlined"
-            disabled
-            onClick={() => setChangeMode(true)}
-          >
-            Change Password
-          </Button>
+          <span>
+            <Button
+              sx={{ my: 2, mx: "auto", borderRadius: 2 }}
+              fullWidth
+              variant="outlined"
+              disabled
+              onClick={() => setChangeMode(true)}
+            >
+              Change Password
+            </Button>
+          </span>
         </Tooltip>
       </Card>
       <ProfilePic />

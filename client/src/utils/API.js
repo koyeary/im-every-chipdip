@@ -274,6 +274,39 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
   }
 };
 
+export const uploadProfilePic = async (file, user, saveUser) => {
+  console.log(file);
+  try {
+    const res = await api.post("/pic/upload", file, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+        enctype: "multipart/form-data",
+      },
+    });
+
+    //saveUser({ filename: res.data});
+    console.log(res);
+    // console.log({ filename: res.data });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const deleteProfilePic = async (formData) => {
+  try {
+    const res = await api.post("/pic/delete", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(res.data);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const setAuthToken = (token, user, saveUser) => {
   if (user) {
     //localStorage.setItem("user", JSON.stringify(user));
