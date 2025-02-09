@@ -8,7 +8,6 @@ let storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    console.log(file);
     let extArray = file.mimetype.split("/");
     let extension = extArray[extArray.length - 1];
     cb(null, file.fieldname + "-" + Date.now() + "." + extension);
@@ -18,5 +17,9 @@ let storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/", upload.single("image"), fileController.fileUpload);
+
+router.get("/", async (req, res) => {
+  res.send("File route");
+});
 
 module.exports = router;

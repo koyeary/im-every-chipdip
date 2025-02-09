@@ -1,12 +1,15 @@
 const moment = require("moment");
+const User = require("../models/User");
 
 module.exports = {
-  fileUpload: (req, res) => {
-    console.log(req.file);
+  fileUpload: async (req, res) => {
+    req.body;
+    console.log("controller");
+    console.log(req.file.path);
     try {
       res.send({
         status: "success",
-        message: `${req.file.originalname} uploaded!`,
+        data: { filename: req.file.path },
       });
     } catch (err) {
       res.send({ status: "err", error: err });

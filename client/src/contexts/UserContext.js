@@ -11,6 +11,7 @@ const defaultUser = {
   github: "",
   linkedIn: "",
   site: "",
+  filename: "",
 };
 
 const extractUser = () => {

@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
   site: {
     type: String,
   },
-  profilePic: {
+  filename: {
     type: String,
   },
   activeInvoice: {
