@@ -63,12 +63,21 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  max-width: 90vw;
+  margin: 0 auto 0 auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
-
   width: 90%;
-
   margin: 0 auto 0 auto;
 }
 

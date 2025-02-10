@@ -306,21 +306,6 @@ export const uploadProfilePic = async (file, user, saveUser, close) => {
   }
 };
 
-export const getProfilePic = async (user) => {
-  try {
-    const res = await api.post("/pic", {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "x-auth-token": localStorage.getItem("token"),
-      },
-      data: user,
-    });
-    console.log(res.data);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
 export const deleteProfilePic = async (formData) => {
   try {
     const res = await api.post("/pic/delete", formData, {

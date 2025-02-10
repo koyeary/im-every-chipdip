@@ -9,6 +9,13 @@ import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Profile.css";
 
+/* test imports */
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+
 const Profile = () => {
   const [localStorageValue, setLocalStorageValue] = useState(
     localStorage.getItem("user")
@@ -57,6 +64,7 @@ const Profile = () => {
         overflow: "auto",
         pr: 2,
         pt: 2,
+        scrollbarWidth: "none",
       }}
     >
       {localStorageValue && (
@@ -84,22 +92,19 @@ const Profile = () => {
       )}
       <Container
         component="main"
-        maxWidth="xs"
+        maxWidth="sm"
         sx={{
-          pr: 6,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
-          height: "100%",
         }}
       >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
-            borderRadius: 1,
-            pl: 0,
+            maxHeight: 275,
+            width: "100%",
           }}
         >
           <UserDetails currentUser={localStorageValue} />

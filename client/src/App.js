@@ -14,7 +14,7 @@ import Login from "./pages/Projects/Profile/Login";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(true);
-  const { user } = useUser();
+  //const { user } = useUser();
 
   const spring = useSpring({
     to: { opacity: 1 },
@@ -23,10 +23,10 @@ const App = () => {
     config: config.slow,
   });
 
-  const handleDarkModeToggle = () => {
+  /*  const handleDarkModeToggle = () => {
     setDarkMode((prevMode) => !prevMode);
     setOpen(false);
-  };
+  }; */
 
   return (
     <>

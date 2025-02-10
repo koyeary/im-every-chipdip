@@ -72,152 +72,147 @@ const UserForm = ({ setEdit, sendToast }) => {
 
   return (
     <div className="profile-form">
-      <Card variant="outlined" sx={{ p: 2, maxWidth: "90vw" }}>
-        <form>
-          <TextField
-            variant="outlined"
-            autoComplete="on"
-            margin="dense"
-            size="small"
-            label="Name"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="Pronouns"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="pronouns"
-            name="pronouns"
-            value={pronouns}
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="Title"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={handleChange}
-          />
+      <Card raised sx={{ p: 2, mx: "auto" }}>
+        <TextField
+          variant="outlined"
+          autoComplete="on"
+          margin="dense"
+          size="small"
+          label="Name"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="name"
+          name="name"
+          value={name}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="Pronouns"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="pronouns"
+          name="pronouns"
+          value={pronouns}
+          onChange={handleChange}
+        />
+        <TextField
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="Title"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={handleChange}
+        />
 
-          <TextField
-            autoComplete="on"
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="Email"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            required
-          />
+        <TextField
+          autoComplete="on"
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="Email"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          disabled
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          required
+        />
 
-          <TextField
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="LinkedIn"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="linkedIn"
-            name="linkedIn"
-            value={linkedIn}
-            onChange={handleChange}
-          />
+        <TextField
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="LinkedIn"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="linkedIn"
+          name="linkedIn"
+          value={linkedIn}
+          onChange={handleChange}
+        />
 
-          <TextField
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="GitHub"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="github"
-            name="github"
-            value={github}
-            onChange={handleChange}
-          />
+        <TextField
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="GitHub"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="github"
+          name="github"
+          value={github}
+          onChange={handleChange}
+        />
 
-          <TextField
-            variant="outlined"
-            margin="dense"
-            size="small"
-            label="Website address"
-            color="secondary"
-            sx={{ backgroundColor: "#FFF", width: "100%" }}
-            type="text"
-            id="website"
-            name="site"
-            value={site}
-            onChange={handleChange}
-          />
+        <TextField
+          variant="outlined"
+          margin="dense"
+          size="small"
+          label="Website address"
+          color="secondary"
+          sx={{ backgroundColor: "#FFF", width: "100%" }}
+          type="text"
+          id="website"
+          name="site"
+          value={site}
+          onChange={handleChange}
+        />
 
-          {showUpload ? (
-            <ProfilePic close={(e) => setShowUpload(false)} />
-          ) : (
-            <>
-              <Button
-                variant="contained"
-                onClick={handleShowUpload}
-                fullWidth
-                sx={{ mt: 1, mx: "auto" }}
-              >
-                <AddPhotoAlternateIcon sx={{ mr: 1 }} />
-                Add Your Photo
+        {showUpload ? (
+          <ProfilePic close={(e) => setShowUpload(false)} />
+        ) : (
+          <>
+            <Button
+              variant="contained"
+              onClick={handleShowUpload}
+              fullWidth
+              sx={{ mt: 1, mx: "auto" }}
+            >
+              <AddPhotoAlternateIcon sx={{ mr: 1 }} />
+              Add Your Photo
+            </Button>
+            <Button
+              onClick={handlePickAvatar}
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 1, mx: "auto" }}
+            >
+              <CollectionsIcon sx={{ mr: 1 }} />
+              Pick from Library
+            </Button>
+
+            <ButtonGroup fullWidth sx={{ mt: 1, mx: "auto" }}>
+              <Button variant="contained" type="submit" onClick={handleSubmit}>
+                Save Changes
               </Button>
               <Button
-                onClick={handlePickAvatar}
-                fullWidth
-                variant="outlined"
-                sx={{ mt: 1, mx: "auto" }}
+                type="reset"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setEdit(false);
+                }}
               >
-                <CollectionsIcon sx={{ mr: 1 }} />
-                Pick from Library
+                Cancel
               </Button>
-
-              <ButtonGroup fullWidth sx={{ mt: 1, mx: "auto" }}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Save Changes
-                </Button>
-                <Button
-                  type="reset"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setEdit(false);
-                  }}
-                >
-                  Cancel
-                </Button>
-              </ButtonGroup>
-            </>
-          )}
-        </form>
+            </ButtonGroup>
+          </>
+        )}
       </Card>
       <Tooltip
         title="Coming soon!"

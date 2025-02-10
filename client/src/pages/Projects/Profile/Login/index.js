@@ -132,7 +132,7 @@ const Login = () => {
             >
               <CardHeader title={createUser ? "Create Profile" : "Login"} />
 
-              <form className="profile-form" onSubmit={handleSubmit}>
+              <form className="login-form" onSubmit={handleSubmit}>
                 {createUser && (
                   <TextField
                     sx={{ backgroundColor: "#FFF", width: "100%" }}

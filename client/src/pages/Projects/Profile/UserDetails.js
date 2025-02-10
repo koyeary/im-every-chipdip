@@ -3,10 +3,12 @@ import useUser from "../../../hooks/useUser";
 
 import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
@@ -15,7 +17,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import UserForm from "./UserForm";
 
 const UserDetails = () => {
@@ -43,96 +44,110 @@ const UserDetails = () => {
     setShow(true);
   };
 
+  const Img = `https://github.com/koyeary/im-every-chipdip/blob/user-details/${currentUser?.filename}?raw=true`;
   const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644", "#7366f0"];
 
   return (
     <>
       {!edit ? (
         <Card
-          maxWidth="xs"
-          variant="outlined"
+          raised={true}
           sx={{
-            p: 1,
-            my: 5,
-            borderRadius: 2,
-            width: "100%",
+            display: "flex",
           }}
         >
-          <CardContent>
-            <Typography
-              variant="h5"
-              component="div"
-              sx={{ display: "flex", flexDirection: "row" }}
+          <CardMedia
+            sx={{ width: "fit-content", height: "auto" }}
+            component="img"
+            image={Img}
+            alt={currentUser?.name}
+          />
+          <Box sx={{ display: "flex" }}>
+            <CardContent
+              sx={{
+                flex: "1 0 auto",
+                ml: 1,
+                height: "100%",
+                /*       minWidth: 275, */
+              }}
             >
-              <Avatar alt={currentUser?.name} src={Img} sx={{ mx: 1 }} />
-              <span style={{ alignSelf: "flex-end" }}>{currentUser.name}</span>
-            </Typography>
-            <Typography sx={{ color: "text.secondary", mt: 1.5, mx: 1 }}>
-              {currentUser?.pronouns ? currentUser.pronouns : ""}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", mb: 1.5, mx: 1 }}>
-              {currentUser?.title ? currentUser.title : "Title"}
-            </Typography>
-            <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 5,
-                  alignContent: "center",
-                }}
-              >
-                <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
-                <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
-              </div>{" "}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 5,
-                  alignContent: "center",
-                }}
-              >
-                <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
-                <div style={{ paddingTop: 4 }}>
-                  {currentUser?.linkedIn
-                    ? currentUser?.linkedIn.replace("https://www.", "")
-                    : "LinkedIn"}{" "}
+              <Typography variant="h5" component="div">
+                <span style={{ alignSelf: "flex-end" }}>
+                  {currentUser.name}
+                </span>
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                {currentUser?.title ? currentUser.title : "Title"}
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                {currentUser?.pronouns ? currentUser.pronouns : ""}
+              </Typography>
+              <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
+                  <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
+                </div>{" "}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
+                  <div style={{ paddingTop: 4 }}>
+                    {currentUser?.linkedIn
+                      ? currentUser?.linkedIn.replace("https://www.", "")
+                      : "LinkedIn"}{" "}
+                  </div>
                 </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 5,
-                  justifyContent: "left",
-                }}
-              >
-                <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
-                <div style={{ paddingTop: 4 }}>
-                  {currentUser?.github
-                    ? currentUser?.github.replace("https://www.", "")
-                    : "GitHub"}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    justifyContent: "left",
+                  }}
+                >
+                  <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
+                  <div style={{ paddingTop: 4 }}>
+                    {currentUser?.github
+                      ? currentUser?.github.replace("https://www.", "")
+                      : "GitHub"}
+                  </div>
                 </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 5,
-                  alignContent: "center",
-                }}
-              >
-                <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
-                <div style={{ paddingTop: 4 }}>
-                  {currentUser?.site
-                    ? currentUser?.site.replace("https://www.", "")
-                    : "Website"}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 5,
+                    alignContent: "center",
+                  }}
+                >
+                  <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
+                  <div style={{ paddingTop: 4 }}>
+                    {currentUser?.site
+                      ? currentUser?.site.replace("https://www.", "")
+                      : "Website"}
+                  </div>
                 </div>
-              </div>
-            </Typography>
-          </CardContent>
-          <CardActions>
+              </Typography>
+            </CardContent>
+          </Box>
+          <CardActions
+            sx={{
+              alignSelf: "flex-end",
+              ml: -2,
+            }}
+          >
             <Button size="small" variant="outlined" onClick={handleEdit}>
               Edit
             </Button>
