@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 
 import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
@@ -15,7 +18,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import UserForm from "./UserForm";
 
 const UserDetails = () => {
@@ -43,37 +45,45 @@ const UserDetails = () => {
     setShow(true);
   };
 
+  const Img = `https://github.com/koyeary/im-every-chipdip/blob/user-details/${currentUser?.filename}?raw=true`;
   const colors = ["#21387a", "#598cfa", "#4078c0", "#6cc644", "#7366f0"];
 
   return (
     <>
       {!edit ? (
         <Card
-          maxWidth="xs"
-          variant="outlined"
+          raised={true}
           sx={{
-            p: 1,
-            my: 5,
-            borderRadius: 2,
-            width: "100%",
+            maxWidth: 345,
           }}
         >
+          {
+            <CardMedia
+              sx={{ height: "fit-content" }}
+              component="img"
+              image={
+                currentUser.filename
+                  ? Img
+                  : `https://robohash.org/${currentUser.name.replace(
+                      /\s+/g,
+                      ""
+                    )}`
+              }
+              alt={currentUser?.name}
+            />
+          }
+
           <CardContent>
-            <Typography
-              variant="h5"
-              component="div"
-              sx={{ display: "flex", flexDirection: "row" }}
-            >
-              <Avatar alt={currentUser?.name} src={Img} sx={{ mx: 1 }} />
+            <Typography gutterBottom variant="h5" component="div">
               <span style={{ alignSelf: "flex-end" }}>{currentUser.name}</span>
             </Typography>
-            <Typography sx={{ color: "text.secondary", mt: 1.5, mx: 1 }}>
-              {currentUser?.pronouns ? currentUser.pronouns : ""}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", mb: 1.5, mx: 1 }}>
+            <Typography sx={{ color: "text.secondary" }}>
               {currentUser?.title ? currentUser.title : "Title"}
             </Typography>
-            <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
+            <Typography sx={{ color: "text.secondary" }}>
+              {currentUser?.pronouns ? currentUser.pronouns : ""}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
               <div
                 style={{
                   display: "flex",
@@ -95,9 +105,13 @@ const UserDetails = () => {
               >
                 <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser?.linkedIn
-                    ? currentUser?.linkedIn.replace("https://www.", "")
-                    : "LinkedIn"}{" "}
+                  {currentUser?.linkedIn ? (
+                    <Link to={currentUser.linkedIn} target="_blank">
+                      {currentUser?.linkedIn.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "LinkedIn"
+                  )}
                 </div>
               </div>
               <div
@@ -110,9 +124,13 @@ const UserDetails = () => {
               >
                 <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser?.github
-                    ? currentUser?.github.replace("https://www.", "")
-                    : "GitHub"}
+                  {currentUser?.github ? (
+                    <Link to={currentUser.github} target="_blank">
+                      {currentUser?.github.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "GitHub"
+                  )}
                 </div>
               </div>
               <div
@@ -125,14 +143,25 @@ const UserDetails = () => {
               >
                 <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
                 <div style={{ paddingTop: 4 }}>
-                  {currentUser?.site
-                    ? currentUser?.site.replace("https://www.", "")
-                    : "Website"}
+                  {currentUser?.site ? (
+                    <Link to={currentUser.site} target="_blank">
+                      {currentUser?.site.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "Website"
+                  )}
                 </div>
               </div>
             </Typography>
           </CardContent>
-          <CardActions>
+
+          <CardActions
+            sx={{
+              alignSelf: "flex-end",
+              ml: 2,
+              mb: 1,
+            }}
+          >
             <Button size="small" variant="outlined" onClick={handleEdit}>
               Edit
             </Button>

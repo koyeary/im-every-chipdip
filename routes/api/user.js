@@ -16,10 +16,12 @@ router.post("/details", async (req, res) => {
   console.log(req.body);
   try {
     const user = await User.findById(id);
-
-    res.json(user);
+    console.log("error");
+    if (!user) {
+      return res.status(401).json({ msg: "User not found" });
+    }
+    return res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send(`Server Error: ${err.message}`);
   }
 });
@@ -41,7 +43,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    console.log("hit the back");
+
     const { name, email, password } = req.body;
 
     try {
@@ -66,6 +68,7 @@ router.post(
         pronouns: "",
         title: "",
         created: Date.now(),
+        filename: "",
       });
 
       await user.save();
@@ -126,7 +129,8 @@ router.put("/update/np", async (req, res) => {
 // @desc     Update user details
 // @access   Public
 router.put("/update", async (req, res) => {
-  const { name, email, github, pronouns, linkedIn, site, title } = req.body;
+  const { name, email, github, pronouns, linkedIn, site, title, filename } =
+    req.body;
   const token = req.body.headers["x-auth-token"];
   console.log(req.body);
   try {
@@ -142,7 +146,7 @@ router.put("/update", async (req, res) => {
 
     user = await User.findOneAndUpdate(
       { email },
-      { name, github, linkedIn, pronouns, site, title },
+      { name, github, linkedIn, pronouns, site, title, filename },
       { new: true }
     );
 

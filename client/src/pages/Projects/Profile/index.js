@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { setAuthToken } from "../../../utils/API";
+import { getUserById } from "../../../utils/API";
+import useMeasure from "react-use-measure";
 import useUser from "../../../hooks/useUser";
 import UserDetails from "./UserDetails";
 import Box from "@mui/material/Box";
@@ -14,11 +17,12 @@ const Profile = () => {
     localStorage.getItem("user")
   );
 
+  const [ref, bounds] = useMeasure();
   let navigate = useNavigate();
 
-  const { user, logout } = useUser();
+  const { user, saveUser } = useUser();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === "myKey") {
         setLocalStorageValue(e.newValue);
@@ -30,22 +34,33 @@ const Profile = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, []); */
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logout();
+    //logout();
     navigate("/login");
   };
 
-  useEffect(() => {
-    if (user._id) {
-      console.log("User is logged in");
+  /* useEffect(() => {
+    // check for token in LS when app first runs
+    if (localStorage.token) {
+      // if there is a token set axios headers for all requests
+      setAuthToken(localStorage.token);
     }
-    if (!localStorage.getItem("token") || !localStorage.getItem("user")) {
-      navigate("/login");
-    }
-  }, [navigate]);
+    // if there is a token get the user data
+
+    window.addEventListener("storage", () => {
+      if (!localStorage.token) {
+        logout();
+        navigate("/login");
+      }
+      if (!localStorage.user) {
+        logout();
+        navigate("/login");
+      }
+    });
+  }, []); */
 
   return (
     <Box
@@ -57,6 +72,7 @@ const Profile = () => {
         overflow: "auto",
         pr: 2,
         pt: 2,
+        scrollbarWidth: "none",
       }}
     >
       {localStorageValue && (
@@ -84,26 +100,15 @@ const Profile = () => {
       )}
       <Container
         component="main"
-        maxWidth="xs"
+        maxWidth="sm"
         sx={{
-          pr: 6,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
-          height: "100%",
+          alignItems: "center",
+          alignSelf: "center",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            borderRadius: 1,
-            pl: 0,
-          }}
-        >
-          <UserDetails currentUser={localStorageValue} />
-        </Box>
+        <UserDetails currentUser={localStorageValue} />
       </Container>
     </Box>
   );

@@ -248,7 +248,8 @@ export const updatePassword = async (newPassword, email, token) => {
 };
 
 export const updateUserDetails = async (formData, saveUser, sendToast) => {
-  const { name, email, github, linkedIn, pronouns, site, title } = formData;
+  const { name, email, github, linkedIn, pronouns, site, title, filename } =
+    formData;
 
   try {
     const res = await api.put("/user/update", {
@@ -264,12 +265,57 @@ export const updateUserDetails = async (formData, saveUser, sendToast) => {
       pronouns: pronouns,
       site: site,
       title: title,
+      filename: filename,
     });
 
     saveUser(res.data);
     sendToast("User details updated", "success");
   } catch (err) {
     sendToast(err.message, "error");
+    console.log(err.message);
+  }
+};
+
+export const uploadProfilePic = async (file, user, saveUser, close) => {
+  console.log(file);
+
+  const formData = new FormData();
+  formData.append("image", file);
+  try {
+    const res = await api.post("/file", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+        enctype: "multipart/form-data",
+      },
+    });
+
+    let user = JSON.parse(localStorage.getItem("user"));
+    user.filename = res.data.data.filename;
+    console.log(user);
+
+    saveUser({ ...user, filename: res.data.data.filename });
+
+    close();
+    console.log(res.data.data.filename);
+
+    //updateUserDetails(user, saveUser, () => {});
+    // console.log({ filename: res.data });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const deleteProfilePic = async (formData) => {
+  try {
+    const res = await api.post("/pic/delete", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(res.data);
+  } catch (err) {
     console.log(err.message);
   }
 };

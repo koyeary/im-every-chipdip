@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema({
   site: {
     type: String,
   },
+  filename: {
+    type: String,
+  },
   activeInvoice: {
     type: String,
   },

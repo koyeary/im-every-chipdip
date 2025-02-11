@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // Define middleware here
+app.use("/uploads", express.static("./uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
