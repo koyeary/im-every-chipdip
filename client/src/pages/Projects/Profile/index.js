@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { setAuthToken } from "../../../utils/API";
+import { getUserById } from "../../../utils/API";
+import useMeasure from "react-use-measure";
 import useUser from "../../../hooks/useUser";
 import UserDetails from "./UserDetails";
 import Box from "@mui/material/Box";
@@ -9,23 +12,17 @@ import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Profile.css";
 
-/* test imports */
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-
 const Profile = () => {
   const [localStorageValue, setLocalStorageValue] = useState(
     localStorage.getItem("user")
   );
 
+  const [ref, bounds] = useMeasure();
   let navigate = useNavigate();
 
-  const { user, logout } = useUser();
+  const { user, saveUser } = useUser();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === "myKey") {
         setLocalStorageValue(e.newValue);
@@ -37,22 +34,33 @@ const Profile = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, []); */
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logout();
+    //logout();
     navigate("/login");
   };
 
-  useEffect(() => {
-    if (user._id) {
-      console.log("User is logged in");
+  /* useEffect(() => {
+    // check for token in LS when app first runs
+    if (localStorage.token) {
+      // if there is a token set axios headers for all requests
+      setAuthToken(localStorage.token);
     }
-    if (!localStorage.getItem("token") || !localStorage.getItem("user")) {
-      navigate("/login");
-    }
-  }, [navigate]);
+    // if there is a token get the user data
+
+    window.addEventListener("storage", () => {
+      if (!localStorage.token) {
+        logout();
+        navigate("/login");
+      }
+      if (!localStorage.user) {
+        logout();
+        navigate("/login");
+      }
+    });
+  }, []); */
 
   return (
     <Box
@@ -96,19 +104,11 @@ const Profile = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
+          alignItems: "center",
+          alignSelf: "center",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: 275,
-            width: "100%",
-          }}
-        >
-          <UserDetails currentUser={localStorageValue} />
-        </Box>
+        <UserDetails currentUser={localStorageValue} />
       </Container>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 import Img from "../../About/Images/sm-Kat_Yeary-6BW.png";
 import {
@@ -11,45 +11,34 @@ import {
   ListItemText,
   Link,
 } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
-const UserProfile = ({ colors, icons, fields, setEdit }) => {
+const UserProfile = ({ colors, icons, fields, edit, setEdit }) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const findInAndAfter = (str) => {
-    const index = str.indexOf("/in/");
+  const handleCancel = (e) => {
+    e.preventDefault();
 
-    if (index !== -1) {
-      return str.substring(index);
-    }
-    return null;
+    setEdit(false);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("User details updated");
   };
 
-  const findGitHub = (str) => {
-    const index = str.indexOf("github.com/");
-    if (index !== -1) {
-      return str.substring(index);
-    }
-    return null;
-  };
-
+  /*     // Example usage:
+    const exampleString = "https://www.linkedin.com/in/kat-yeary";
+    const result = findInAndAfter(exampleString);
+    console.log(result); // Output: /in/kat-yea
+    // ry */
   return (
-    <Box
-      sx={{
-        width: "100%",
-
-        borderRadius: 1,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <>
       <List
         sx={{
           width: 600,
           maxWidth: "100%",
           bgcolor: "background.paper",
-          margin: "100px auto 20px auto",
+          margin: "100px auto",
           height: "100%",
           display: "flex",
           flexDirection: "column",
@@ -74,7 +63,7 @@ const UserProfile = ({ colors, icons, fields, setEdit }) => {
                 <ListItemText
                   secondary={item.charAt(0).toUpperCase() + item.slice(1)}
                 />
-                {user[item] && user[item].startsWith("ht") ? (
+                {/*        {user[item] && user[item].startsWith("ht") ? (
                   <ListItemText
                     primary={
                       <Link to={user[item]} target="_blank">
@@ -86,13 +75,24 @@ const UserProfile = ({ colors, icons, fields, setEdit }) => {
                   />
                 ) : (
                   <ListItemText primary={user[item]} />
-                )}
+                )} */}
               </ListItemButton>
             </ListItem>
+            <Divider variant="inset" component="li" />
           </Fragment>
         ))}
       </List>
-    </Box>
+      {edit && (
+        <div style={{ margin: "auto", width: "fit-content" }}>
+          <Button type="submit" variant="contained" onClick={handleSubmit}>
+            Save
+          </Button>
+          <Button onClick={handleCancel} type="submit" variant="contained">
+            Cancel
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -185,16 +185,7 @@ const UserForm = ({ setEdit, sendToast }) => {
               sx={{ mt: 1, mx: "auto" }}
             >
               <AddPhotoAlternateIcon sx={{ mr: 1 }} />
-              Add Your Photo
-            </Button>
-            <Button
-              onClick={handlePickAvatar}
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 1, mx: "auto" }}
-            >
-              <CollectionsIcon sx={{ mr: 1 }} />
-              Pick from Library
+              {filename === "" ? "Add Your Photo" : "Change Photo"}
             </Button>
 
             <ButtonGroup fullWidth sx={{ mt: 1, mx: "auto" }}>

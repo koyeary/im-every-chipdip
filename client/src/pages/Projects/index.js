@@ -41,17 +41,20 @@ const Projects = ({ darkMode }) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography style={{ display: "flex", flexDirection: "column" }}>
-            <Link to="/login">Sign My Guestbook</Link>
+            <Link to="/profile">Sign My Guestbook</Link>
             <br />
             This is an in-progress project that allows a user to create a
             password-protected account, with a profile they can save and view
             later. They can then choose to write a message in the guestbook,
-            which they have the option to make public or private. <br />
+            which they have the option to make public or private.
+            <br />
             <br />
             For now, the user is able to create an account, log in, and view or
-            update their profile. Future features will include the ability to
-            change their password, upload a profile image, and write messages in
-            the guestbook.
+            update their profile. This includes uploading a profile image.
+            Future features will include the ability to other users' profiles,
+            and the ability to write messages to other users. The guestbook will
+            also be able to be viewed by the public, and will include a search
+            function to find specific messages. <br />
             <br />
             <br />
             This application is built with React, Node.js, Express, and MongoDB.

@@ -16,10 +16,12 @@ router.post("/details", async (req, res) => {
   console.log(req.body);
   try {
     const user = await User.findById(id);
-
-    res.json(user);
+    console.log("error");
+    if (!user) {
+      return res.status(401).json({ msg: "User not found" });
+    }
+    return res.json(user);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send(`Server Error: ${err.message}`);
   }
 });

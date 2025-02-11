@@ -6,7 +6,6 @@ import Profile from "./pages/Projects/Profile";
 import Splash from "./pages/Splash";
 import Status from "./pages/Projects/Status";
 import FinanceDashboard from "./pages/Projects/FinanceDashboard";
-import useUser from "./hooks/useUser";
 import "./App.css";
 
 import Login from "./pages/Projects/Profile/Login";
@@ -14,7 +13,6 @@ import Login from "./pages/Projects/Profile/Login";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [open, setOpen] = useState(true);
-  //const { user } = useUser();
 
   const spring = useSpring({
     to: { opacity: 1 },

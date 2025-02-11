@@ -4,6 +4,7 @@ import {
   createNewUser,
   authenticateUser,
   getUserById,
+  setAuthToken,
 } from "../../../../utils/API";
 
 //Hooks
@@ -48,7 +49,7 @@ const Login = () => {
   const [show, setShow] = useState(false);
 
   const { name, email, password, rePassword } = formData;
-  const { saveUser } = useUser();
+  const { user, saveUser } = useUser();
   let navigate = useNavigate();
 
   const { severity, msg } = alert;
@@ -79,6 +80,16 @@ const Login = () => {
       });
     }
   };
+  /* 
+  useEffect(() => {
+    // check for token in LS when app first runs
+    if (localStorage.token && localStorage.user) {
+      // if there is a token set axios headers for all requests
+      setAuthToken(localStorage.token);
+
+      navigate("/profile");
+    }
+  }, []); */
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

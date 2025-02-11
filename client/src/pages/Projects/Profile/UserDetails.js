@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 
 import Alert from "@mui/material/Alert";
@@ -53,99 +54,112 @@ const UserDetails = () => {
         <Card
           raised={true}
           sx={{
-            display: "flex",
+            maxWidth: 345,
           }}
         >
-          <CardMedia
-            sx={{ width: "fit-content", height: "auto" }}
-            component="img"
-            image={Img}
-            alt={currentUser?.name}
-          />
-          <Box sx={{ display: "flex" }}>
-            <CardContent
-              sx={{
-                flex: "1 0 auto",
-                ml: 1,
-                height: "100%",
-                /*       minWidth: 275, */
-              }}
-            >
-              <Typography variant="h5" component="div">
-                <span style={{ alignSelf: "flex-end" }}>
-                  {currentUser.name}
-                </span>
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                {currentUser?.title ? currentUser.title : "Title"}
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                {currentUser?.pronouns ? currentUser.pronouns : ""}
-              </Typography>
-              <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
-                >
-                  <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
-                  <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
-                </div>{" "}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
-                >
-                  <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
-                  <div style={{ paddingTop: 4 }}>
-                    {currentUser?.linkedIn
-                      ? currentUser?.linkedIn.replace("https://www.", "")
-                      : "LinkedIn"}{" "}
-                  </div>
+          {
+            <CardMedia
+              sx={{ height: "fit-content" }}
+              component="img"
+              image={
+                currentUser.filename
+                  ? Img
+                  : `https://robohash.org/${currentUser.name.replace(
+                      /\s+/g,
+                      ""
+                    )}`
+              }
+              alt={currentUser?.name}
+            />
+          }
+
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              <span style={{ alignSelf: "flex-end" }}>{currentUser.name}</span>
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              {currentUser?.title ? currentUser.title : "Title"}
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              {currentUser?.pronouns ? currentUser.pronouns : ""}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 5,
+                  alignContent: "center",
+                }}
+              >
+                <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
+                <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
+              </div>{" "}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 5,
+                  alignContent: "center",
+                }}
+              >
+                <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
+                <div style={{ paddingTop: 4 }}>
+                  {currentUser?.linkedIn ? (
+                    <Link to={currentUser.linkedIn} target="_blank">
+                      {currentUser?.linkedIn.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "LinkedIn"
+                  )}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    justifyContent: "left",
-                  }}
-                >
-                  <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
-                  <div style={{ paddingTop: 4 }}>
-                    {currentUser?.github
-                      ? currentUser?.github.replace("https://www.", "")
-                      : "GitHub"}
-                  </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 5,
+                  justifyContent: "left",
+                }}
+              >
+                <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
+                <div style={{ paddingTop: 4 }}>
+                  {currentUser?.github ? (
+                    <Link to={currentUser.github} target="_blank">
+                      {currentUser?.github.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "GitHub"
+                  )}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 5,
-                    alignContent: "center",
-                  }}
-                >
-                  <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
-                  <div style={{ paddingTop: 4 }}>
-                    {currentUser?.site
-                      ? currentUser?.site.replace("https://www.", "")
-                      : "Website"}
-                  </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 5,
+                  alignContent: "center",
+                }}
+              >
+                <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
+                <div style={{ paddingTop: 4 }}>
+                  {currentUser?.site ? (
+                    <Link to={currentUser.site} target="_blank">
+                      {currentUser?.site.replace("https://www.", "")}
+                    </Link>
+                  ) : (
+                    "Website"
+                  )}
                 </div>
-              </Typography>
-            </CardContent>
-          </Box>
+              </div>
+            </Typography>
+          </CardContent>
+
           <CardActions
             sx={{
               alignSelf: "flex-end",
-              ml: -2,
+              ml: 2,
+              mb: 1,
             }}
           >
             <Button size="small" variant="outlined" onClick={handleEdit}>
