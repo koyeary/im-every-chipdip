@@ -64,7 +64,7 @@ const UserDetails = () => {
               image={
                 currentUser?.filename
                   ? Img
-                  : `https://robohash.org/${currentUser.name.replace(
+                  : `https://robohash.org/${currentUser?.name.replace(
                       /\s+/g,
                       ""
                     )}`
@@ -75,13 +75,13 @@ const UserDetails = () => {
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              <span style={{ alignSelf: "flex-end" }}>{currentUser.name}</span>
+              <span style={{ alignSelf: "flex-end" }}>{currentUser?.name}</span>
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
-              {currentUser?.title ? currentUser.title : "Title"}
+              {currentUser?.title ? currentUser?.title : "Title"}
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
-              {currentUser?.pronouns ? currentUser.pronouns : ""}
+              {currentUser?.pronouns ? currentUser?.pronouns : ""}
             </Typography>
             <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
               <span
@@ -93,7 +93,7 @@ const UserDetails = () => {
                 }}
               >
                 <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
-                <span style={{ paddingTop: 4 }}>{currentUser.email}</span>
+                <span style={{ paddingTop: 4 }}>{currentUser?.email}</span>
               </span>{" "}
               <span
                 style={{
@@ -106,7 +106,7 @@ const UserDetails = () => {
                 <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
                 <span style={{ paddingTop: 4 }}>
                   {currentUser?.linkedIn ? (
-                    <Link to={currentUser.linkedIn} target="_blank">
+                    <Link to={currentUser?.linkedIn} target="_blank">
                       {currentUser?.linkedIn.replace("https://www.", "")}
                     </Link>
                   ) : (
@@ -125,7 +125,7 @@ const UserDetails = () => {
                 <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
                 <span style={{ paddingTop: 4 }}>
                   {currentUser?.github ? (
-                    <Link to={currentUser.github} target="_blank">
+                    <Link to={currentUser?.github} target="_blank">
                       {currentUser?.github.replace("https://www.", "")}
                     </Link>
                   ) : (
@@ -144,7 +144,7 @@ const UserDetails = () => {
                 <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
                 <span style={{ paddingTop: 4 }}>
                   {currentUser?.site ? (
-                    <Link to={currentUser.site} target="_blank">
+                    <Link to={currentUser?.site} target="_blank">
                       {currentUser?.site.replace("https://www.", "")}
                     </Link>
                   ) : (
