@@ -185,7 +185,9 @@ const UserForm = ({ setEdit, sendToast }) => {
               sx={{ mt: 1, mx: "auto" }}
             >
               <AddPhotoAlternateIcon sx={{ mr: 1 }} />
-              {filename === "" ? "Add Your Photo" : "Change Photo"}
+              {filename === "" || filename === undefined
+                ? "Add Your Photo"
+                : "Change Photo"}
             </Button>
 
             <ButtonGroup fullWidth sx={{ mt: 1, mx: "auto" }}>
@@ -204,27 +206,27 @@ const UserForm = ({ setEdit, sendToast }) => {
             </ButtonGroup>
           </>
         )}
+        <Tooltip
+          title="Coming soon!"
+          placement="bottom"
+          slotProps={{
+            tooltip: { sx: { bgcolor: "#00bfa5", p: 1, fontSize: 14 } },
+          }}
+        >
+          <span>
+            <Button
+              sx={{ my: 2, mx: "auto", borderRadius: 2 }}
+              fullWidth
+              variant="outlined"
+              disabled
+              color="secondary"
+              onClick={() => setChangeMode(true)}
+            >
+              Change Password
+            </Button>
+          </span>
+        </Tooltip>
       </Card>
-      <Tooltip
-        title="Coming soon!"
-        placement="bottom"
-        slotProps={{
-          tooltip: { sx: { bgcolor: "#00bfa5", p: 1, fontSize: 14 } },
-        }}
-      >
-        <span>
-          <Button
-            sx={{ my: 2, mx: "auto", borderRadius: 2 }}
-            fullWidth
-            variant="outlined"
-            disabled
-            color="secondary"
-            onClick={() => setChangeMode(true)}
-          >
-            Change Password
-          </Button>
-        </span>
-      </Tooltip>
     </div>
   );
 };

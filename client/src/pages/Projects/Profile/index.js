@@ -38,7 +38,7 @@ const Profile = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    //logout();
+    logout();
     navigate("/login");
   };
 

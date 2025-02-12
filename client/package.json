@@ -34,7 +34,9 @@
     "react-router": "^6.25.0",
     "react-router-dom": "^6.25.0",
     "react-scripts": "^5.0.1",
-    "react-spring": "^9.7.3"
+    "react-simple-file-upload": "^1.1.0",
+    "react-spring": "^9.7.3",
+    "react-use-measure": "^2.1.7"
   },
   "browserslist": {
     "production": [
