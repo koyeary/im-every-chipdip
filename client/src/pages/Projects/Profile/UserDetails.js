@@ -84,7 +84,7 @@ const UserDetails = () => {
               {currentUser?.pronouns ? currentUser.pronouns : ""}
             </Typography>
             <Typography variant="body1" sx={{ ml: 1, mt: 2 }}>
-              <div
+              <span
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -93,9 +93,9 @@ const UserDetails = () => {
                 }}
               >
                 <EmailIcon sx={{ m: 0.5, color: colors[1] }} />
-                <div style={{ paddingTop: 4 }}>{currentUser.email}</div>
-              </div>{" "}
-              <div
+                <span style={{ paddingTop: 4 }}>{currentUser.email}</span>
+              </span>{" "}
+              <span
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -104,7 +104,7 @@ const UserDetails = () => {
                 }}
               >
                 <LinkedInIcon sx={{ m: 0.5, color: colors[2] }} />
-                <div style={{ paddingTop: 4 }}>
+                <span style={{ paddingTop: 4 }}>
                   {currentUser?.linkedIn ? (
                     <Link to={currentUser.linkedIn} target="_blank">
                       {currentUser?.linkedIn.replace("https://www.", "")}
@@ -112,9 +112,9 @@ const UserDetails = () => {
                   ) : (
                     "LinkedIn"
                   )}
-                </div>
-              </div>
-              <div
+                </span>
+              </span>
+              <span
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -123,7 +123,7 @@ const UserDetails = () => {
                 }}
               >
                 <GitHubIcon sx={{ m: 0.5, color: colors[3] }} />
-                <div style={{ paddingTop: 4 }}>
+                <span style={{ paddingTop: 4 }}>
                   {currentUser?.github ? (
                     <Link to={currentUser.github} target="_blank">
                       {currentUser?.github.replace("https://www.", "")}
@@ -131,9 +131,9 @@ const UserDetails = () => {
                   ) : (
                     "GitHub"
                   )}
-                </div>
-              </div>
-              <div
+                </span>
+              </span>
+              <span
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -142,7 +142,7 @@ const UserDetails = () => {
                 }}
               >
                 <LinkIcon sx={{ m: 0.5, color: colors[4] }} />
-                <div style={{ paddingTop: 4 }}>
+                <span style={{ paddingTop: 4 }}>
                   {currentUser?.site ? (
                     <Link to={currentUser.site} target="_blank">
                       {currentUser?.site.replace("https://www.", "")}
@@ -150,8 +150,8 @@ const UserDetails = () => {
                   ) : (
                     "Website"
                   )}
-                </div>
-              </div>
+                </span>
+              </span>
             </Typography>
           </CardContent>
 

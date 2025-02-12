@@ -20,7 +20,7 @@ const Profile = () => {
   const [ref, bounds] = useMeasure();
   let navigate = useNavigate();
 
-  const { user, saveUser } = useUser();
+  const { user, saveUser, logout } = useUser();
 
   /*   useEffect(() => {
     const handleStorageChange = (e) => {
