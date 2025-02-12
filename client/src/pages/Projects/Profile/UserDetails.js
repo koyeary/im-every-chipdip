@@ -62,7 +62,7 @@ const UserDetails = () => {
               sx={{ height: "fit-content" }}
               component="img"
               image={
-                currentUser.filename
+                currentUser?.filename
                   ? Img
                   : `https://robohash.org/${currentUser.name.replace(
                       /\s+/g,
